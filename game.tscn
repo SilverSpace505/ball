@@ -1,24 +1,23 @@
 [gd_scene load_steps=4 format=3 uid="uid://cplji6psrpo8t"]
 
-[ext_resource type="PackedScene" uid="uid://cn8pmff4bbixf" path="res://test.tscn" id="1_e2o6t"]
+[ext_resource type="PackedScene" path="res://track.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://xf7dekaj2vlt" path="res://player.tscn" id="2_feb5d"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_e2o6t"]
-size = Vector3(11.975342, 0.6094971, 11.046448)
+[sub_resource type="Environment" id="Environment_e2o6t"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.43
 
 [node name="world" type="Node3D"]
 
-[node name="test" parent="." instance=ExtResource("1_e2o6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11393535, 0, 0.10025692)
-
 [node name="player" parent="." instance=ExtResource("2_feb5d")]
-transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 0.33177245, 0.3389411, 0.6030934)
+transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 0.33177245, 0.3389411, 0.50314885)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.911353, 0.4116257, 0, -0.4116257, 0.911353, 0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e2o6t")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.038208, -0.19525146, -0.8561096)
-shape = SubResource("BoxShape3D_e2o6t")
+[node name="test2" parent="." instance=ExtResource("2_e2o6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2774129, -0.07597321, -0.01993449)
