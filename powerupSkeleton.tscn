@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv2mgmilujlwo"]
+
+[ext_resource type="Script" uid="uid://cfhrkwkjtjvn1" path="res://powerup_skeleton.gd" id="1_6w7n3"]
+
+[node name="Area3D" type="Area3D"]
+script = ExtResource("1_6w7n3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
