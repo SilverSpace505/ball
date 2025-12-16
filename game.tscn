@@ -1,23 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://cplji6psrpo8t"]
+[gd_scene load_steps=6 format=3 uid="uid://cplji6psrpo8t"]
 
-[ext_resource type="PackedScene" uid="uid://cn8pmff4bbixf" path="res://track.tscn" id="2_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://0rcc5flgc7gv" path="res://player.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" path="res://track.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://xf7dekaj2vlt" path="res://player.tscn" id="2_feb5d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
+
+[sub_resource type="Sky" id="Sky_feb5d"]
+sky_material = SubResource("ProceduralSkyMaterial_e2o6t")
 
 [sub_resource type="Environment" id="Environment_e2o6t"]
-background_color = Color(0, 0, 0.49019608, 1)
+background_mode = 2
+sky = SubResource("Sky_feb5d")
 ambient_light_source = 2
-ambient_light_color = Color(0.69135684, 0.6913568, 0.69135684, 1)
-ambient_light_energy = 1.57
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.23
 
-[node name="game" type="Node3D"]
+[node name="world" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("2_feb5d")]
-transform = Transform3D(-8.742278e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.742278e-09, 0, 0.42272198, 0.5408243)
+transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 0, 0.3288656, 0)
+floor_stop_on_slope = false
+floor_block_on_wall = false
+friction = 1.03
 
-[node name="test" parent="." instance=ExtResource("2_e2o6t")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9219646, 0.22110593, -0.31795204, 0, 0.82099974, 0.5709286, 0.38727424, -0.52637595, 0.7569327, 0, 1.0497183, 0)
+light_energy = 4.629
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_e2o6t")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.539256, 0.842142, 0, -0.842142, 0.539256, 0, 1.6026578, 0)
+[node name="track" parent="." instance=ExtResource("2_e2o6t")]
