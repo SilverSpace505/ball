@@ -34,6 +34,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2774129, -0.07597321, -0.01
 =======
 [node name="track" parent="." instance=ExtResource("2_e2o6t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.055461645, -0.07597321, 0.22007799)
+
 >>>>>>> parent of 748e8b7 (AAAAAAAAAAHHHHHHHH)
 =======
 [node name="test2" parent="." instance=ExtResource("2_e2o6t")]
