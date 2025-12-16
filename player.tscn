@@ -1,15 +1,26 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=6 format=3 uid="uid://i07r3cydxpo8"]
+=======
+[gd_scene load_steps=8 format=3 uid="uid://xf7dekaj2vlt"]
+>>>>>>> Stashed changes
 
 <<<<<<< HEAD
 [ext_resource type="Script" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Script" path="res://character_body_3d.gd" id="2_onrkg"]
 =======
 [ext_resource type="Script" uid="uid://dksggyfqmwiyv" path="res://player.gd" id="1_4flbx"]
+<<<<<<< Updated upstream
 >>>>>>> c85180d821c31fd3a7b032a8944b355d265e3c44
+=======
+[ext_resource type="Texture2D" uid="uid://0l5voe7sv8eh" path="res://Screenshot 2025-12-15 221253.png" id="2_onrkg"]
+>>>>>>> Stashed changes
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4flbx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_onrkg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
+albedo_texture = ExtResource("2_onrkg")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4flbx"]
 albedo_color = Color(0.18972152, 0.9999998, 0.28259748, 1)
@@ -21,15 +32,19 @@ material = SubResource("StandardMaterial3D_4flbx")
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_4flbx")
 
+[node name="camPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="camPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3604555, 4.0377965)
+current = true
+
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_4flbx")
 disabled = true
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9973298, 0.07302932, 0, -0.07302932, 0.9973298, 0, 2.3604555, 4.0377965)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_onrkg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_i3pqv")
 mesh = SubResource("SphereMesh_onrkg")
