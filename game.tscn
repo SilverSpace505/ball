@@ -12,10 +12,9 @@ ambient_light_energy = 1.57
 [node name="game" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("2_feb5d")]
-transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 0, 1.37203, 2.1120634)
+transform = Transform3D(-8.742278e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.742278e-09, 0, 0.42272198, 0.5408243)
 
 [node name="test" parent="." instance=ExtResource("2_e2o6t")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_e2o6t")
