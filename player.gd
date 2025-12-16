@@ -1,12 +1,16 @@
 extends CharacterBody3D
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of c85180d (better track and player movement)
 var speed = 5
 var minSpeed = 15
 var maxSpeed = 50
 var jumpHeight = 100
 var turnSpeed = 0.02
 
+<<<<<<< HEAD
 
 =======
 @export var speed = 3
@@ -15,6 +19,8 @@ var turnSpeed = 0.02
 @export var jumpHeight = 100
 @export var turnSpeed = 0.02
 @export var friction = 0.1
+=======
+>>>>>>> parent of c85180d (better track and player movement)
 
 >>>>>>> parent of 748e8b7 (AAAAAAAAAAHHHHHHHH)
 # Called when the node enters the scene tree for the first time.
@@ -27,10 +33,14 @@ func _process(delta: float) -> void:
 	var gravity = get_gravity()
 	if !is_on_floor():
 <<<<<<< HEAD
+<<<<<<< HEAD
 		velocity = gravity
 =======
 		velocity += gravity
 >>>>>>> parent of 748e8b7 (AAAAAAAAAAHHHHHHHH)
+=======
+		velocity = gravity
+>>>>>>> parent of c85180d (better track and player movement)
 	else:
 		gravity = 0
 	
@@ -47,12 +57,17 @@ func _process(delta: float) -> void:
 		velocity.z = lerpf(velocity.z, -direction.z * speed, 0.2)
 	else:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 =======
 		velocity.x = move_toward(velocity.x, 0, friction)
 		velocity.z = move_toward(velocity.z, 0, friction)
 >>>>>>> parent of 748e8b7 (AAAAAAAAAAHHHHHHHH)
+=======
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
+>>>>>>> parent of c85180d (better track and player movement)
 	if Input.is_action_pressed("go"):
 		speed = lerpf(speed, maxSpeed, 0.002 * speed)
 	elif Input.is_action_pressed("slow"):

@@ -53,12 +53,15 @@ go={
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 [physics]
 
 3d/default_gravity=1.0
 3d/default_gravity_vector=Vector3(0, -0.1, 0)
 >>>>>>> parent of 748e8b7 (AAAAAAAAAAHHHHHHHH)
 
+=======
+>>>>>>> parent of c85180d (better track and player movement)
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
