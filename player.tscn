@@ -1,13 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://xf7dekaj2vlt"]
+[gd_scene load_steps=6 format=3 uid="uid://xf7dekaj2vlt"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_sh265"]
+[ext_resource type="Script" uid="uid://dksggyfqmwiyv" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://cxb7pqjbp14dr" path="res://character_body_3d.gd" id="2_onrkg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4flbx"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4flbx"]
+albedo_color = Color(0.68378246, 1, 0.64306635, 1)
+metallic = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_sh265"]
+material = SubResource("StandardMaterial3D_4flbx")
+
 [node name="player" type="CharacterBody3D"]
+script = ExtResource("1_4flbx")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_sh265")
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("SphereShape3D_4flbx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_sh265")
+skeleton = NodePath("../..")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+script = ExtResource("2_onrkg")
