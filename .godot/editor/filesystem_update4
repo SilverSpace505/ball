@@ -1,3 +1,3 @@
-res://powerupSkeleton.tscn
-res://powerup_skeleton.gd
 res://player.tscn
+res://game.tscn
+res://player.gd
