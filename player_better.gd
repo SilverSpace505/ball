@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 		camera.rotate(Vector3(0, 1, 0).normalized(), turnDir * turnSpeed)
 		
 	
-	var direction := Input.get_axis("go", "slow") * camera.basis.x
+	var direction := Input.get_axis("go", "slow") * camera.basis.z
 	#if direction:
 		#apply_torque(Vector3(-direction.x * speed , 0, -direction.z * speed))
 	#else:
@@ -63,6 +63,8 @@ func _process(delta: float) -> void:
 		speed = lerpf(speed, backSpeed, 0.0002 / speed)
 	else:
 		speed = lerpf(speed, minSpeed, 0.2)
+	
+	angular_velocity -= angular_velocity * 0.01
 	
 	#angular_velocity *= 0.99
 	

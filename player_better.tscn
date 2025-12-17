@@ -4,7 +4,10 @@
 [ext_resource type="Script" uid="uid://i2qcev2b67q8" path="res://player_better.gd" id="1_i14tx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0w77n"]
-friction = 2.0
+friction = 500.0
+rough = true
+bounce = 500.0
+absorbent = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i14tx"]
 albedo_texture = ExtResource("1_0w77n")
@@ -15,8 +18,9 @@ material = SubResource("StandardMaterial3D_i14tx")
 [sub_resource type="SphereShape3D" id="SphereShape3D_0w77n"]
 
 [node name="playerBetter" type="RigidBody3D"]
-mass = 5.0
+mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_0w77n")
+angular_damp_mode = 1
 angular_damp = 5.173
 script = ExtResource("1_i14tx")
 
