@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	elif Input.is_action_pressed("esc"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
-	print(gravity)
+	#print(gravity)
 	# gravity
 	if is_on_floor() == false:
 		#print($camPivot/Camera3D.fov)
@@ -71,14 +71,21 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") && is_on_floor():
 		velocity.y = lerpf(velocity.y, jumpHeight, 0.6)
 	
-	var dir = Quaternion(Vector3(0,0,0), velocity)
-	var perpendicular = Vector3(1,0,0) * dir
+	#var dir = Quaternion(Vector3(0,0,0), velocity)
+	#var perpendicular = Vector3(1,0,0) * dir
 	
-	rotationVel += perpendicular
-	$MeshInstance3D.rotate(-rotationVel, velocity.length())
-	print(rotationVel)
+	#rotationVel += perpendicular
+	#$MeshInstance3D.rotate(-rotationVel, velocity.length())
+	#print(rotationVel)
 	velocity *= 0.98
 	move_and_slide()
+	Network.data.x = position.x
+	Network.data.y = position.y
+	Network.data.z = position.z
+	
+	Network.data.rx = rotation.x
+	Network.data.ry = rotation.y
+	Network.data.rz = rotation.z
 
 func _input(event):
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

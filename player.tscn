@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://dksggyfqmwiyv" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://0l5voe7sv8eh" path="res://Screenshot 2025-12-15 221253.png" id="2_onrkg"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4flbx"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onrkg"]
 shading_mode = 0
 albedo_texture = ExtResource("2_onrkg")
 
 [sub_resource type="SphereMesh" id="SphereMesh_onrkg"]
-material = SubResource("StandardMaterial3D_4flbx")
+material = SubResource("StandardMaterial3D_onrkg")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4flbx"]
 

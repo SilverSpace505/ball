@@ -15,6 +15,10 @@ run/main_scene="uid://ho6u8qy1xbmb"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Network="*res://network.tscn"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
