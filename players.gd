@@ -15,7 +15,7 @@ func _on_data(data):
 		if player == id:
 			continue
 		
-		if not player in players and data[player].x != null and data[player].y != null and data[player].z != null and data[player].rx != null:
+		if not player in players and data[player].x != null and data[player].y != null and data[player].z != null and data[player].rx != null and data[player].ry != null and data[player].rz != null:
 			players[player] = playerInstance.instantiate()
 			players[player].x = data[player].x
 			players[player].y = data[player].y
