@@ -21,4 +21,3 @@ mesh = SubResource("SphereMesh_j6rbc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_3vexw")
-disabled = true
