@@ -4,7 +4,7 @@ var grounded = false
 @export var speed = 0
 @export var backSpeed = 5
 @export var minSpeed = 0
-@export var maxSpeed = 50
+@export var maxSpeed = 70
 @export var jumpHeight = 10
 @export var gravity = 10
 @export var turnSpeed = 0.02
@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 		camera.rotate(Vector3(0, 1, 0).normalized(), turnDir * turnSpeed)
 		
 	
-	var direction := Input.get_axis("go", "slow") * camera.basis.z
+	var direction := Input.get_axis("slow", "go") * camera.basis.x
 	#if direction:
 		#apply_torque(Vector3(-direction.x * speed , 0, -direction.z * speed))
 	#else:
@@ -49,7 +49,9 @@ func _process(delta: float) -> void:
 		#angular_velocity.z = lerpf(angular_velocity.z, 0, 0.01)
 	if Input.is_action_pressed("go"):
 		angular_velocity += direction*speed*delta
+		apply_force(direction*speed)
 	if Input.is_action_pressed("slow"):
+		apply_force(direction*speed*delta)
 		angular_velocity += direction*speed*delta
 	if Input.is_action_just_pressed("go"):
 		if speed < 2:
@@ -66,7 +68,7 @@ func _process(delta: float) -> void:
 	
 	angular_velocity -= angular_velocity * 0.01
 	
-	#angular_velocity *= 0.99
+	apply_force(-linear_velocity * 10)
 	
 	# jump
 	#if Input.is_action_just_pressed("jump") && is_on_floor():
