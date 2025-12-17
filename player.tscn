@@ -26,7 +26,3 @@ mesh = SubResource("SphereMesh_onrkg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_4flbx")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_4flbx")
-disabled = true

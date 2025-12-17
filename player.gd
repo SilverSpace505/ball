@@ -9,6 +9,7 @@ extends CharacterBody3D
 @export var turnSpeed = 0.02
 @export var friction = 0.01
 
+var rotationVel = Vector3(0,0,0)
 var direction := Input.get_axis("slow", "go") * basis.z
 var rotateSpeed = Vector3(direction.x * speed, 0, direction.z * speed)
 #Camera vars
@@ -27,7 +28,7 @@ func _process(delta: float) -> void:
 	print(gravity)
 	# gravity
 	if is_on_floor() == false:
-		print($camPivot/Camera3D.fov)
+		#print($camPivot/Camera3D.fov)
 		gravity = 1
 		gravity = lerpf(gravity, 50, 0.8 * gravity)
 		if velocity.y <= -0.00000001:
@@ -70,22 +71,12 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") && is_on_floor():
 		velocity.y = lerpf(velocity.y, jumpHeight, 0.6)
 	
-	$MeshInstance3D.rotation_degrees -= abs(rotateSpeed)
-	#if velocity.x <= -0.000001:
-		#$MeshInstance3D.rotation_degrees += Vector3(-rotateSpeed.x,0,0)
-	#elif velocity.x >= 0.000001:
-		#$MeshInstance3D.rotation_degrees += Vector3(rotateSpeed.x,0,0)
-	#else:
-		#$MeshInstance3D.rotation_degrees += Vector3(0,0,0)
-	#if velocity.z <= -0.000001:
-		#$MeshInstance3D.rotation_degrees += Vector3(0,0,-rotateSpeed.z)
-	#elif velocity.z >= 0.000001:
-		#$MeshInstance3D.rotation_degrees += Vector3(0,0,rotateSpeed.z)
-	#else:
-		#$MeshInstance3D.rotation_degrees += Vector3(0,0,0)
-	#var rotationSpeed = velocity * Vector3(1, 0, 1).rotated(Vector3(0, 1, 0), PI/2) / 2
-	#$MeshInstance3D.rotate(rotationSpeed.normalized(), rotationSpeed.length())
-	#$MeshInstance3D.rotation += (velocity * Vector3(1, 0, 1)).rotated(Vector3(0, 1, 0), PI/2) / 2
+	var dir = Quaternion(Vector3(0,0,0), velocity)
+	var perpendicular = Vector3(1,0,0) * dir
+	
+	rotationVel += perpendicular
+	$MeshInstance3D.rotate(-rotationVel, velocity.length())
+	print(rotationVel)
 	velocity *= 0.98
 	move_and_slide()
 
