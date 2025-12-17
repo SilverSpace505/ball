@@ -8,7 +8,7 @@ _data = {
 point_count = 29
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dlrp4"]
-friction = 5.1
+friction = 0.0
 bounce = 1.0
 absorbent = true
 
