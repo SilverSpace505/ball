@@ -17,7 +17,8 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	print(angular_velocity)
+	#print(angular_velocity)
+	print($"../camPivot/Camera3D".fov)
 	# get mouse to be used :O
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

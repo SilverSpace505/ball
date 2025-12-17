@@ -9,12 +9,15 @@ extends CharacterBody3D
 @export var turnSpeed = 0.02
 @export var friction = 0.01
 
+var direction := Input.get_axis("slow", "go") * basis.z
+var rotateSpeed = Vector3(direction.x * speed, 0, direction.z * speed)
 #Camera vars
 @export var mouseSens = 1000
 func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+	rotateSpeed = Vector3(direction.x * speed, 0, direction.z * speed)
 	# get mouse to be used :O
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -38,7 +41,7 @@ func _process(delta: float) -> void:
 	if turnDir:
 		$".".rotate(Vector3(0, 1, 0).normalized(), turnDir * turnSpeed)
 		
-	var direction := Input.get_axis("slow", "go") * basis.z
+	direction = Input.get_axis("slow", "go") * basis.z
 	#var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = lerpf(velocity.x, -direction.x * speed, 0.2)
@@ -61,13 +64,28 @@ func _process(delta: float) -> void:
 	else:
 		speed = lerpf(speed, minSpeed, 0.2)
 		$camPivot/Camera3D.fov = lerpf($camPivot/Camera3D.fov, 75, 0.02)
-	print(speed)
-	#print(velocity)
+	#print(speed)
 	
 	# jump
 	if Input.is_action_just_pressed("jump") && is_on_floor():
 		velocity.y = lerpf(velocity.y, jumpHeight, 0.6)
 	
+	$MeshInstance3D.rotation_degrees -= abs(rotateSpeed)
+	#if velocity.x <= -0.000001:
+		#$MeshInstance3D.rotation_degrees += Vector3(-rotateSpeed.x,0,0)
+	#elif velocity.x >= 0.000001:
+		#$MeshInstance3D.rotation_degrees += Vector3(rotateSpeed.x,0,0)
+	#else:
+		#$MeshInstance3D.rotation_degrees += Vector3(0,0,0)
+	#if velocity.z <= -0.000001:
+		#$MeshInstance3D.rotation_degrees += Vector3(0,0,-rotateSpeed.z)
+	#elif velocity.z >= 0.000001:
+		#$MeshInstance3D.rotation_degrees += Vector3(0,0,rotateSpeed.z)
+	#else:
+		#$MeshInstance3D.rotation_degrees += Vector3(0,0,0)
+	#var rotationSpeed = velocity * Vector3(1, 0, 1).rotated(Vector3(0, 1, 0), PI/2) / 2
+	#$MeshInstance3D.rotate(rotationSpeed.normalized(), rotationSpeed.length())
+	#$MeshInstance3D.rotation += (velocity * Vector3(1, 0, 1)).rotated(Vector3(0, 1, 0), PI/2) / 2
 	velocity *= 0.98
 	move_and_slide()
 

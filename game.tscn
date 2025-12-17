@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cplji6psrpo8t"]
+[gd_scene load_steps=6 format=3 uid="uid://cplji6psrpo8t"]
 
 [ext_resource type="PackedScene" uid="uid://cn8pmff4bbixf" path="res://track.tscn" id="2_e2o6t"]
-[ext_resource type="Script" uid="uid://bggp8vj88rpwe" path="res://camera_holder.gd" id="3_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://fttr8w35dilp" path="res://player_better.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://xf7dekaj2vlt" path="res://player.tscn" id="2_feb5d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
 
@@ -27,13 +26,5 @@ environment = SubResource("Environment_e2o6t")
 
 [node name="track" parent="." instance=ExtResource("2_e2o6t")]
 
-[node name="playerBetter" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("3_feb5d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44612554, 0.19760148, -0.07534742)
-camera = NodePath("../camPivot")
-
-[node name="camPivot" type="Node3D" parent="."]
-script = ExtResource("3_fc0e3")
-
-[node name="Camera3D" type="Camera3D" parent="camPivot"]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.5, 0.25, 0)
-current = true
+[node name="player" parent="." instance=ExtResource("2_feb5d")]
+transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 0.40721384, 0.30945757, 0.22301316)
