@@ -26,7 +26,7 @@ physics_material_override = SubResource("PhysicsMaterial_dlrp4")
 
 [node name="main" type="CSGPolygon3D" parent="Path3D/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008399963, -0.006588459, -0.0018625259)
-polygon = PackedVector2Array(0.7188491, 0.032244653, 0.7940184, 0.08829844, 0.71491265, 0.1470801, -0.709388, 0.1319323, -0.800091, 0.060768425, -0.7138859, -0.0011589378)
+polygon = PackedVector2Array(0.7188491, 0.032244653, 0.7940184, 0.08829844, 0.71491265, 0.1470801, -0.709388, 0.1319323, -0.8103854, 0.06134966, -0.7138859, -0.0011589378)
 mode = 2
 path_node = NodePath("../..")
 path_interval_type = 0

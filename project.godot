@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ball"
-run/main_scene="uid://cplji6psrpo8t"
+run/main_scene="uid://ho6u8qy1xbmb"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
