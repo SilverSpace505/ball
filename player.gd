@@ -4,7 +4,7 @@ extends CharacterBody3D
 @export var backSpeed = 5
 @export var minSpeed = 0
 @export var maxSpeed = 50
-@export var jumpHeight = 10
+@export var jumpHeight = 7
 @export var gravity = 10
 @export var turnSpeed = 0.02
 @export var friction = 0.01
@@ -29,13 +29,13 @@ func _process(delta: float) -> void:
 	# gravity
 	if is_on_floor() == false:
 		#print($camPivot/Camera3D.fov)
-		gravity = 1
-		gravity = lerpf(gravity, 50, 0.8 * gravity)
+		#gravity = 1
+		#gravity = lerpf(gravity, 50, 0.8 * gravity)
 		if velocity.y <= -0.00000001:
-			$camPivot/Camera3D.fov = lerpf($camPivot/Camera3D.fov, 100, 0.0002 * gravity)
-		velocity.y = lerpf(velocity.y, -gravity, 0.002)
+			$camPivot/Camera3D.fov = lerpf($camPivot/Camera3D.fov, 100, 0.0002 * abs(velocity.y))
+		velocity.y -= gravity * delta
 	else:
-		gravity = 0
+		velocity.y = 0
 	
 	# moving script
 	var turnDir = Input.get_axis("right", "left")
@@ -77,7 +77,8 @@ func _process(delta: float) -> void:
 	#rotationVel += perpendicular
 	#$MeshInstance3D.rotate(-rotationVel, velocity.length())
 	#print(rotationVel)
-	velocity *= 0.98
+	velocity.x *= 0.98
+	velocity.z *= 0.98
 	move_and_slide()
 	Network.data.x = position.x
 	Network.data.y = position.y
