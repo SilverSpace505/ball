@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cplji6psrpo8t"]
+[gd_scene load_steps=12 format=3 uid="uid://cplji6psrpo8t"]
 
 [ext_resource type="PackedScene" uid="uid://cn8pmff4bbixf" path="res://track.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://xf7dekaj2vlt" path="res://player.tscn" id="2_feb5d"]
 [ext_resource type="Script" uid="uid://da7dasqxngmk1" path="res://players.gd" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://dovjqn5n6qnrn" path="res://network_player.tscn" id="4_fc0e3"]
+[ext_resource type="Script" uid="uid://c22tp7wdyuqea" path="res://camera.gd" id="5_7jktm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
 
@@ -17,6 +18,16 @@ ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.23
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jktm"]
+albedo_color = Color(0, 0.33740154, 0.5662666, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ryrav"]
+material = SubResource("StandardMaterial3D_7jktm")
+height = 0.05
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_eow3j"]
+height = 0.05
+
 [node name="world" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -27,10 +38,58 @@ light_energy = 4.629
 environment = SubResource("Environment_e2o6t")
 
 [node name="track" parent="." instance=ExtResource("2_e2o6t")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, -0.42035323, 0.5572126)
+top_level = true
 
-[node name="player" parent="." instance=ExtResource("2_feb5d")]
-transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 0.40721384, 0.30945757, 0.22301316)
+[node name="player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_feb5d")]
+transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
+camera = NodePath("../camera")
 
 [node name="players" type="Node3D" parent="."]
 script = ExtResource("3_feb5d")
 playerInstance = ExtResource("4_fc0e3")
+
+[node name="camera" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.5)
+rotation_edit_mode = 1
+current = true
+script = ExtResource("5_7jktm")
+player = NodePath("../player")
+
+[node name="random" type="Node3D" parent="."]
+
+[node name="platform" type="StaticBody3D" parent="random"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.69878, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="random/platform"]
+mesh = SubResource("CylinderMesh_ryrav")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="random/platform"]
+shape = SubResource("CylinderShape3D_eow3j")
+
+[node name="platform2" type="StaticBody3D" parent="random"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.421806, 0.22626007, 0.5589342)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="random/platform2"]
+mesh = SubResource("CylinderMesh_ryrav")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="random/platform2"]
+shape = SubResource("CylinderShape3D_eow3j")
+
+[node name="platform3" type="StaticBody3D" parent="random"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.606895, 0.48135495, 1.8020115)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="random/platform3"]
+mesh = SubResource("CylinderMesh_ryrav")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="random/platform3"]
+shape = SubResource("CylinderShape3D_eow3j")
+
+[node name="platform4" type="StaticBody3D" parent="random"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, -13.192005, 0.9065919, 7.137403)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="random/platform4"]
+mesh = SubResource("CylinderMesh_ryrav")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="random/platform4"]
+shape = SubResource("CylinderShape3D_eow3j")

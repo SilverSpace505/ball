@@ -5,6 +5,7 @@ extends Node3D
 var players: Dictionary[String, NetworkPlayer] = {}
 
 func _ready() -> void:
+	#if connected already, request all the player data
 	Network.on_data.connect(_on_data)
 	if Network.connected:
 		Network.client.emit('getData')
@@ -15,6 +16,7 @@ func _on_data(data):
 		if player == id:
 			continue
 		
+		#create a mesh for the players
 		if not player in players and 'x' in data[player] and 'y' in data[player] and 'z' in data[player] and 'rx' in data[player] and 'ry' in data[player] and 'rz' in data[player]:
 			players[player] = playerInstance.instantiate()
 			players[player].x = data[player].x
@@ -25,26 +27,28 @@ func _on_data(data):
 			players[player].rz = data[player].rz
 			add_child(players[player])
 		
+		#update the position and rotation of the network player
+		players[player].lx = players[player].x
+		players[player].ly = players[player].y
+		players[player].lz = players[player].z
+		players[player].lrx = players[player].rx
+		players[player].lry = players[player].ry
+		players[player].lrz = players[player].rz
+		
 		if 'x' in data[player]:
-			players[player].lx = players[player].x
 			players[player].x = data[player].x
 		if 'y' in data[player]:
-			players[player].ly = players[player].y
 			players[player].y = data[player].y
 		if 'z' in data[player]:
-			players[player].lz = players[player].z
 			players[player].z = data[player].z
-			
 		if 'rx' in data[player]:
-			players[player].lrx = players[player].rx
 			players[player].rx = data[player].rx
 		if 'ry' in data[player]:
-			players[player].lry = players[player].ry
 			players[player].ry = data[player].ry
 		if 'rz' in data[player]:
-			players[player].lrz = players[player].rz
 			players[player].rz = data[player].rz
 	
+	#delete meshes of disconnected players
 	for player in players:
 		if not player in data or player == id:
 			players[player].queue_free()

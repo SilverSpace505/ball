@@ -19,6 +19,7 @@ var lry = 0
 var rz = 0
 var lrz = 0
 
+#my little interpolation functions
 func lerp(start: float, end: float, multiply: float):
 	if multiply > 1:
 		multiply = 1
@@ -30,10 +31,14 @@ func interpVar(current: float, last: float, tickrate: float, accumulator: float)
 	return lerp(last, current, accumulator / (1 / tickrate))
 
 func _process(_delta: float) -> void:
+	#do some weird interpolation stuff using the accumulator from network.gd
 	position.x = interpVar(x, lx, 10, Network.naccumulator)
 	position.y = interpVar(y, ly, 10, Network.naccumulator)
 	position.z = interpVar(z, lz, 10, Network.naccumulator)
 	
-	rotation.x = interpVar(rx, lrx, 10, Network.naccumulator)
-	rotation.y = interpVar(ry, lry, 10, Network.naccumulator)
-	rotation.z = interpVar(rz, lrz, 10, Network.naccumulator)
+	var lastQuat = Quaternion.from_euler(Vector3(lrx, lry, lrz))
+	var quat = Quaternion.from_euler(Vector3(rx, ry, rz))
+	
+	var multiply = Network.naccumulator / (1.0 / 10.0)
+	
+	quaternion = lastQuat.slerp(quat, multiply)

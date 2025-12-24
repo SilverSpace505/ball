@@ -12,5 +12,11 @@ default_namespace = "ball"
 base_url = "https://silverspace.io"
 metadata/_custom_type_script = "uid://c4kqubgcvw3hm"
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+ignore_time_scale = true
+
 [connection signal="event_received" from="SocketIO" to="." method="_on_socket_io_event_received"]
 [connection signal="socket_connected" from="SocketIO" to="." method="_on_socket_io_socket_connected"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
