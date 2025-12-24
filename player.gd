@@ -66,8 +66,8 @@ func _process(delta: float) -> void:
 			Network.client.emit('launch', [[collider.id, launch.x, launch.y, launch.z]])
 	
 	#void
-	if position.y < -10:
-		var dif = Vector3(0, 10, 0) - position
+	if position.y < -100:
+		var dif = Vector3(0, 25, 0) - position
 		position += dif
 		camera.position += dif
 		camera.followPos += dif

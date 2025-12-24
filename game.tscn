@@ -59,7 +59,7 @@ player = NodePath("../player")
 [node name="random" type="Node3D" parent="."]
 
 [node name="platform" type="StaticBody3D" parent="random"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.69878, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5836864, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="random/platform"]
 mesh = SubResource("CylinderMesh_ryrav")
@@ -68,7 +68,7 @@ mesh = SubResource("CylinderMesh_ryrav")
 shape = SubResource("CylinderShape3D_eow3j")
 
 [node name="platform2" type="StaticBody3D" parent="random"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.421806, 0.22626007, 0.5589342)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3067126, 0.22626007, 0.5589342)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="random/platform2"]
 mesh = SubResource("CylinderMesh_ryrav")
@@ -77,7 +77,7 @@ mesh = SubResource("CylinderMesh_ryrav")
 shape = SubResource("CylinderShape3D_eow3j")
 
 [node name="platform3" type="StaticBody3D" parent="random"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.606895, 0.48135495, 1.8020115)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4918017, 0.48135495, 1.8020115)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="random/platform3"]
 mesh = SubResource("CylinderMesh_ryrav")
@@ -86,7 +86,7 @@ mesh = SubResource("CylinderMesh_ryrav")
 shape = SubResource("CylinderShape3D_eow3j")
 
 [node name="platform4" type="StaticBody3D" parent="random"]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, -13.192005, 0.9065919, 7.137403)
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, -9.076912, 0.9065919, 7.137403)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="random/platform4"]
 mesh = SubResource("CylinderMesh_ryrav")

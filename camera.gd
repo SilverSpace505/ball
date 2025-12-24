@@ -35,8 +35,8 @@ func _process(delta: float) -> void:
 		player.position.x + ((followPos.x - player.position.x) / xzlength) * hoverxz,
 		player.position.z + ((followPos.z - player.position.z) / xzlength) * hoverxz,
 	)
-	followPos.x = lerp5(followPos.x, nearest.x, delta * 20);
-	followPos.z = lerp5(followPos.z, nearest.y, delta * 20);
+	followPos.x = lerp5(followPos.x, nearest.x, delta * 20 * 10);
+	followPos.z = lerp5(followPos.z, nearest.y, delta * 20 * 10);
 	
 	#extract the rotation along the x and z axis and store it for player movement
 	var targetQuaternion = Quaternion()
@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 	dummy = dummy.looking_at(targetPoint, Vector3.UP)
 	targetQuaternion = dummy.basis.get_rotation_quaternion()
 	
-	var multiply = 1 - (1 - 0.5) ** (delta * 50)
+	var multiply = 1 - (1 - 0.5) ** (delta * 50 * 10)
 	followQuat = followQuat.slerp(targetQuaternion, multiply)
 	
 	#smoothly move the camera to the target position
@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 	#smoothly rotate the camera to point at the player
 	var dummy2 = Transform3D()
 	dummy2.origin = position
-	dummy2 = dummy2.looking_at(player.position + Vector3(0, 0.1, 0), Vector3.UP)
+	dummy2 = dummy2.looking_at(player.position + Vector3(0, 0, 0), Vector3.UP)
 	
 	var multiply2 = 1 - (1 - 0.5) ** (delta * 10)
 	quaternion = quaternion.slerp(dummy2.basis.get_rotation_quaternion(), multiply2)
