@@ -3,3 +3,5 @@
 **/.godot
 .godot/
 .godot
+
+build/

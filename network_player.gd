@@ -1,6 +1,10 @@
 class_name NetworkPlayer
 extends Node3D
 
+var isNetworkPlayer = true
+
+var id = ''
+
 var x = 0
 var lx = 0
 

@@ -17,7 +17,7 @@ extends CharacterBody3D
 #Camera vars
 #@export var mouseSens = 1000
 func _ready() -> void:
-	pass
+	Network.launch.connect(_launch)
 
 func _process(delta: float) -> void:
 	# get mouse to be used :O
@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	else:
+	elif velocity.y < 0:
 		velocity.y = 0
 	
 	#get input axis relative to camera direction
@@ -52,7 +52,18 @@ func _process(delta: float) -> void:
 	velocity.x *= 0.99
 	velocity.z *= 0.99
 	
+	var oldVel = velocity
+	
 	move_and_slide()
+	
+	#check for collisions and launch other players
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if 'isNetworkPlayer' in collider:
+			print('send launch')
+			var launch = oldVel + Vector3(0, 1, 0) * Vector2(velocity.x, velocity.z).length()
+			Network.client.emit('launch', [[collider.id, launch.x, launch.y, launch.z]])
 	
 	#void
 	if position.y < -10:
@@ -76,3 +87,6 @@ func _input(event):
 			pass
 			#i don't think we need this for now
 			#rotate(Vector3(0, 1, 0), -event.relative.x / mouseSens)
+
+func _launch(vel):
+	velocity += Vector3(vel[0], vel[1], vel[2])

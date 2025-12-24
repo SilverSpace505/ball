@@ -19,6 +19,7 @@ func _on_data(data):
 		#create a mesh for the players
 		if not player in players and 'x' in data[player] and 'y' in data[player] and 'z' in data[player] and 'rx' in data[player] and 'ry' in data[player] and 'rz' in data[player]:
 			players[player] = playerInstance.instantiate()
+			players[player].id = player
 			players[player].x = data[player].x
 			players[player].y = data[player].y
 			players[player].z = data[player].z
@@ -28,25 +29,26 @@ func _on_data(data):
 			add_child(players[player])
 		
 		#update the position and rotation of the network player
-		players[player].lx = players[player].x
-		players[player].ly = players[player].y
-		players[player].lz = players[player].z
-		players[player].lrx = players[player].rx
-		players[player].lry = players[player].ry
-		players[player].lrz = players[player].rz
+		if player in players:
+			players[player].lx = players[player].x
+			players[player].ly = players[player].y
+			players[player].lz = players[player].z
+			players[player].lrx = players[player].rx
+			players[player].lry = players[player].ry
+			players[player].lrz = players[player].rz
 		
-		if 'x' in data[player]:
-			players[player].x = data[player].x
-		if 'y' in data[player]:
-			players[player].y = data[player].y
-		if 'z' in data[player]:
-			players[player].z = data[player].z
-		if 'rx' in data[player]:
-			players[player].rx = data[player].rx
-		if 'ry' in data[player]:
-			players[player].ry = data[player].ry
-		if 'rz' in data[player]:
-			players[player].rz = data[player].rz
+			if 'x' in data[player]:
+				players[player].x = data[player].x
+			if 'y' in data[player]:
+				players[player].y = data[player].y
+			if 'z' in data[player]:
+				players[player].z = data[player].z
+			if 'rx' in data[player]:
+				players[player].rx = data[player].rx
+			if 'ry' in data[player]:
+				players[player].ry = data[player].ry
+			if 'rz' in data[player]:
+				players[player].rz = data[player].rz
 	
 	#delete meshes of disconnected players
 	for player in players:

@@ -18,6 +18,7 @@ var id = ''
 var naccumulator = 0
 
 signal on_data
+signal launch
 
 func _ready() -> void:
 	print('connecting')
@@ -41,6 +42,8 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 	elif event == 'id':
 		#update state with id from server
 		id = msg[0]
+	elif event == 'launch':
+		launch.emit(msg[0])
 
 func _on_timer_timeout() -> void:
 	if connected:
