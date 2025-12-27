@@ -7,6 +7,8 @@ var offset = Vector3()
 var followPos = Vector3()
 var followQuat = Quaternion()
 
+var turn = 0
+
 #my essential interpolation functions
 func lerpn(start, end, multiply, step):
 	multiply = 1 - (1 - multiply) ** step
@@ -25,15 +27,19 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
+	turn *= 0.9
+	
 	#first, draw an imaginary circle around the player, and place the camera target position on it
 	var hoverxz = offset.z
 	var xzlength = sqrt(
 		(followPos.x - player.position.x) ** 2 +
 		(followPos.z - player.position.z) ** 2
 	)
+	var dif = Vector2(player.position.x - followPos.x, player.position.z - followPos.z)
+	dif = dif.rotated(turn)
 	var nearest = Vector2(
-		player.position.x + ((followPos.x - player.position.x) / xzlength) * hoverxz,
-		player.position.z + ((followPos.z - player.position.z) / xzlength) * hoverxz,
+		player.position.x + (-dif.x / xzlength) * hoverxz,
+		player.position.z + (-dif.y / xzlength) * hoverxz,
 	)
 	followPos.x = lerp5(followPos.x, nearest.x, delta * 20 * 10);
 	followPos.z = lerp5(followPos.z, nearest.y, delta * 20 * 10);

@@ -7,6 +7,10 @@
 [ext_resource type="Script" uid="uid://c22tp7wdyuqea" path="res://camera.gd" id="5_7jktm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
+sky_top_color = Color(0.63627326, 0.78774506, 0.8974483, 1)
+sky_horizon_color = Color(0.4695983, 0.68823117, 0.8059809, 1)
+ground_bottom_color = Color(0.47058824, 0.6862745, 0.80784315, 1)
+ground_horizon_color = Color(0.47058824, 0.6862745, 0.80784315, 1)
 
 [sub_resource type="Sky" id="Sky_feb5d"]
 sky_material = SubResource("ProceduralSkyMaterial_e2o6t")
@@ -16,7 +20,7 @@ background_mode = 2
 sky = SubResource("Sky_feb5d")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.23
+ambient_light_energy = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jktm"]
 albedo_color = Color(0, 0.33740154, 0.5662666, 1)
@@ -57,7 +61,9 @@ data = PackedVector3Array(-0.049, 0, -0.4976, 0, 0.0488, -0.50479996, 0, 0, -0.5
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.9219646, 0.22110593, -0.31795204, 0, 0.82099974, 0.5709286, 0.38727424, -0.52637595, 0.7569327, 0, 1.0497183, 0)
-light_energy = 4.629
+light_energy = 1.5
+shadow_enabled = true
+shadow_opacity = 0.8
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_e2o6t")

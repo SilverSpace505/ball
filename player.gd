@@ -35,14 +35,19 @@ func _process(delta: float) -> void:
 	
 	#get input axis relative to camera direction
 	var wasd = Vector3(Input.get_axis('left', 'right'), 0, Input.get_axis('slow', 'go'))
+	
+	camera.turn += (wasd.x / 100) * (Vector2(velocity.x, velocity.z).length() / 10) ** 2
+	
 	wasd *= camera.followQuat
 	wasd *= -1
 	
 	floor -= delta
 	
+	var addSpeed = clamp(1 + (Vector2(velocity.x, velocity.z).length() / 5) ** 2 / 3, 1, 5)
+	
 	#add input axis onto velocity
-	velocity.x += wasd.x * speed
-	velocity.z -= wasd.z * speed
+	velocity.x += wasd.x * speed * addSpeed
+	velocity.z -= wasd.z * speed * addSpeed
 	
 	#rotate player by velocity
 	rotate(Vector3(0, 0, 1), -velocity.x / 10 / 5)

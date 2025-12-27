@@ -12,7 +12,7 @@ func _ready() -> void:
 	var forward = Quaternion()
 	var forward2 = Quaternion()
 	
-	const scalar = 0.2
+	const scalar = 0.1
 	
 	var vel = Vector3()
 	
@@ -21,7 +21,7 @@ func _ready() -> void:
 	
 	seed(Global.seed)
 	
-	for i in range(1000):
+	for i in range(2000):
 		pos += Vector3(0, 0, -1 * scalar) * forward
 		path.curve.add_point(pos)
 		
