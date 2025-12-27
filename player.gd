@@ -4,7 +4,7 @@ extends CharacterBody3D
 @export var camera: Camera
 
 @export var speed = 0.05
-@export var jumpHeight = 7
+@export var jumpHeight = 5
 @export var gravity = 10
 #@export var backSpeed = 5
 #@export var minSpeed = 0
@@ -13,6 +13,8 @@ extends CharacterBody3D
 #@export var friction = 0.01
 
 #dont need half those variables anymore
+
+var floor = 0.0
 
 #Camera vars
 #@export var mouseSens = 1000
@@ -36,6 +38,8 @@ func _process(delta: float) -> void:
 	wasd *= camera.followQuat
 	wasd *= -1
 	
+	floor -= delta
+	
 	#add input axis onto velocity
 	velocity.x += wasd.x * speed
 	velocity.z -= wasd.z * speed
@@ -44,26 +48,35 @@ func _process(delta: float) -> void:
 	rotate(Vector3(0, 0, 1), -velocity.x / 10 / 5)
 	rotate(Vector3(1, 0, 0), velocity.z / 10 / 5)
 	
-	# jump
-	if Input.is_action_just_pressed("jump") && is_on_floor():
-		velocity.y = lerpf(velocity.y, jumpHeight, 0.6)
-	
 	#friction
 	velocity.x *= 0.99
 	velocity.z *= 0.99
 	
 	var oldVel = velocity
 	
-	move_and_slide()
+	var collision = move_and_collide(velocity * delta)
+	
+	const bounciness = 0.5
 	
 	#check for collisions and launch other players
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
+	#for i in get_slide_collision_count():
+		#var collision = get_slide_collision(i)
+	if collision:
 		var collider = collision.get_collider()
+		var normal = collision.get_normal()
 		if 'isNetworkPlayer' in collider:
-			print('send launch')
 			var launch = oldVel + Vector3(0, 1, 0) * Vector2(velocity.x, velocity.z).length()
 			Network.client.emit('launch', [[collider.id, launch.x, launch.y, launch.z]])
+		var change = (1 + bounciness) * velocity.dot(normal) * normal
+		if change.length() > 0.1:
+			velocity -= change
+		if normal.dot(Vector3.UP) > 0.5:
+			floor = 0.2
+	
+	# jump
+	if Input.is_action_pressed("jump") && floor > 0:
+		velocity.y = jumpHeight
+		floor = 0
 	
 	#void
 	if position.y < -100:
