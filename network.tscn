@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://tg76e0poxjuq"]
 
 [ext_resource type="Script" uid="uid://kgfggrkfqx17" path="res://network.gd" id="1_qmnym"]
-[ext_resource type="Script" uid="uid://c4kqubgcvw3hm" path="res://addons/godot-socketio/socketio.gd" id="2_n0pfp"]
+[ext_resource type="Script" uid="uid://bxuwu2qsr7kx6" path="res://addons/godot-socketio/socketio.gd" id="2_n0pfp"]
 
 [node name="network" type="Node"]
 script = ExtResource("1_qmnym")
@@ -10,7 +10,6 @@ script = ExtResource("1_qmnym")
 script = ExtResource("2_n0pfp")
 default_namespace = "ball"
 base_url = "https://silverspace.io"
-metadata/_custom_type_script = "uid://c4kqubgcvw3hm"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1

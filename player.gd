@@ -26,10 +26,10 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# get mouse to be used :O
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	elif Input.is_action_pressed("esc"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#elif Input.is_action_pressed("esc"):
+		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	if not is_on_floor():
 		velocity.y -= gravity * delta

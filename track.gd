@@ -6,6 +6,8 @@ extends Node3D
 
 @export var staticBody: StaticBody3D
 
+@export var finish: Node3D
+
 func _ready() -> void:
 	
 	var pos = Vector3()
@@ -40,6 +42,10 @@ func _ready() -> void:
 		
 		#var perp = Vector3(1, 0, 0) * forward2
 		#forward *= Quaternion(perp, vel.x)
+	
+	
+	finish.position = pos
+	finish.quaternion = forward
 	
 	var current_path = csgMesh.path_node
 	csgMesh.path_node = NodePath("")

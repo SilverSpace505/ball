@@ -1,8 +1,12 @@
 extends Node3D
 
 @export var playerInstance: PackedScene
+@export var playersList: VBoxContainer
+
+@export var playerElement: PackedScene
 
 var players: Dictionary[String, NetworkPlayer] = {}
+var playerElements: Dictionary[String, PlayerElement] = {}
 
 func _ready() -> void:
 	#if connected already, request all the player data
@@ -12,10 +16,7 @@ func _ready() -> void:
 	
 func _on_data(data):
 	var id = Network.id
-	for player in data:
-		if player == id:
-			continue
-		
+	for player in data:	
 		#create a mesh for the players
 		if not player in players and 'x' in data[player] and 'y' in data[player] and 'z' in data[player] and 'rx' in data[player] and 'ry' in data[player] and 'rz' in data[player]:
 			players[player] = playerInstance.instantiate()
@@ -26,12 +27,17 @@ func _on_data(data):
 			players[player].rx = data[player].rx
 			players[player].ry = data[player].ry
 			players[player].rz = data[player].rz
-			add_child(players[player])
+			if player != id:
+				add_child(players[player])
+			
+			playerElements[player] = playerElement.instantiate()
+			playersList.add_child(playerElements[player])
 		
 		#update the position and rotation of the network player
 		if player in players:
 			if 'username' in data[player]:
 				players[player].username = data[player].username
+				playerElements[player].username = data[player].username
 			
 			players[player].lx = players[player].x
 			players[player].ly = players[player].y
@@ -55,6 +61,10 @@ func _on_data(data):
 	
 	#delete meshes of disconnected players
 	for player in players:
-		if not player in data or player == id:
-			players[player].queue_free()
+		if not player in data:
+			if player != id:
+				players[player].queue_free()
 			players.erase(player)
+			
+			playerElements[player].queue_free()
+			playerElements.erase(player)
