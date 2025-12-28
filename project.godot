@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 Global="*res://global.gd"
 Network="*res://network.tscn"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot-socketio/plugin.cfg")
