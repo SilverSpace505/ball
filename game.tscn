@@ -1,5 +1,6 @@
-[gd_scene load_steps=27 format=3 uid="uid://cplji6psrpo8t"]
+[gd_scene load_steps=28 format=3 uid="uid://cplji6psrpo8t"]
 
+[ext_resource type="Script" uid="uid://57v0fg1vf783" path="res://game.gd" id="1_vef74"]
 [ext_resource type="PackedScene" uid="uid://cn8pmff4bbixf" path="res://track.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://xf7dekaj2vlt" path="res://player.tscn" id="2_feb5d"]
 [ext_resource type="Script" uid="uid://da7dasqxngmk1" path="res://players.gd" id="3_feb5d"]
@@ -66,11 +67,16 @@ albedo_color = Color(0.24103117, 0.5531629, 0, 0.5254902)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vef74"]
 material = SubResource("StandardMaterial3D_j5wjh")
-size = Vector3(3, 1, 0.1)
+size = Vector3(3.5, 1, 0.1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_hve3p"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_vef74"]
+size = Vector3(3.5, 1, 0.1)
 
-[node name="world" type="Node3D"]
+[node name="world" type="Node3D" node_paths=PackedStringArray("player", "camera", "start")]
+script = ExtResource("1_vef74")
+player = NodePath("player")
+camera = NodePath("camera")
+start = NodePath("CanvasLayer/Control/start")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.9219646, 0.22110593, -0.31795204, 0, 0.82099974, 0.5709286, 0.38727424, -0.52637595, 0.7569327, 0, 1.0497183, 0)
@@ -93,8 +99,8 @@ camera = NodePath("../camera")
 [node name="players" type="Node3D" parent="." node_paths=PackedStringArray("playersList")]
 script = ExtResource("3_feb5d")
 playerInstance = ExtResource("4_fc0e3")
-playerElement = ExtResource("7_eow3j")
 playersList = NodePath("../CanvasLayer/Control/PanelContainer/MarginContainer/players")
+playerElement = ExtResource("7_eow3j")
 
 [node name="camera" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.5)
@@ -236,13 +242,32 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 0
 
+[node name="start" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 75
+text = "5"
+horizontal_alignment = 1
+
 [node name="finish" type="Area3D" parent="."]
 script = ExtResource("8_j5wjh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="finish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20432895, 0, 0)
 mesh = SubResource("BoxMesh_vef74")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="finish"]
-shape = SubResource("SphereShape3D_hve3p")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20432895, 0, 0)
+shape = SubResource("BoxShape3D_vef74")
 
 [connection signal="body_entered" from="finish" to="finish" method="_on_body_entered"]

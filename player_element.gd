@@ -3,7 +3,7 @@ extends Control
 
 @export var username: String = 'Unnamed'
 
-@export var place: String = '1st'
+@export var place: String = ''
 
 @export var time: String = '0'
 

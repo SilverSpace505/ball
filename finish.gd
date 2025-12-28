@@ -11,4 +11,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_body_entered(body: Node3D) -> void:
-	print(body.name)
+	if body.name == 'player':
+		Global.running = false
+		if Global.race:
+			Network.client.emit('finish', Global.time)

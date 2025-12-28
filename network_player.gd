@@ -28,6 +28,11 @@ var lry = 0
 var rz = 0
 var lrz = 0
 
+var time = 0
+var ltime = 0
+
+var itime = 0
+
 #my little interpolation functions
 func lerp(start: float, end: float, multiply: float):
 	if multiply > 1:
@@ -41,6 +46,10 @@ func interpVar(current: float, last: float, tickrate: float, accumulator: float)
 
 func _process(_delta: float) -> void:
 	label.text = username
+	
+	if time < ltime:
+		ltime = time
+	itime = interpVar(time, ltime, 10, Network.naccumulator)
 	
 	#do some weird interpolation stuff using the accumulator from network.gd
 	position.x = interpVar(x, lx, 10, Network.naccumulator)

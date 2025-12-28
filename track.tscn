@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cn8pmff4bbixf"]
+[gd_scene load_steps=3 format=3 uid="uid://cn8pmff4bbixf"]
 
 [ext_resource type="Script" uid="uid://bxo74i4xu5chj" path="res://track.gd" id="1_mll3j"]
 
@@ -9,17 +9,12 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dlrp4"]
-friction = 0.0
-bounce = 1.0
-absorbent = true
-
 [node name="track" type="Node3D" node_paths=PackedStringArray("path", "csgMesh", "staticBody")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("1_mll3j")
 path = NodePath("Path3D")
 csgMesh = NodePath("main")
-staticBody = NodePath("StaticBody3D")
+staticBody = NodePath("")
 
 [node name="Path3D" type="Path3D" parent="."]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -42,7 +37,3 @@ path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
 smooth_faces = true
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
-physics_material_override = SubResource("PhysicsMaterial_dlrp4")

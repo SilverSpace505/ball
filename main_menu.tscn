@@ -69,7 +69,6 @@ alignment = 1
 max_length = 15
 
 [node name="race" type="CheckBox" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

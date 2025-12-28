@@ -17,11 +17,13 @@ extends CharacterBody3D
 #dont need half those variables anymore
 
 var floor = 0.0
+var bounceFactor = 1.0
 
 #Camera vars
 #@export var mouseSens = 1000
 func _ready() -> void:
 	Network.launch.connect(_launch)
+	Network.spawn.connect(_spawn)
 	username.text = Global.username
 
 func _process(delta: float) -> void:
@@ -31,7 +33,7 @@ func _process(delta: float) -> void:
 	#elif Input.is_action_pressed("esc"):
 		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-	if not is_on_floor():
+	if not is_on_floor() and Global.running:
 		velocity.y -= gravity * delta
 	elif velocity.y < 0:
 		velocity.y = 0
@@ -43,6 +45,9 @@ func _process(delta: float) -> void:
 	
 	wasd *= camera.followQuat
 	wasd *= -1
+	
+	if not Global.running:
+		wasd *= 0
 	
 	floor -= delta
 	
@@ -60,6 +65,9 @@ func _process(delta: float) -> void:
 	velocity.x *= 0.99
 	velocity.z *= 0.99
 	
+	if not Global.running:
+		velocity *= 0.99
+	
 	var oldVel = velocity
 	
 	var collision = move_and_collide(velocity * delta)
@@ -75,9 +83,10 @@ func _process(delta: float) -> void:
 		if 'isNetworkPlayer' in collider:
 			var launch = oldVel + Vector3(0, 1, 0) * Vector2(velocity.x, velocity.z).length()
 			Network.client.emit('launch', [[collider.id, launch.x, launch.y, launch.z]])
-		var change = (1 + bounciness) * velocity.dot(normal) * normal
+		var change = (1 + bounciness * bounceFactor) * velocity.dot(normal) * normal
 		if change.length() > 0.1:
 			velocity -= change
+		bounceFactor = 1
 		if normal.dot(Vector3.UP) > 0.5:
 			floor = 0.2
 	
@@ -87,11 +96,12 @@ func _process(delta: float) -> void:
 		floor = 0
 	
 	#void
-	if position.y < -100:
-		var dif = Vector3(0, 25, 0) - position
+	if position.y < Global.voidLevel:
+		var dif = Vector3(0, 10, 0) - position
 		position += dif
 		camera.position += dif
 		camera.followPos += dif
+		bounceFactor = 0.2
 	
 	#networking
 	Network.data.x = position.x
@@ -111,3 +121,11 @@ func _input(event):
 
 func _launch(vel):
 	velocity += Vector3(vel[0], vel[1], vel[2])
+
+func _spawn(index):
+	position = Vector3(index * 0.25, 0, 0)
+	velocity = Vector3()
+	camera.position = camera.offset + position
+	camera.look_at(position)
+	camera.followPos = camera.offset + position
+	camera.followQuat = camera.quaternion
