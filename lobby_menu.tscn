@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://c51hjd1iarkfj"]
+
+[ext_resource type="Script" uid="uid://dkbwj0skicqp0" path="res://lobby_menu.gd" id="1_nv5w8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_10hg3"]
+
+[node name="lobby_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nv5w8")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 551.0
+offset_right = 1150.0
+offset_bottom = 643.0
+theme_override_font_sizes/font_size = 61
+toggle_mode = true
+text = "Ready up"
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 95.0
+offset_right = 452.0
+offset_bottom = 538.0
+theme_override_font_sizes/font_size = 35
+item_count = 5
+item_0/text = "overscore"
+item_1/text = "silver"
+item_2/text = "blazingfish"
+item_3/text = "bemannu"
+item_4/text = "redguyonetwo"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 488.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 56
+text = "username's lobby"
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(0.14406255, 0.14406255, 0.14406255, 1)
+position = Vector2(825.00006, 275.81253)
+scale = Vector2(633.25, 535.625)
+mesh = SubResource("BoxMesh_10hg3")
+
+[node name="lengthVal" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 513.0
+offset_top = 51.0
+offset_right = 839.99994
+offset_bottom = 67.0
+max_value = 200.0
+
+[node name="lengthLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 12.0
+offset_right = 552.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 28
+text = "track length"
