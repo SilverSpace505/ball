@@ -2,6 +2,8 @@ class_name Player
 extends CharacterBody3D
 
 @export var camera: Camera
+@export var username: Label3D
+@export var mesh: Node3D
 
 @export var speed = 0.05
 @export var jumpHeight = 5
@@ -20,6 +22,7 @@ var floor = 0.0
 #@export var mouseSens = 1000
 func _ready() -> void:
 	Network.launch.connect(_launch)
+	username.text = Global.username
 
 func _process(delta: float) -> void:
 	# get mouse to be used :O
@@ -50,8 +53,8 @@ func _process(delta: float) -> void:
 	velocity.z -= wasd.z * speed * addSpeed
 	
 	#rotate player by velocity
-	rotate(Vector3(0, 0, 1), -velocity.x / 10 / 5)
-	rotate(Vector3(1, 0, 0), velocity.z / 10 / 5)
+	mesh.rotate(Vector3(0, 0, 1), -velocity.x / 10 / 5)
+	mesh.rotate(Vector3(1, 0, 0), velocity.z / 10 / 5)
 	
 	#friction
 	velocity.x *= 0.99
@@ -95,9 +98,9 @@ func _process(delta: float) -> void:
 	Network.data.y = position.y
 	Network.data.z = position.z
 	
-	Network.data.rx = rotation.x
-	Network.data.ry = rotation.y
-	Network.data.rz = rotation.z
+	Network.data.rx = mesh.rotation.x
+	Network.data.ry = mesh.rotation.y
+	Network.data.rz = mesh.rotation.z
 
 func _input(event):
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

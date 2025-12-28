@@ -1,12 +1,19 @@
 extends Node
 
 var seed = 1
+var username = 'Unnamed'
+var race = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	loadData()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func loadData():
+	var config = ConfigFile.new()
+	var err = config.load('user://data.cfg')
+	if err == OK:
+		username = config.get_value('player', 'username', 'Unnamed')
+	
+func saveData():
+	var config = ConfigFile.new()
+	config.set_value('player', 'username', username)
+	config.save('user://data.cfg')

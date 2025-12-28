@@ -17,11 +17,13 @@ height = 2.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_3vexw"]
 radius = 1.0
 
-[node name="networkPlayer" type="StaticBody3D"]
+[node name="networkPlayer" type="StaticBody3D" node_paths=PackedStringArray("mesh", "label")]
 transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_j6rbc")
+mesh = NodePath("MeshInstance3D")
+label = NodePath("Label3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
@@ -29,3 +31,8 @@ mesh = SubResource("SphereMesh_j6rbc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_3vexw")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3718, 0)
+billboard = 1
+font_size = 64

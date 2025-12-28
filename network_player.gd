@@ -1,9 +1,14 @@
 class_name NetworkPlayer
 extends Node3D
 
+@export var mesh: Node3D
+@export var label: Label3D
+
 var isNetworkPlayer = true
 
 var id = ''
+
+var username = 'Unnamed'
 
 var x = 0
 var lx = 0
@@ -35,6 +40,8 @@ func interpVar(current: float, last: float, tickrate: float, accumulator: float)
 	return lerp(last, current, accumulator / (1 / tickrate))
 
 func _process(_delta: float) -> void:
+	label.text = username
+	
 	#do some weird interpolation stuff using the accumulator from network.gd
 	position.x = interpVar(x, lx, 10, Network.naccumulator)
 	position.y = interpVar(y, ly, 10, Network.naccumulator)
@@ -45,4 +52,4 @@ func _process(_delta: float) -> void:
 	
 	var multiply = Network.naccumulator / (1.0 / 10.0)
 	
-	quaternion = lastQuat.slerp(quat, multiply)
+	mesh.quaternion = lastQuat.slerp(quat, multiply)

@@ -30,6 +30,9 @@ func _on_data(data):
 		
 		#update the position and rotation of the network player
 		if player in players:
+			if 'username' in data[player]:
+				players[player].username = data[player].username
+			
 			players[player].lx = players[player].x
 			players[player].ly = players[player].y
 			players[player].lz = players[player].z

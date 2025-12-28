@@ -1,13 +1,24 @@
 extends Control
 
-@export var seedInput: LineEdit
+@export var lobby: LineEdit
+@export var username: LineEdit
+@export var race: CheckBox
 
 func _ready() -> void:
-	seedInput.text = str(Global.seed)
+	lobby.text = str(Global.seed)
+	username.text = Global.username
 
 func _on_play_button_down() -> void:
-	get_tree().change_scene_to_file("res://game.tscn")
+	Network.client.emit('join', [str(Global.seed), race.button_pressed])
+	#get_tree().change_scene_to_file("res://game.tscn")
 
-func _on_seed_text_changed(new_text: String) -> void:
+func _on_lobby_text_changed(new_text: String) -> void:
 	if int(new_text):
 		Global.seed = int(new_text)
+
+func _on_username_text_changed(new_text: String) -> void:
+	Global.username = new_text
+	Global.saveData()
+
+func _on_race_toggled(toggled_on: bool) -> void:
+	Global.race = toggled_on

@@ -10,10 +10,12 @@ var data = {
 	'z': 0.0,
 	'rx': 0.0,
 	'ry': 0.0,
-	'rz': 0.0
+	'rz': 0.0,
+	'username': 'Unnamed'
 }
 
 var id = ''
+var lobby = null
 
 var naccumulator = 0
 
@@ -44,7 +46,12 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 		id = msg[0]
 	elif event == 'launch':
 		launch.emit(msg[0])
+	elif event == 'joined':
+		lobby = msg[0]
+		get_tree().change_scene_to_file("res://game.tscn")
+		
 
 func _on_timer_timeout() -> void:
-	if connected:
+	if connected and lobby != null:
+		data.username = Global.username
 		client.emit('data', data)
