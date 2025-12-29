@@ -26,6 +26,30 @@ signal on_data
 signal launch
 signal spawn
 
+func get_url_parameters() -> Dictionary:
+	var params = {}
+	
+	var js_code = """
+	(function() {
+	    var params = {};
+	    var searchParams = new URLSearchParams(window.location.search);
+	    searchParams.forEach(function(value, key) {
+	        params[key] = value;
+	    });
+	    return JSON.stringify(params);
+	})();
+	"""
+	
+	var result = JavaScriptBridge.eval(js_code)
+	
+	if result != null and result != "":
+		var json = JSON.new()
+		var error = json.parse(result)
+		if error == OK:
+			params = json.data
+	
+	return params
+
 func _ready() -> void:
 	print('connecting')
 	client.connect_socket()
@@ -39,6 +63,16 @@ func _on_socket_io_socket_connected(_ns: String) -> void:
 	print('connected!')
 	connected = true
 	client.emit('getId')
+	
+	if OS.has_feature("web"):
+		var url_params = get_url_parameters()
+		if url_params.has('lobby'):
+			var lobbyf: String = url_params['lobby']
+			var isRace = lobbyf[0] == 'r'
+			var lobbyn = lobbyf.substr(1)
+			Global.seed = int(lobbyn)
+			Global.race = isRace
+			Network.client.emit('join', [str(Global.seed), isRace])
 
 func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> void:
 	if event == 'data':
