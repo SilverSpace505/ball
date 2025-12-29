@@ -16,6 +16,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Network.id in playerElements:
+		players[Network.id].itime = Global.time
 		playerElements[Network.id].place = Global.place
 		playerElements[Network.id].time = str(round(Global.time * 100) / 100)
 		playerElements[Network.id].isReady = 0
@@ -31,6 +32,22 @@ func _process(_delta: float) -> void:
 			continue
 		if player in playerElements:
 			playerElements[player].time = str(round(players[player].itime * 100) / 100)
+			if playerElements[player].time == '0.0':
+				playerElements[player].time = '0'
+	
+	var children = playersList.get_children()
+	children.sort_custom(func(a, b):
+		var aplace = a.place != ''
+		var bplace = b.place != ''
+		
+		if aplace != bplace:
+			return aplace
+		
+		return float(a.time) < float(b.time)
+	)
+	
+	for i in range(children.size()):
+		playersList.move_child(children[i], i)
 	
 func _on_data(data):
 	var id = Network.id

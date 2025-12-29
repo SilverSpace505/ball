@@ -2,7 +2,7 @@ extends Node
 
 var seed = 1
 var username = 'Unnamed'
-var race = false
+var race = true
 var startTime = -1
 
 var voidLevel = -100
