@@ -32,8 +32,8 @@ func _process(_delta: float) -> void:
 	else:
 		start.text = ''
 	
-	if Global.startTime != -1 && unix_timestamp_ms >= Global.startTime:
+	if Global.startTime != -1 and unix_timestamp_ms >= Global.startTime:
 		Global.startTime = -1
 		Global.time = 0
 		Global.running = true
-		Global.isReady = false
+		Global.isReady = true
