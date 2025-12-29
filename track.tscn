@@ -9,12 +9,11 @@ _data = {
 }
 point_count = 2
 
-[node name="track" type="Node3D" node_paths=PackedStringArray("path", "csgMesh", "staticBody")]
+[node name="track" type="Node3D" node_paths=PackedStringArray("path", "csgMesh")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("1_mll3j")
 path = NodePath("Path3D")
 csgMesh = NodePath("main")
-staticBody = NodePath("")
 
 [node name="Path3D" type="Path3D" parent="."]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -24,11 +23,11 @@ curve = SubResource("Curve3D_mll3j")
 [node name="main" type="CSGPolygon3D" parent="."]
 transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, -0.19089925, 0.0073064417, -0.0103241205)
 use_collision = true
-polygon = PackedVector2Array(1.6984326, -0.009544842, 1.7778943, 0.05872508, 1.6939559, 0.24003191, 1.6346394, 0.29599082, 1.5842764, 0.24450867, 1.550701, 0.12699495, -1.5505424, 0.12251821, -1.5818795, 0.24562787, -1.6400768, 0.28927577, -1.6971546, 0.24115112, -1.7721397, 0.05872508, -1.7027508, -0.015140714)
+polygon = PackedVector2Array(2.336213, -0.008503631, 2.3912826, 0.050157327, 2.3314245, 0.39853126, 2.2643836, 0.45360076, 2.2057226, 0.39493978, 2.1446671, 0.12078987, -2.1434705, 0.12117225, -2.20692, 0.39532226, -2.2691724, 0.445603, -2.332622, 0.39771652, -2.3900857, 0.044553913, -2.3386078, -0.010515555)
 mode = 2
 path_node = NodePath("../Path3D")
 path_interval_type = 0
-path_interval = 1.0
+path_interval = 0.5
 path_simplify_angle = 0.0
 path_rotation = 1
 path_rotation_accurate = false

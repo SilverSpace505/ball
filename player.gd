@@ -2,11 +2,13 @@ class_name Player
 extends CharacterBody3D
 
 @export var camera: Camera
+
 @export var username: Label3D
 @export var mesh: Node3D
+@export var core: Node3D
 
 @export var speed = 0.05
-@export var jumpHeight = 5
+@export var jumpHeight = 3
 @export var gravity = 10
 #@export var backSpeed = 5
 #@export var minSpeed = 0
@@ -16,7 +18,7 @@ extends CharacterBody3D
 
 #dont need half those variables anymore
 
-var floor = 0.0
+var floort = 0.0
 var bounceFactor = 1.0
 
 #Camera vars
@@ -25,21 +27,36 @@ func _ready() -> void:
 	Network.launch.connect(_launch)
 	Network.spawn.connect(_spawn)
 	username.text = Global.username
+	
+	core.scale = scale
 
-func _process(delta: float) -> void:
+func tp(pos):
+	var dif = pos - position
+	position += dif
+	core.global_position = global_position
+	camera.position += dif
+	camera.followPos += dif
+
+func reset():
+	position = Vector3()
+	velocity = Vector3()
+	camera.position = camera.offset
+	camera.look_at(position + Vector3(0, 0.2, 0))
+	camera.followPos = camera.offset + position
+	camera.followQuat = camera.quaternion
+
+func _physics_process(delta: float) -> void:
 	# get mouse to be used :O
 	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	#elif Input.is_action_pressed("esc"):
 		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
-	if not is_on_floor() and Global.running:
+	
+	if Global.running:
 		velocity.y -= gravity * delta
-	elif velocity.y < 0:
-		velocity.y = 0
 	
 	#get input axis relative to camera direction
-	var wasd = Vector3(Input.get_axis('left', 'right'), 0, Input.get_axis('slow', 'go'))
+	var wasd = Vector3(Input.get_axis('left', 'right'), 0, Input.get_axis('slow', 'go')).normalized()
 	
 	camera.turn += (wasd.x / 100) * (Vector2(velocity.x, velocity.z).length() / 10) ** 2
 	
@@ -49,17 +66,13 @@ func _process(delta: float) -> void:
 	if not Global.running:
 		wasd *= 0
 	
-	floor -= delta
+	floort -= delta
 	
 	var addSpeed = clamp(1 + (Vector2(velocity.x, velocity.z).length() / 5) ** 2 / 3, 1, 5)
 	
 	#add input axis onto velocity
 	velocity.x += wasd.x * speed * addSpeed
 	velocity.z -= wasd.z * speed * addSpeed
-	
-	#rotate player by velocity
-	mesh.rotate(Vector3(0, 0, 1), -velocity.x / 10 / 5)
-	mesh.rotate(Vector3(1, 0, 0), velocity.z / 10 / 5)
 	
 	#friction
 	velocity.x *= 0.99
@@ -72,7 +85,7 @@ func _process(delta: float) -> void:
 	
 	var collision = move_and_collide(velocity * delta)
 	
-	const bounciness = 0.5
+	const bounciness = 0.3
 	
 	#check for collisions and launch other players
 	#for i in get_slide_collision_count():
@@ -88,19 +101,16 @@ func _process(delta: float) -> void:
 			velocity -= change
 		bounceFactor = 1
 		if normal.dot(Vector3.UP) > 0.5:
-			floor = 0.2
+			floort = 0.2
 	
 	# jump
-	if Input.is_action_pressed("jump") && floor > 0:
+	if Input.is_action_pressed("jump") && floort > 0:
 		velocity.y = jumpHeight
-		floor = 0
+		floort = 0
 	
 	#void
 	if position.y < Global.voidLevel:
-		var dif = Vector3(0, 10, 0) - position
-		position += dif
-		camera.position += dif
-		camera.followPos += dif
+		tp(Vector3(0, 10, 0))
 		bounceFactor = 0.2
 	
 	#networking
@@ -111,6 +121,13 @@ func _process(delta: float) -> void:
 	Network.data.rx = mesh.rotation.x
 	Network.data.ry = mesh.rotation.y
 	Network.data.rz = mesh.rotation.z
+	
+func _process(delta: float) -> void:
+	#rotate player by velocity
+	mesh.rotate(Vector3(0, 0, 1), -velocity.x * delta * 2)
+	mesh.rotate(Vector3(1, 0, 0), velocity.z * delta * 2)
+	
+	core.global_position = core.global_position.lerp(global_position, clamp(delta * 50, 0, 1))
 
 func _input(event):
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -125,7 +142,12 @@ func _launch(vel):
 func _spawn(index):
 	position = Vector3(index * 0.25, 0, 0)
 	velocity = Vector3()
-	camera.position = camera.offset + position
-	camera.look_at(position)
+	core.global_position = global_position
+	
 	camera.followPos = camera.offset + position
-	camera.followQuat = camera.quaternion
+	camera.followQuat = Quaternion()
+	
+	#camera.position = camera.offset + position
+	#camera.look_at(position + Vector3(0, 0.2, 0))
+	#camera.followPos = camera.offset + position
+	#camera.followQuat = camera.quaternion

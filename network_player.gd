@@ -59,6 +59,6 @@ func _process(_delta: float) -> void:
 	var lastQuat = Quaternion.from_euler(Vector3(lrx, lry, lrz))
 	var quat = Quaternion.from_euler(Vector3(rx, ry, rz))
 	
-	var multiply = Network.naccumulator / (1.0 / 10.0)
+	var multiply = clamp(Network.naccumulator / (1.0 / 10.0), 0, 1)
 	
 	mesh.quaternion = lastQuat.slerp(quat, multiply)

@@ -5,7 +5,7 @@ var username = 'Unnamed'
 var race = true
 var startTime = -1
 
-var voidLevel = -100
+var voidLevel = 0
 var time = 0
 var running = false
 var place = ''
@@ -15,7 +15,7 @@ var isReady = false
 func _ready() -> void:
 	loadData()
 	
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if running:
 		time += delta
 

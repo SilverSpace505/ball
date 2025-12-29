@@ -17,7 +17,7 @@ func _ready() -> void:
 	
 	const scalar = 0.1
 	
-	var vel = Vector3()
+	var vel = Vector3(0, -0.2, 0)
 	
 	path.curve.clear_points()
 	path.curve.add_point(Vector3(0, 0, 0))
@@ -41,13 +41,15 @@ func _ready() -> void:
 		
 		vel.y = clamp(vel.y, -0.5, 0)
 		
+		vel.x -= (vel.x ** 3) * scalar * 10
 		vel.x = clamp(vel.x, -2, 2)
-		vel.x -= (vel.x ** 3) * scalar
 		
 		pos.y += vel.y * scalar
 		
 		forward *= Quaternion(Vector3(0, 1, 0), vel.x * scalar)
 		totalx += vel.x * scalar
+		
+		Global.voidLevel = min(Global.voidLevel, pos.y - 5)
 		#forward2 *= Quaternion(Vector3(0, 1, 0), vel.y)
 		
 		#var perp = Vector3(1, 0, 0) * forward2
@@ -56,9 +58,7 @@ func _ready() -> void:
 	totalx -= vel.x * scalar
 	
 	finish.position = positions[0] - $Path3D.global_position
-	
-	Global.voidLevel = finish.position.y - 5
-	
+		
 	# Calculate the actual forward direction from the last quaternion
 	var track_forward = Vector3(0, 0, -1) * quaternions[0]
 	var track_up = Vector3(0, 1, 0) * quaternions[0]

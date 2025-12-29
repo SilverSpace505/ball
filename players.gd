@@ -1,3 +1,4 @@
+class_name Players
 extends Node3D
 
 @export var playerInstance: PackedScene
@@ -5,8 +6,16 @@ extends Node3D
 
 @export var playerElement: PackedScene
 
+@export var player: Player
+
 var players: Dictionary[String, NetworkPlayer] = {}
 var playerElements: Dictionary[String, PlayerElement] = {}
+var inRace = false
+
+var center = Vector3()
+var minp = Vector3()
+var maxp = Vector3()
+var length = 0
 
 func _ready() -> void:
 	#if connected already, request all the player data
@@ -14,7 +23,11 @@ func _ready() -> void:
 	if Network.connected:
 		Network.client.emit('getData')
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	var currentCenter = Vector3()
+	var racingPlayers = 0
+	minp = Vector3(INF, INF, INF)
+	maxp = Vector3(-INF, -INF, -INF)
 	if Network.id in playerElements:
 		players[Network.id].itime = Global.time
 		playerElements[Network.id].place = Global.place
@@ -26,14 +39,36 @@ func _process(_delta: float) -> void:
 			else:
 				playerElements[Network.id].isReady = 2
 	
-	for player in players:
-		players[player].get_node('CollisionShape3D').disabled = not Global.running
-		if player == Network.id:
+	for player2 in players:
+		if playerElements[player2].isReady == 0:
+			racingPlayers += 1
+			currentCenter += players[player2].position
+			minp = Vector3(
+				min(minp.x, players[player2].position.x),
+				min(minp.y, players[player2].position.y),
+				min(minp.z, players[player2].position.z)
+			)
+			maxp = Vector3(
+				max(maxp.x, players[player2].position.x),
+				max(maxp.y, players[player2].position.y),
+				max(maxp.z, players[player2].position.z)
+			)
+		
+		players[player2].get_node('CollisionShape3D').disabled = not Global.running
+		if player2 == Network.id:
 			continue
-		if player in playerElements:
-			playerElements[player].time = str(round(players[player].itime * 100) / 100)
-			if playerElements[player].time == '0.0':
-				playerElements[player].time = '0'
+		if player2 in playerElements:
+			playerElements[player2].time = str(round(players[player2].itime * 100) / 100)
+			if playerElements[player2].time == '0.0':
+				playerElements[player2].time = '0'
+	
+	if racingPlayers > 0:
+		currentCenter /= racingPlayers
+	print(racingPlayers)
+	if Global.running or not Global.race:
+		currentCenter = player.position
+	center = center.lerp(currentCenter, clamp(delta * 10, 0, 1))
+	length = (maxp - minp).length()
 	
 	var children = playersList.get_children()
 	children.sort_custom(func(a, b):
@@ -50,6 +85,7 @@ func _process(_delta: float) -> void:
 		playersList.move_child(children[i], i)
 	
 func _on_data(data):
+	inRace = false
 	var id = Network.id
 	for player in data:
 		#create a mesh for the players
@@ -101,6 +137,9 @@ func _on_data(data):
 				players[player].rz = data[player].rz
 			if 'time' in data[player]:
 				players[player].time = data[player].time
+		
+			if playerElements[player].isReady == 0:
+				inRace = Global.race
 	
 	#delete meshes of disconnected players
 	for player in players:

@@ -7,14 +7,6 @@ extends Node3D
 func _ready() -> void:
 	Global.running = not Global.race
 	Global.isReady = false
-	
-func resetPlayer():
-	player.position = Vector3()
-	player.velocity = Vector3()
-	camera.position = camera.offset
-	camera.look_at(position)
-	camera.followPos = camera.offset + position
-	camera.followQuat = camera.quaternion
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed('ready'):
@@ -24,7 +16,7 @@ func _process(_delta: float) -> void:
 		elif not Global.running:
 			Global.running = true
 			Global.time = 0
-			resetPlayer()
+			player.reset()
 	
 	var unix_timestamp_ms = Time.get_unix_time_from_system() * 1000
 	if unix_timestamp_ms < Global.startTime:
@@ -36,4 +28,4 @@ func _process(_delta: float) -> void:
 		Global.startTime = -1
 		Global.time = 0
 		Global.running = true
-		Global.isReady = true
+		Global.isReady = false

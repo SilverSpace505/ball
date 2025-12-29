@@ -70,6 +70,10 @@ ready={
 ]
 }
 
+[physics]
+
+common/physics_ticks_per_second=100
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
