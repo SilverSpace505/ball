@@ -17,7 +17,18 @@ autostart = true
 
 [node name="Timer2" type="Timer" parent="."]
 
+[node name="sync" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="reconnect" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="event_received" from="SocketIO" to="." method="_on_socket_io_event_received"]
 [connection signal="socket_connected" from="SocketIO" to="." method="_on_socket_io_socket_connected"]
+[connection signal="socket_disconnected" from="SocketIO" to="." method="_on_socket_io_socket_disconnected"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="sync" to="." method="_on_sync_timeout"]
+[connection signal="timeout" from="reconnect" to="." method="_on_reconnect_timeout"]

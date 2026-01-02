@@ -35,7 +35,7 @@ var ltime = 0
 
 var itime = 0
 
-var peer := WebRTCPeerConnection.new()
+var peer: WebRTCPeerConnection
 var channel: WebRTCDataChannel
 var eventChannel: WebRTCDataChannel
 var myId = 0
@@ -52,15 +52,9 @@ var latency = 0
 
 var offset = Vector3()
 
+var reconnect_cooldown = 0
+
 func _ready() -> void:
-	#peer = WebRTCPeerConnection.new()
-	var iceServers = {
-		"iceServers": [
-			{"urls": ["stun:stun.l.google.com:19302"]}
-		]
-	}
-	peer.initialize(iceServers)
-	
 	if Network.connected:
 		_socket_ready()
 	else:
@@ -70,15 +64,30 @@ func _ready() -> void:
 	Network.on_session.connect(_on_session_received)
 	Network.on_candidate.connect(_on_candidate_received)
 	Network.broadcast_data.connect(_broadcast_data)
-	
-	channel = peer.create_data_channel('game', {'id': 1, 'negotiated': true, 'ordered': false, 'maxRetransmits': 0})
-	eventChannel = peer.create_data_channel('event', {'id': 2, 'negotiated': true, 'ordered': true})
 
 func _socket_ready():
+	connect_peer()
+
+func connect_peer():
+	reconnect_cooldown = 2
+	if peer:
+		peer.close()
+	peer = WebRTCPeerConnection.new()
+	
+	var iceServers = {
+		"iceServers": [
+			{"urls": ["stun:stun.l.google.com:19302"]}
+		]
+	}
+	peer.initialize(iceServers)
+	
 	peer.ice_candidate_created.connect(_on_ice_canditate)
 	peer.session_description_created.connect(_on_session_created)
 	
-	Network.client.emit('startwebrtc', id)
+	channel = peer.create_data_channel('game', {'id': 1, 'negotiated': true, 'ordered': false, 'maxRetransmits': 0})
+	eventChannel = peer.create_data_channel('event', {'id': 2, 'negotiated': true, 'ordered': true})
+	
+	Network.emit('startwebrtc', id)
 	
 func _on_create_offer(tid):
 	if tid == id:
@@ -112,7 +121,12 @@ func interpVar(current: float, last: float, tickrate: float, accumulator: float)
 
 func _process(delta: float) -> void:
 	accumulator += delta
-	connected = channel.get_ready_state() == WebRTCDataChannel.STATE_OPEN and eventChannel.get_ready_state() == WebRTCDataChannel.STATE_OPEN
+	
+	var peerOk = peer.get_connection_state() < 3
+	var channelOk = channel.get_ready_state() < 2
+	var eventChannelOk = eventChannel.get_ready_state() < 2
+	
+	connected = channel and peer and peer.get_connection_state() == WebRTCPeerConnection.STATE_CONNECTED and channel.get_ready_state() == WebRTCDataChannel.STATE_OPEN and eventChannel.get_ready_state() == WebRTCDataChannel.STATE_OPEN
 	element.connecting = !connected
 	peer.poll()
 	if channel.get_ready_state() == WebRTCDataChannel.STATE_OPEN:
@@ -122,9 +136,15 @@ func _process(delta: float) -> void:
 	if eventChannel.get_ready_state() == WebRTCDataChannel.STATE_OPEN:
 		while eventChannel.get_available_packet_count() > 0:
 			on_data(eventChannel.get_packet().get_string_from_utf8())
-		
-	if peer.get_connection_state() == WebRTCPeerConnection.STATE_FAILED:
+	
+	if (not peerOk) or (not channelOk) or (not eventChannelOk):
 		relay = true
+		reconnect_cooldown -= delta
+		if reconnect_cooldown <= 0:
+			connect_peer()
+	
+	if connected:
+		relay = false
 	
 	label.text = username
 	

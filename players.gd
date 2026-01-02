@@ -22,9 +22,16 @@ func _ready() -> void:
 	Network.on_dm.connect(_on_dm)
 	Network.on_player_joined.connect(_on_player_joined)
 	Network.on_player_left.connect(_on_player_left)
+	Network.on_disconnected.connect(_on_disconnected)
+	Network.on_names.connect(_on_names)
 	if Network.connected:
 		Network.client.emit('getData')
+	load_names(Network.names)
 	
+func _on_names(names):
+	load_names(names)
+
+func load_names(names):
 	for id in Network.names:
 		players[id] = playerInstance.instantiate()
 		players[id].id = id
@@ -36,7 +43,6 @@ func _ready() -> void:
 		if Network.id == id:
 			playerElements[id].connecting = false
 		playersList.add_child(playerElements[id])
-		
 
 func _process(delta: float) -> void:
 	var currentCenter = Vector3()
@@ -114,3 +120,11 @@ func _on_player_left(id):
 	
 	playerElements[id].queue_free()
 	playerElements.erase(id)
+
+func _on_disconnected():
+	for id in players:
+		players[id].queue_free()
+		players.erase(id)
+	for id in playerElements:
+		playerElements[id].queue_free()
+		playerElements.erase(id)

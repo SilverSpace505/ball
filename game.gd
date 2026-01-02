@@ -18,7 +18,7 @@ func _physics_process(_delta: float) -> void:
 			Global.time = 0
 			player.reset()
 	
-	var unix_timestamp_ms = Time.get_unix_time_from_system() * 1000
+	var unix_timestamp_ms = Network.get_time()
 	if unix_timestamp_ms < Global.startTime:
 		start.text = str(int(min(3, ceil((Global.startTime - unix_timestamp_ms) / 1000))))
 	else:

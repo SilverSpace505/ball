@@ -18,6 +18,7 @@ radius = 1.0
 height = 2.0
 
 [node name="player" type="CharacterBody3D" node_paths=PackedStringArray("username", "mesh", "core")]
+transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
 script = ExtResource("1_4flbx")
 username = NodePath("core/Label3D")
 mesh = NodePath("core/MeshInstance3D")
@@ -27,6 +28,7 @@ core = NodePath("core")
 shape = SubResource("SphereShape3D_4flbx")
 
 [node name="core" type="Node3D" parent="."]
+transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
 top_level = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="core"]

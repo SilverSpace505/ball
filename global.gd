@@ -11,6 +11,7 @@ var running = false
 var place = ''
 
 var isReady = false
+var inGame = false
 
 var lastState = -1
 

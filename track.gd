@@ -15,7 +15,8 @@ func _ready() -> void:
 		
 	const scalar = 0.1
 	
-	var vel = Vector3(0, -0.2, 0)
+	var tvel = Vector3(0, -0.2, 0)
+	var vel = tvel
 	
 	path.curve.clear_points()
 	path.curve.add_point(Vector3(0, 0, 0))
@@ -34,13 +35,15 @@ func _ready() -> void:
 			positions.append(pos)
 			quaternions.append(forward)
 		
-		vel.x += randf_range(-0.5, 0.5) * scalar
-		vel.y += randf_range(-0.1, 0.1) * scalar
+		tvel.x += randf_range(-0.5, 0.5) * scalar
+		tvel.y += randf_range(-0.1, 0.1) * scalar
 		
-		vel.y = clamp(vel.y, -0.5, 0)
+		tvel.y = clamp(tvel.y, -0.5, 0)
 		
-		vel.x -= (vel.x ** 3) * scalar * 10
-		vel.x = clamp(vel.x, -2, 2)
+		tvel.x -= (tvel.x ** 3) * scalar * 10
+		tvel.x = clamp(tvel.x, -2, 2)
+		
+		vel = vel.lerp(tvel, 0.025)
 		
 		pos.y += vel.y * scalar
 		

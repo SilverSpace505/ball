@@ -31,6 +31,8 @@ var fpsc = 0
 signal launch
 signal spawn
 signal on_connected
+signal on_disconnected
+signal on_names
 
 signal on_create_offer
 signal on_session
@@ -40,6 +42,10 @@ signal on_dm
 
 signal on_player_joined
 signal on_player_left
+
+func emit(event, ndata = null):
+	if connected:
+		client.emit(event, ndata)
 
 func get_url_parameters() -> Dictionary:
 	var params = {}
@@ -90,16 +96,22 @@ func _on_socket_io_socket_connected(_ns: String) -> void:
 			var lobbyn = lobbyf.substr(1)
 			Global.seed = int(lobbyn)
 			Global.race = isRace
-			Network.client.emit('join', [str(Global.seed), isRace])
+			Network.client.emit('join', [str(Global.seed), isRace, Global.username])
 
 func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> void:
 	if event == 'id':
 		#update state with id from server
 		id = msg[0]
+		if lobby != null:
+			emit('join', [str(Global.seed), Global.race, Global.username])
 	elif event == 'joined':
 		lobby = msg[0]
 		names = msg[1]
-		get_tree().change_scene_to_file("res://game.tscn")
+		if not Global.inGame:
+			get_tree().change_scene_to_file("res://game.tscn")
+		else:
+			on_names.emit(names)
+		Global.inGame = true
 	elif event == 'start':
 		Global.startTime = msg[0]
 		Global.time = 0
@@ -121,6 +133,12 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 		on_player_joined.emit(msg[0], msg[1])
 	elif event == 'playerLeft':
 		on_player_left.emit(msg[0])
+	elif event == 'sync':
+		var response_time = Time.get_unix_time_from_system()
+		var latency_time = response_time - request_time
+		var server_time = msg[0] / 1000
+		var estimated_server_time = server_time + (latency_time / 2.0)
+		time_offset = (estimated_server_time - response_time) * 1000
 
 func _on_timer_timeout() -> void:
 	if connected and lobby != null:
@@ -137,7 +155,27 @@ func _on_timer_timeout() -> void:
 		broadcast_data.emit(data)
 		client.emit('data', data)
 
-
 func _on_timer_2_timeout() -> void:
 	fps = fpsc
 	fpsc = 0
+	
+var request_time = 0
+var time_offset = 0
+func sync_time() -> void:
+	if not connected:
+		return
+	request_time = Time.get_unix_time_from_system()
+	emit('sync')
+
+func _on_sync_timeout() -> void:
+	sync_time()
+
+func get_time():
+	return Time.get_unix_time_from_system() * 1000 + time_offset
+
+func _on_reconnect_timeout() -> void:
+	client.connect_socket()
+
+func _on_socket_io_socket_disconnected() -> void:
+	on_disconnected.emit()
+	$reconnect.start()

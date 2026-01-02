@@ -28,8 +28,6 @@ func _ready() -> void:
 	Network.spawn.connect(_spawn)
 	username.text = Global.username
 	
-	core.scale = scale
-
 func tp(pos):
 	var dif = pos - position
 	position += dif
