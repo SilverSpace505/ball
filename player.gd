@@ -94,8 +94,10 @@ func _physics_process(delta: float) -> void:
 		var collider = collision.get_collider()
 		var normal = collision.get_normal()
 		if 'isNetworkPlayer' in collider:
-			var launch = oldVel + Vector3(0, 1, 0) * Vector2(velocity.x, velocity.z).length()
-			Network.client.emit('launch', [[collider.id, launch.x, launch.y, launch.z]])
+			var launch = oldVel + Vector3(0, 0.2, 0) * Vector2(velocity.x, velocity.z).length()
+			if collider.connected:
+				collider.send_msg('launch', [launch.x, launch.y, launch.z], true)
+			#Network.client.emit('launch', [[collider.id, launch.x, launch.y, launch.z]])
 		var change = (1 + bounciness * bounceFactor) * velocity.dot(normal) * normal
 		if change.length() > 0.1:
 			velocity -= change
@@ -128,6 +130,8 @@ func _process(delta: float) -> void:
 	mesh.rotate(Vector3(1, 0, 0), velocity.z * delta * 2)
 	
 	core.global_position = core.global_position.lerp(global_position, clamp(delta * 50, 0, 1))
+	if Network.fps < 100:
+		core.global_position = global_position
 
 func _input(event):
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

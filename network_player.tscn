@@ -31,6 +31,7 @@ mesh = SubResource("SphereMesh_j6rbc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_3vexw")
+disabled = true
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3718, 0)
@@ -38,3 +39,8 @@ billboard = 1
 no_depth_test = true
 fixed_size = true
 font_size = 64
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -12,9 +12,7 @@ func _ready() -> void:
 	
 	var pos = Vector3()
 	var forward = Quaternion()
-	
-	var totalx = 0
-	
+		
 	const scalar = 0.1
 	
 	var vel = Vector3(0, -0.2, 0)
@@ -47,16 +45,13 @@ func _ready() -> void:
 		pos.y += vel.y * scalar
 		
 		forward *= Quaternion(Vector3(0, 1, 0), vel.x * scalar)
-		totalx += vel.x * scalar
 		
 		Global.voidLevel = min(Global.voidLevel, pos.y - 5)
 		#forward2 *= Quaternion(Vector3(0, 1, 0), vel.y)
 		
 		#var perp = Vector3(1, 0, 0) * forward2
 		#forward *= Quaternion(perp, vel.x)
-	
-	totalx -= vel.x * scalar
-	
+		
 	finish.position = positions[0] - $Path3D.global_position
 		
 	# Calculate the actual forward direction from the last quaternion

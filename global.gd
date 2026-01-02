@@ -12,8 +12,21 @@ var place = ''
 
 var isReady = false
 
+var lastState = -1
+
 func _ready() -> void:
 	loadData()
+
+func _process(_delta: float) -> void:
+	var state = 0
+	if not running:
+		if isReady:
+			state = 1
+		else:
+			state = 2
+	if state != lastState and Network.connected and Network.lobby != null:
+		Network.client.emit('ready', state)
+		lastState = state
 	
 func _physics_process(delta: float) -> void:
 	if running:

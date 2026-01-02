@@ -8,7 +8,7 @@ func _ready() -> void:
 	Global.running = not Global.race
 	Global.isReady = false
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed('ready'):
 		if Global.race:
 			if not Global.running:

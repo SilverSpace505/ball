@@ -9,7 +9,7 @@ func _ready() -> void:
 	username.text = Global.username
 
 func _on_play_button_down() -> void:
-	Network.client.emit('join', [str(Global.seed), race.button_pressed])
+	Network.client.emit('join', [str(Global.seed), race.button_pressed, Global.username])
 	#get_tree().change_scene_to_file("res://game.tscn")
 
 func _on_lobby_text_changed(new_text: String) -> void:

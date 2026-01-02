@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctosjx6bcrfi"]
+[gd_scene load_steps=6 format=3 uid="uid://ctosjx6bcrfi"]
 
 [ext_resource type="Script" uid="uid://c7gxkvy0gfnva" path="res://player_element.gd" id="1_6vtg0"]
 [ext_resource type="Theme" uid="uid://6thw543k5i1t" path="res://gui.tres" id="1_rtdu2"]
 [ext_resource type="Texture2D" uid="uid://d2asm2mom1our" path="res://tick.png" id="2_rpkf1"]
+[ext_resource type="Texture2D" uid="uid://pxossf3rfsib" path="res://connecting.png" id="3_86tmw"]
 [ext_resource type="Texture2D" uid="uid://bkp2x56pojfwb" path="res://cross.png" id="3_ogmru"]
 
 [node name="playerElement" type="Control"]
@@ -16,6 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_6vtg0")
+username = ""
 
 [node name="panel" type="Panel" parent="."]
 layout_mode = 1
@@ -48,7 +50,6 @@ theme_override_font_sizes/font_size = 10
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 10
-text = "Unnamed"
 
 [node name="space" type="Control" parent="panel/margin/container"]
 layout_mode = 2
@@ -127,4 +128,16 @@ offset_bottom = 7.5
 grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("3_ogmru")
+expand_mode = 4
+
+[node name="latency" type="Label" parent="panel/margin/container/right"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5044349, 0.8063406, 1, 1)
+theme_override_font_sizes/font_size = 8
+
+[node name="connecting" type="TextureRect" parent="panel/margin/container/right"]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("3_86tmw")
 expand_mode = 4

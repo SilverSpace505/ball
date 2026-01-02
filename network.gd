@@ -19,12 +19,27 @@ var data = {
 
 var id = ''
 var lobby = null
+var names = {}
+
+const updateRate = 20
 
 var naccumulator = 0
 
-signal on_data
+var fps = 100
+var fpsc = 0
+
 signal launch
 signal spawn
+signal on_connected
+
+signal on_create_offer
+signal on_session
+signal on_candidate
+signal broadcast_data
+signal on_dm
+
+signal on_player_joined
+signal on_player_left
 
 func get_url_parameters() -> Dictionary:
 	var params = {}
@@ -56,6 +71,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	#increment interpolation and send player data up to server
+	fpsc += 1
 	naccumulator += delta
 
 func _on_socket_io_socket_connected(_ns: String) -> void:
@@ -63,6 +79,8 @@ func _on_socket_io_socket_connected(_ns: String) -> void:
 	print('connected!')
 	connected = true
 	client.emit('getId')
+	
+	on_connected.emit()
 	
 	if OS.has_feature("web"):
 		var url_params = get_url_parameters()
@@ -75,17 +93,12 @@ func _on_socket_io_socket_connected(_ns: String) -> void:
 			Network.client.emit('join', [str(Global.seed), isRace])
 
 func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> void:
-	if event == 'data':
-		#reset interpolation and let players.gd handle the global players data
-		naccumulator = 0
-		on_data.emit(msg[0])
-	elif event == 'id':
+	if event == 'id':
 		#update state with id from server
 		id = msg[0]
-	elif event == 'launch':
-		launch.emit(msg[0])
 	elif event == 'joined':
 		lobby = msg[0]
+		names = msg[1]
 		get_tree().change_scene_to_file("res://game.tscn")
 	elif event == 'start':
 		Global.startTime = msg[0]
@@ -96,6 +109,18 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 		Global.startTime = -1
 	elif event == 'place':
 		Global.place = msg[0]
+	elif event == 'createOffer':
+		on_create_offer.emit(msg[0])
+	elif event == 'session':
+		on_session.emit(msg[0], msg[1], msg[2])
+	elif event == 'candidate':
+		on_candidate.emit(msg[0], msg[1], msg[2], msg[3])
+	elif event == 'dm':
+		on_dm.emit(msg[0], msg[1])
+	elif event == 'playerJoined':
+		on_player_joined.emit(msg[0], msg[1])
+	elif event == 'playerLeft':
+		on_player_left.emit(msg[0])
 
 func _on_timer_timeout() -> void:
 	if connected and lobby != null:
@@ -109,4 +134,10 @@ func _on_timer_timeout() -> void:
 				isReady = 2
 		data.ready = isReady
 		data.place = Global.place
+		broadcast_data.emit(data)
 		client.emit('data', data)
+
+
+func _on_timer_2_timeout() -> void:
+	fps = fpsc
+	fpsc = 0
