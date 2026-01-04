@@ -266,7 +266,7 @@ horizontal_alignment = 1
 script = ExtResource("8_j5wjh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="finish"]
-transform = Transform3D(1.185, 0, 0, 0, 2.695, 0, 0, 0, 5, -0.20432895, 0.9349525, 0)
+transform = Transform3D(1.185, 0, 0, 0, 2.695, 0, 0, 0, 5, 0.041017473, 0.9349525, 0)
 mesh = SubResource("BoxMesh_vef74")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="finish"]
