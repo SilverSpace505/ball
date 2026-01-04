@@ -12,6 +12,7 @@ var place = ''
 
 var isReady = false
 var inGame = false
+var scene = 'menu'
 
 var lastState = -1
 

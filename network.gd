@@ -123,16 +123,17 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 	elif event == 'joined':
 		lobby = msg[0]
 		names = msg[1]
-		if not Global.inGame:
+		if Global.scene != 'lobby':
+			Global.scene = 'lobby'
 			get_tree().change_scene_to_file("res://lobby_menu.tscn")
 		else:
-			on_names.emit(names)
-		Global.inGame = true
-		
+			on_names.emit(names)		
 		if len(names.keys()) == 1:
 			emit('options', options)
 	elif event == 'startGame':
-		get_tree().change_scene_to_file("res://game.tscn")
+		if Global.scene != 'game':
+			Global.scene = 'game'
+			get_tree().change_scene_to_file("res://game.tscn")
 	elif event == 'start':
 		Global.startTime = msg[0]
 		Global.time = 0
