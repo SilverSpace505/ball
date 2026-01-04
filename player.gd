@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 	
 	floort -= delta
 	
-	var addSpeed = clamp(1 + (Vector2(velocity.x, velocity.z).length() / 5) ** 2 / 3, 1, 5)
+	var addSpeed = clamp(1 + (Vector2(velocity.x, velocity.z).length() / 5) ** 2 / 3, 1, 10)
 	
 	#add input axis onto velocity
 	velocity.x += wasd.x * speed * addSpeed
