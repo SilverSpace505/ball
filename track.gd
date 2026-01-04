@@ -9,6 +9,13 @@ extends Node3D
 @export var finish: Node3D
 
 func _ready() -> void:
+	var points = csgMesh.polygon
+	for i in range(len(points)):
+		if points[i].x < 0:
+			points[i] = points[i] - Vector2(Network.options.trackSize - 1, 0)
+		if points[i].x > 0:
+			points[i] = points[i] + Vector2(Network.options.trackSize - 1, 0)
+	csgMesh.polygon = points
 	
 	var pos = Vector3()
 	var forward = Quaternion()
@@ -50,7 +57,7 @@ func _ready() -> void:
 		
 		pos.y += vel.y * scalar
 		
-		forward *= Quaternion(Vector3(0, 1, 0), vel.x * scalar)
+		forward *= Quaternion(Vector3(0, 1, 0), vel.x * scalar / Network.options.trackSize) 
 		
 		Global.voidLevel = min(Global.voidLevel, pos.y - 5)
 		#forward2 *= Quaternion(Vector3(0, 1, 0), vel.y)
