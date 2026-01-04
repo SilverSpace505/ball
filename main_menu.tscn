@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cskbojmb7f2h7"]
 
 [ext_resource type="Script" uid="uid://dx32ny7ktawxe" path="res://main_menu.gd" id="1_7vrkn"]
-[ext_resource type="Texture2D" uid="uid://t7vmhvl2x8jk" path="res://play button.png" id="2_fu7sn"]
+[ext_resource type="Texture2D" uid="uid://dxnpwxnhl2j6y" path="res://New Piskel (1).png" id="2_7vrkn"]
 
 [node name="main menu" type="Control" node_paths=PackedStringArray("lobby", "username", "race")]
 layout_mode = 3
@@ -16,6 +16,7 @@ username = NodePath("username")
 race = NodePath("race")
 
 [node name="play" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -31,8 +32,10 @@ grow_vertical = 2
 scale = Vector2(0.21, 0.21)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-icon = ExtResource("2_fu7sn")
+icon = ExtResource("2_7vrkn")
 flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="lobby" type="LineEdit" parent="."]
 layout_mode = 1

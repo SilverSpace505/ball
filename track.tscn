@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cn8pmff4bbixf"]
+[gd_scene load_steps=5 format=3 uid="uid://cn8pmff4bbixf"]
 
 [ext_resource type="Script" uid="uid://bxo74i4xu5chj" path="res://track.gd" id="1_mll3j"]
+[ext_resource type="Texture2D" uid="uid://yysv1ockiurm" path="res://asphalt-1600-mm-architextures.jpg" id="2_phvr8"]
 
 [sub_resource type="Curve3D" id="Curve3D_mll3j"]
 _data = {
@@ -8,6 +9,10 @@ _data = {
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcvet"]
+albedo_color = Color(0.6003083, 0.5517678, 0.47231716, 1)
+albedo_texture = ExtResource("2_phvr8")
 
 [node name="track" type="Node3D" node_paths=PackedStringArray("path", "csgMesh")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -21,9 +26,9 @@ top_level = true
 curve = SubResource("Curve3D_mll3j")
 
 [node name="main" type="CSGPolygon3D" parent="."]
-transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, -0.19089924, 0.0073064417, -0.01032412)
+transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, -0.22558957, 0.16303922, -0.023931736)
 use_collision = true
-polygon = PackedVector2Array(2.2315166, 0.7168159, 2.3130066, 0.716845, 2.3460412, 0.64282304, 2.3912468, 0.051776603, 2.337587, -0.01208885, -2.337134, -0.0125065, -2.3907032, 0.051776603, -2.3458138, 0.6446438, -2.3143451, 0.7170219, -2.231255, 0.7169181, -2.2042043, 0.64149696, -2.144284, 0.12320222, 2.144828, 0.12320222, 2.204115, 0.6403761)
+polygon = PackedVector2Array(2.022574, 0.5997693, 2.0592518, 0.7246823, 2.1940527, 0.7728698, 2.3460412, 0.64282304, 2.372448, 0.1769182, 2.223335, -0.02409707, -0.0018093586, -0.16295941, -2.2209468, -0.02111189, -2.3707223, 0.1746095, -2.3458138, 0.6446438, -2.1939783, 0.7716727, -2.0606136, 0.7256573, -2.0227547, 0.6012651, -2.084987, 0.4764558, -2.0490372, 0.32940346, -1.9330698, 0.2407753, 0.012950927, 0.15882798, 1.9348866, 0.24232359, 2.0501568, 0.3322304, 2.083381, 0.47597533)
 mode = 2
 path_node = NodePath("../Path3D")
 path_interval_type = 0
@@ -33,6 +38,6 @@ path_rotation = 1
 path_rotation_accurate = false
 path_local = false
 path_continuous_u = true
-path_u_distance = 1.0
+path_u_distance = 0.0
 path_joined = false
-smooth_faces = true
+material = SubResource("StandardMaterial3D_bcvet")
