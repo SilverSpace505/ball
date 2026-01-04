@@ -5,6 +5,12 @@ var mapLength = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$track/length/lengthBox.value = Network.options.length
+	$track/length/lengthVal.value = Network.options.length
+	$track/turning/turningBox.value = Network.options.turning
+	$track/turning/turningVal.value = Network.options.turning
+	$track/size/sizeBox.value = Network.options.trackSize
+	$track/size/sizeVal.value = Network.options.trackSize
 	Network.on_player_joined.connect(_addPlayer)
 	Network.options_changed.connect(_optionsChanged)
 	#Network.on_player_left.connect(_removePlayer)

@@ -23,6 +23,7 @@ var options = {
 	'trackSize': 1,
 	'jumps': false
 }
+
 var lastOptions = {}
 
 var id = ''
@@ -137,6 +138,7 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 		Global.time = 0
 		Global.place = ''
 		spawn.emit(msg[1])
+		Global.seed = msg[2]
 	elif event == 'cancelStart':
 		Global.startTime = -1
 	elif event == 'place':
