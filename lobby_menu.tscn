@@ -48,18 +48,22 @@ position = Vector2(825.00006, 275.81253)
 scale = Vector2(633.25, 535.625)
 mesh = SubResource("BoxMesh_10hg3")
 
-[node name="length" type="Node" parent="."]
+[node name="track" type="Node" parent="."]
 
-[node name="LengthVal" type="HSlider" parent="length"]
+[node name="length" type="Node" parent="track"]
+
+[node name="lengthVal" type="HSlider" parent="track/length"]
 offset_left = 513.0
 offset_top = 51.0
 offset_right = 839.99994
 offset_bottom = 67.0
 min_value = 100.0
 max_value = 500.0
+step = 10.0
 value = 100.0
+metadata/_edit_use_anchors_ = true
 
-[node name="lengthLabel" type="Label" parent="length"]
+[node name="lengthLabel" type="Label" parent="track/length"]
 texture_filter = 1
 offset_left = 512.0
 offset_top = 12.0
@@ -67,8 +71,9 @@ offset_right = 674.0
 offset_bottom = 51.0
 theme_override_font_sizes/font_size = 28
 text = "track length"
+metadata/_edit_use_anchors_ = true
 
-[node name="LengthBox" type="SpinBox" parent="length"]
+[node name="lengthBox" type="SpinBox" parent="track/length"]
 offset_left = 846.0
 offset_top = 42.0
 offset_right = 932.5625
@@ -76,18 +81,85 @@ offset_bottom = 73.0
 min_value = 100.0
 max_value = 99999.0
 value = 100.0
+metadata/_edit_use_anchors_ = true
+
+[node name="turning" type="Node" parent="track"]
+
+[node name="turningVal" type="HSlider" parent="track/turning"]
+offset_left = 513.0
+offset_top = 112.0
+offset_right = 839.99994
+offset_bottom = 128.0
+max_value = 5.0
+step = 0.1
+value = 1.0
+metadata/_edit_use_anchors_ = true
+
+[node name="turningLabel" type="Label" parent="track/turning"]
+texture_filter = 1
+offset_left = 512.0
+offset_top = 73.0
+offset_right = 737.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 28
+text = "turning intensity"
+metadata/_edit_use_anchors_ = true
+
+[node name="turningBox" type="SpinBox" parent="track/turning"]
+offset_left = 846.0
+offset_top = 103.0
+offset_right = 932.5625
+offset_bottom = 134.0
+max_value = 5.0
+step = 0.1
+value = 0.5
+metadata/_edit_use_anchors_ = true
+
+[node name="size" type="Node" parent="track"]
+
+[node name="sizeVal" type="HSlider" parent="track/size"]
+offset_left = 513.0
+offset_top = 112.0
+offset_right = 839.99994
+offset_bottom = 128.0
+max_value = 5.0
+step = 0.1
+value = 1.0
+metadata/_edit_use_anchors_ = true
+
+[node name="sizeLabel" type="Label" parent="track/size"]
+texture_filter = 1
+offset_left = 512.0
+offset_top = 73.0
+offset_right = 737.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 28
+text = "turning intensity"
+metadata/_edit_use_anchors_ = true
+
+[node name="sizeBox" type="SpinBox" parent="track/size"]
+offset_left = 846.0
+offset_top = 103.0
+offset_right = 932.5625
+offset_bottom = 134.0
+max_value = 5.0
+step = 0.1
+value = 0.5
+metadata/_edit_use_anchors_ = true
 
 [node name="Jumps" type="Node" parent="."]
 
 [node name="CheckBox" type="CheckBox" parent="Jumps"]
 texture_filter = 1
-offset_left = 511.0
-offset_top = 77.0
-offset_right = 623.0
-offset_bottom = 124.0
+offset_left = 513.0
+offset_top = 454.0
+offset_right = 625.0
+offset_bottom = 501.0
 theme_override_font_sizes/font_size = 28
 text = "Jumps"
 
 [connection signal="button_down" from="start" to="." method="_on_start_button_down"]
-[connection signal="value_changed" from="length/LengthVal" to="." method="_on_length_val_value_changed"]
-[connection signal="value_changed" from="length/LengthBox" to="." method="_on_length_box_value_changed"]
+[connection signal="value_changed" from="track/length/lengthVal" to="." method="_on_length_val_value_changed"]
+[connection signal="value_changed" from="track/length/lengthBox" to="." method="_on_length_box_value_changed"]
+[connection signal="value_changed" from="track/turning/turningVal" to="." method="_on_turning_val_value_changed"]
+[connection signal="value_changed" from="track/turning/turningBox" to="." method="_on_turning_box_value_changed"]

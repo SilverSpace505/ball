@@ -18,19 +18,28 @@ func _process(delta: float) -> void:
 
 func _addPlayer(id, username):
 	$playerList.add_item(username)
-	
-#func _removePlayer(id):
-	#$playerList.remove_item(username)
+
+func _removePlayer(id):
+	$playerList.remove_item(Network.names.keys().find(id))
 
 func _on_start_button_down() -> void:
 	Network.client.emit('start')
 
 #Map length change
 func _on_length_val_value_changed(value: float) -> void:
-	$length/LengthBox.value = $length/LengthVal.value
-	Network.options.length = $length/LengthBox.value
+	$track/length/lengthBox.value = $track/length/lengthVal.value
+	Network.options.length = $track/length/lengthBox.value
 
 func _on_length_box_value_changed(value: float) -> void:
-	if($length/LengthBox.value <= 500):
-		$length/LengthVal.value = $length/LengthBox.value
-	Network.options.length = $length/LengthBox.value
+	if($track/length/lengthBox.value <= 500):
+		$track/length/lengthVal.value = $track/length/lengthBox.value
+	Network.options.length = $track/length/lengthBox.value
+
+#turning amount change
+func _on_turning_val_value_changed(value: float) -> void:
+	$track/turning/turningBox.value = $track/turning/turningVal.value
+	Network.options.turning = $track/length/turningBox.value
+
+func _on_turning_box_value_changed(value: float) -> void:
+	$track/turning/turningVal.value = $track/turning/turningBox.value
+	Network.options.turning = $track/length/turningBox.value
