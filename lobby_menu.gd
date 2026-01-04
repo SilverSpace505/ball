@@ -39,12 +39,16 @@ func _on_start_button_down() -> void:
 
 #sync settings
 func _optionsChanged():
+	#track settings
 	$track/length/lengthBox.value = Network.options.length
 	$track/length/lengthVal.value = Network.options.length
 	$track/turning/turningBox.value = Network.options.turning
 	$track/turning/turningVal.value = Network.options.turning
 	$track/size/sizeBox.value = Network.options.trackSize
 	$track/size/sizeVal.value = Network.options.trackSize
+	
+	#player settings
+	$player/jumps/jumpBox.button_pressed = Network.options.jumps
 
 #Map length change
 func _on_length_val_value_changed(value: float) -> void:
@@ -72,3 +76,7 @@ func _on_size_val_value_changed(value: float) -> void:
 func _on_size_box_value_changed(value: float) -> void:
 	$track/size/sizeVal.value = $track/size/sizeBox.value
 	Network.options.trackSize = $track/size/sizeBox.value
+
+#jumping
+func _on_jump_box_toggled(toggled_on: bool) -> void:
+	Network.options.jumps = toggled_on
