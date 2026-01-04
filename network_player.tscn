@@ -25,7 +25,7 @@ transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_j6rbc")
-mesh = NodePath("")
+mesh = NodePath("MeshInstance3D")
 label = NodePath("Label3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
