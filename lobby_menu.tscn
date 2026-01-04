@@ -23,28 +23,22 @@ theme_override_font_sizes/font_size = 61
 toggle_mode = true
 text = "Ready up"
 
-[node name="ItemList" type="ItemList" parent="."]
+[node name="playerList" type="ItemList" parent="."]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 95.0
 offset_right = 452.0
 offset_bottom = 538.0
 theme_override_font_sizes/font_size = 35
-item_count = 5
-item_0/text = "overscore"
-item_1/text = "silver"
-item_2/text = "blazingfish"
-item_3/text = "bemannu"
-item_4/text = "redguyonetwo"
 
-[node name="Label" type="Label" parent="."]
+[node name="hostName" type="Label" parent="."]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 8.0
 offset_right = 488.0
 offset_bottom = 95.0
 theme_override_font_sizes/font_size = 56
-text = "username's lobby"
+text = "'s lobby"
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color(0.14406255, 0.14406255, 0.14406255, 1)
