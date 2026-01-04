@@ -11,7 +11,7 @@ _data = {
 point_count = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcvet"]
-albedo_color = Color(0.6003083, 0.5517678, 0.47231716, 1)
+albedo_color = Color(0.73707026, 0.69554824, 0.61662525, 1)
 albedo_texture = ExtResource("2_phvr8")
 
 [node name="track" type="Node3D" node_paths=PackedStringArray("path", "csgMesh")]
