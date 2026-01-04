@@ -21,6 +21,7 @@ var options = {
 	'length': 100,
 	'jumps': false
 }
+var lastOptions = options.duplicate()
 
 var id = ''
 var lobby = null
@@ -84,6 +85,10 @@ func _process(delta: float) -> void:
 	#increment interpolation and send player data up to server
 	fpsc += 1
 	naccumulator += delta
+	
+	if not options.recursive_equal(lastOptions, 1):
+		emit('options', options)
+		lastOptions = options.duplicate()
 
 func _on_socket_io_socket_connected(_ns: String) -> void:
 	#update connection state and request network id
@@ -141,12 +146,15 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 		names[msg[0]] = msg[1]
 	elif event == 'playerLeft':
 		on_player_left.emit(msg[0])
+		names.erase(msg[0])
 	elif event == 'sync':
 		var response_time = Time.get_unix_time_from_system()
 		var latency_time = response_time - request_time
 		var server_time = msg[0] / 1000
 		var estimated_server_time = server_time + (latency_time / 2.0)
 		time_offset = (estimated_server_time - response_time) * 1000
+	elif event == 'options':
+		options = msg[0]
 
 func _on_timer_timeout() -> void:
 	if connected and lobby != null:
