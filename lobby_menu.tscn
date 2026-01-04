@@ -14,6 +14,7 @@ grow_vertical = 2
 script = ExtResource("1_nv5w8")
 
 [node name="start" type="Button" parent="."]
+texture_filter = 1
 layout_mode = 0
 offset_left = -1.0
 offset_top = 551.0
@@ -32,6 +33,7 @@ offset_bottom = 538.0
 theme_override_font_sizes/font_size = 35
 
 [node name="hostName" type="Label" parent="."]
+texture_filter = 1
 layout_mode = 0
 offset_left = 10.0
 offset_top = 8.0
@@ -46,21 +48,46 @@ position = Vector2(825.00006, 275.81253)
 scale = Vector2(633.25, 535.625)
 mesh = SubResource("BoxMesh_10hg3")
 
-[node name="lengthVal" type="HSlider" parent="."]
-layout_mode = 0
+[node name="length" type="Node" parent="."]
+
+[node name="LengthVal" type="HSlider" parent="length"]
 offset_left = 513.0
 offset_top = 51.0
 offset_right = 839.99994
 offset_bottom = 67.0
-max_value = 200.0
+min_value = 100.0
+max_value = 500.0
+value = 100.0
 
-[node name="lengthLabel" type="Label" parent="."]
-layout_mode = 0
+[node name="lengthLabel" type="Label" parent="length"]
+texture_filter = 1
 offset_left = 512.0
 offset_top = 12.0
-offset_right = 552.0
-offset_bottom = 35.0
+offset_right = 674.0
+offset_bottom = 51.0
 theme_override_font_sizes/font_size = 28
 text = "track length"
 
+[node name="LengthBox" type="SpinBox" parent="length"]
+offset_left = 846.0
+offset_top = 42.0
+offset_right = 932.5625
+offset_bottom = 73.0
+min_value = 100.0
+max_value = 99999.0
+value = 100.0
+
+[node name="Jumps" type="Node" parent="."]
+
+[node name="CheckBox" type="CheckBox" parent="Jumps"]
+texture_filter = 1
+offset_left = 511.0
+offset_top = 77.0
+offset_right = 623.0
+offset_bottom = 124.0
+theme_override_font_sizes/font_size = 28
+text = "Jumps"
+
 [connection signal="button_down" from="start" to="." method="_on_start_button_down"]
+[connection signal="value_changed" from="length/LengthVal" to="." method="_on_length_val_value_changed"]
+[connection signal="value_changed" from="length/LengthBox" to="." method="_on_length_box_value_changed"]

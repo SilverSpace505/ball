@@ -26,12 +26,12 @@ func _ready() -> void:
 	var positions = []
 	var quaternions = []
 	
-	for i in range(2000):
+	for i in range(Network.options.length * 20):
 		
 		pos += Vector3(0, 0, -1 * scalar) * forward
 		path.curve.add_point(pos)
 		
-		if i >= 2000 - 5:
+		if i >= Network.options.length * 20 - 5:
 			positions.append(pos)
 			quaternions.append(forward)
 		

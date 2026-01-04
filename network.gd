@@ -17,6 +17,11 @@ var data = {
 	'place': ''
 }
 
+var options = {
+	'length': 100,
+	'jumps': false
+}
+
 var id = ''
 var lobby = null
 var names = {}

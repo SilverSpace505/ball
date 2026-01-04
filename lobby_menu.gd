@@ -24,3 +24,13 @@ func _addPlayer(id, username):
 
 func _on_start_button_down() -> void:
 	Network.client.emit('start')
+
+#Map length change
+func _on_length_val_value_changed(value: float) -> void:
+	$length/LengthBox.value = $length/LengthVal.value
+	Network.options.length = $length/LengthBox.value
+
+func _on_length_box_value_changed(value: float) -> void:
+	if($length/LengthBox.value <= 500):
+		$length/LengthVal.value = $length/LengthBox.value
+	Network.options.length = $length/LengthBox.value
