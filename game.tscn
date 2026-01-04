@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://cplji6psrpo8t"]
 
-[ext_resource type="Script" uid="uid://57v0fg1vf783" path="res://game.gd" id="1_vef74"]
+[ext_resource type="Script" path="res://game.gd" id="1_vef74"]
 [ext_resource type="PackedScene" uid="uid://cn8pmff4bbixf" path="res://track.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://xf7dekaj2vlt" path="res://player.tscn" id="2_feb5d"]
 [ext_resource type="Script" uid="uid://da7dasqxngmk1" path="res://players.gd" id="3_feb5d"]
@@ -266,7 +266,7 @@ horizontal_alignment = 1
 script = ExtResource("8_j5wjh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="finish"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20432895, 0, 0)
+transform = Transform3D(1.185, 0, 0, 0, 2.695, 0, 0, 0, 5, -0.20432895, 0.9349525, 0)
 mesh = SubResource("BoxMesh_vef74")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="finish"]
