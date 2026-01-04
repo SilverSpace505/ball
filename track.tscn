@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cn8pmff4bbixf"]
+[gd_scene load_steps=3 format=3 uid="uid://cn8pmff4bbixf"]
 
 [ext_resource type="Script" uid="uid://bxo74i4xu5chj" path="res://track.gd" id="1_mll3j"]
-[ext_resource type="Texture2D" uid="uid://yysv1ockiurm" path="res://asphalt-1600-mm-architextures.jpg" id="2_phvr8"]
 
 [sub_resource type="Curve3D" id="Curve3D_mll3j"]
 _data = {
@@ -9,10 +8,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcvet"]
-albedo_color = Color(0.73707026, 0.69554824, 0.61662525, 1)
-albedo_texture = ExtResource("2_phvr8")
 
 [node name="track" type="Node3D" node_paths=PackedStringArray("path", "csgMesh")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -40,4 +35,3 @@ path_local = false
 path_continuous_u = true
 path_u_distance = 0.0
 path_joined = false
-material = SubResource("StandardMaterial3D_bcvet")
