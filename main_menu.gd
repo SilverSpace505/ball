@@ -24,3 +24,10 @@ func _on_username_text_changed(new_text: String) -> void:
 
 func _on_race_toggled(toggled_on: bool) -> void:
 	Global.race = toggled_on
+
+
+func _on_settings_pressed() -> void:
+	$AnimationPlayer.play("settingsPressed")
+
+func _on_back_pressed() -> void:
+	$AnimationPlayer.play_backwards("settingsPressed")
