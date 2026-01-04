@@ -23,7 +23,7 @@ var options = {
 	'size': 1,
 	'jumps': false
 }
-var lastOptions = options.duplicate()
+var lastOptions = {}
 
 var id = ''
 var lobby = null
@@ -82,6 +82,7 @@ func get_url_parameters() -> Dictionary:
 func _ready() -> void:
 	print('connecting')
 	client.connect_socket()
+	lastOptions = options.duplicate()
 
 func _process(delta: float) -> void:
 	#increment interpolation and send player data up to server
