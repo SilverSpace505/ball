@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcatevliq7jdf"]
+
+[ext_resource type="AudioStream" uid="uid://cq4pshs5s5uew" path="res://BREAKCORE.mp3" id="1_4m5bw"]
+
+[node name="backgroundMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_4m5bw")
+volume_db = -12.21
+pitch_scale = 1.1
+autoplay = true
