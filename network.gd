@@ -112,6 +112,8 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 		else:
 			on_names.emit(names)
 		Global.inGame = true
+	elif event == 'startGame':
+		get_tree().change_scene_to_file("res://game.tscn")
 	elif event == 'start':
 		Global.startTime = msg[0]
 		Global.time = 0

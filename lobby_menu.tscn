@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nv5w8")
 
-[node name="Button" type="Button" parent="."]
+[node name="start" type="Button" parent="."]
 layout_mode = 0
 offset_left = -1.0
 offset_top = 551.0
@@ -62,3 +62,5 @@ offset_right = 552.0
 offset_bottom = 35.0
 theme_override_font_sizes/font_size = 28
 text = "track length"
+
+[connection signal="button_down" from="start" to="." method="_on_start_button_down"]
