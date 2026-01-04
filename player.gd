@@ -7,7 +7,7 @@ extends CharacterBody3D
 @export var mesh: Node3D
 @export var core: Node3D
 
-@export var speed = 0.05
+@export var speed = Network.options.speed / 100
 @export var jumpHeight = 3
 @export var gravity = 10
 #@export var backSpeed = 5

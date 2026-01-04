@@ -35,6 +35,8 @@ func _removePlayer(id):
 		$hostName.text = Network.names[Network.names.keys()[1]] + "'s lobby"
 
 func _on_start_button_down() -> void:
+	$AnimationPlayer.play("goToGame")
+	await get_tree().create_timer(0.5).timeout
 	Network.client.emit('start')
 
 #sync settings
@@ -79,4 +81,18 @@ func _on_size_box_value_changed(value: float) -> void:
 
 #jumping
 func _on_jump_box_toggled(toggled_on: bool) -> void:
+	if toggled_on == true:
+		$player/jumps/jumpLabel2.text = "Enabled"
+	else:
+		$player/jumps/jumpLabel2.text = "Disabled"
 	Network.options.jumps = toggled_on
+
+#player speed
+func _on_speed_val_value_changed(value: float) -> void:
+	$player/speed/speedBox.value = $player/speed/speedVal.value
+	Network.options.speed = $player/speed/speedBox.value
+	
+
+func _on_speed_box_value_changed(value: float) -> void:
+	$player/speed/speedVal.value = $player/speed/speedBox.value
+	Network.options.speed = $player/speed/speedBox.value

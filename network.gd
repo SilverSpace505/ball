@@ -21,7 +21,8 @@ var options = {
 	'length': 100,
 	'turning': 0.5,
 	'trackSize': 1,
-	'jumps': false
+	'jumps': false,
+	'speed': 5
 }
 
 var lastOptions = {}
