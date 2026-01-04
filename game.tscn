@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://cplji6psrpo8t"]
 
-[ext_resource type="Script" path="res://game.gd" id="1_vef74"]
+[ext_resource type="Script" uid="uid://57v0fg1vf783" path="res://game.gd" id="1_vef74"]
 [ext_resource type="PackedScene" uid="uid://cn8pmff4bbixf" path="res://track.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://xf7dekaj2vlt" path="res://player.tscn" id="2_feb5d"]
 [ext_resource type="Script" uid="uid://da7dasqxngmk1" path="res://players.gd" id="3_feb5d"]
@@ -69,10 +69,10 @@ albedo_color = Color(0.24103117, 0.5531629, 0, 0.5254902)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vef74"]
 material = SubResource("StandardMaterial3D_j5wjh")
-size = Vector3(4.5, 1, 0.1)
+size = Vector3(5, 3, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vef74"]
-size = Vector3(4.5, 1, 0.1)
+size = Vector3(5, 3, 2.6413085)
 
 [node name="world" type="Node3D" node_paths=PackedStringArray("player", "camera", "start")]
 script = ExtResource("1_vef74")
@@ -263,14 +263,14 @@ text = "5"
 horizontal_alignment = 1
 
 [node name="finish" type="Area3D" parent="."]
+physics_interpolation_mode = 1
 script = ExtResource("8_j5wjh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="finish"]
-transform = Transform3D(1.185, 0, 0, 0, 2.695, 0, 0, 0, 5, 0.041017473, 0.9349525, 0)
 mesh = SubResource("BoxMesh_vef74")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="finish"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20432895, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2706543)
 shape = SubResource("BoxShape3D_vef74")
 
 [connection signal="body_entered" from="finish" to="finish" method="_on_body_entered"]
