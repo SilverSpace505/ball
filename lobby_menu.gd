@@ -12,18 +12,21 @@ func _ready() -> void:
 	$track/size/sizeBox.value = Network.options.trackSize
 	$track/size/sizeVal.value = Network.options.trackSize
 	Network.on_player_joined.connect(_addPlayer)
+	Network.on_player_left.connect(_removePlayer)
 	Network.options_changed.connect(_optionsChanged)
 	#Network.on_player_left.connect(_removePlayer)
 	$hostName.text = Network.names[Network.names.keys()[0]] + "'s lobby"
 	players = Network.names.values()
 	for username in players:
 		$playerList.add_item(username)
+		
+	Network.emit('getOptions')
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func _addPlayer(id, username):
+func _addPlayer(_id, username):
 	$playerList.add_item(username)
 
 func _removePlayer(id):
