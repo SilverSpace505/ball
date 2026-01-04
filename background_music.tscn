@@ -8,5 +8,5 @@ stream = ExtResource("1_4m5bw")
 volume_db = -25.525
 pitch_scale = 1.1
 autoplay = true
-playback_type = 1
+playback_type = 2
 script = ExtResource("2_l3d1b")
