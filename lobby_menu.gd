@@ -31,6 +31,8 @@ func _addPlayer(_id, username):
 
 func _removePlayer(id):
 	$playerList.remove_item(Network.names.keys().find(id))
+	if Network.names.keys().find(id) == 0:
+		$hostName.text = Network.names[Network.names.keys()[1]] + "'s lobby"
 
 func _on_start_button_down() -> void:
 	Network.client.emit('start')
