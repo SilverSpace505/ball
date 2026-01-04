@@ -35,12 +35,15 @@ func _ready() -> void:
 			positions.append(pos)
 			quaternions.append(forward)
 		
-		tvel.x += randf_range(-0.5, 0.5) * scalar
-		tvel.y += randf_range(-0.1, 0.1) * scalar
+		var turnFactor = Network.options.turning
+		if turnFactor < 0:
+			turnFactor = 1 / abs(turnFactor)
+		tvel.x += randf_range(-0.5, 0.5) * scalar * turnFactor
+		tvel.y += randf_range(-0.1, 0.1) * scalar * turnFactor
 		
 		tvel.y = clamp(tvel.y, -0.5, 0)
 		
-		tvel.x -= (tvel.x ** 3) * scalar * 10
+		tvel.x -= (tvel.x ** 3) * scalar * 10 / turnFactor
 		tvel.x = clamp(tvel.x, -2, 2)
 		
 		vel = vel.lerp(tvel, 0.025)

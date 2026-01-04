@@ -20,7 +20,7 @@ var data = {
 var options = {
 	'length': 100,
 	'turning': 0.5,
-	'size': 1,
+	'trackSize': 1,
 	'jumps': false
 }
 var lastOptions = {}

@@ -90,6 +90,7 @@ offset_left = 513.0
 offset_top = 112.0
 offset_right = 839.99994
 offset_bottom = 128.0
+min_value = -5.0
 max_value = 5.0
 step = 0.1
 value = 1.0
@@ -110,6 +111,7 @@ offset_left = 846.0
 offset_top = 103.0
 offset_right = 932.5625
 offset_bottom = 134.0
+min_value = -5.0
 max_value = 5.0
 step = 0.1
 value = 0.5
@@ -119,10 +121,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="sizeVal" type="HSlider" parent="track/size"]
 offset_left = 513.0
-offset_top = 112.0
+offset_top = 172.0
 offset_right = 839.99994
-offset_bottom = 128.0
-max_value = 5.0
+offset_bottom = 188.0
+min_value = 1.0
+max_value = 10.0
 step = 0.1
 value = 1.0
 metadata/_edit_use_anchors_ = true
@@ -130,21 +133,22 @@ metadata/_edit_use_anchors_ = true
 [node name="sizeLabel" type="Label" parent="track/size"]
 texture_filter = 1
 offset_left = 512.0
-offset_top = 73.0
+offset_top = 133.0
 offset_right = 737.0
-offset_bottom = 112.0
+offset_bottom = 172.0
 theme_override_font_sizes/font_size = 28
-text = "turning intensity"
+text = "track size"
 metadata/_edit_use_anchors_ = true
 
 [node name="sizeBox" type="SpinBox" parent="track/size"]
 offset_left = 846.0
-offset_top = 103.0
+offset_top = 163.0
 offset_right = 932.5625
-offset_bottom = 134.0
-max_value = 5.0
+offset_bottom = 194.0
+min_value = 1.0
+max_value = 10.0
 step = 0.1
-value = 0.5
+value = 1.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Jumps" type="Node" parent="."]
@@ -163,3 +167,5 @@ text = "Jumps"
 [connection signal="value_changed" from="track/length/lengthBox" to="." method="_on_length_box_value_changed"]
 [connection signal="value_changed" from="track/turning/turningVal" to="." method="_on_turning_val_value_changed"]
 [connection signal="value_changed" from="track/turning/turningBox" to="." method="_on_turning_box_value_changed"]
+[connection signal="value_changed" from="track/size/sizeVal" to="." method="_on_size_val_value_changed"]
+[connection signal="value_changed" from="track/size/sizeBox" to="." method="_on_size_box_value_changed"]
