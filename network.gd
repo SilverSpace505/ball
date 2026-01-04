@@ -51,6 +51,8 @@ signal on_dm
 signal on_player_joined
 signal on_player_left
 
+signal options_changed
+
 func emit(event, ndata = null):
 	if connected:
 		client.emit(event, ndata)
@@ -161,6 +163,8 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 		time_offset = (estimated_server_time - response_time) * 1000
 	elif event == 'options':
 		options = msg[0]
+		lastOptions = options.duplicate()
+		options_changed.emit()
 
 func _on_timer_timeout() -> void:
 	if connected and lobby != null:
