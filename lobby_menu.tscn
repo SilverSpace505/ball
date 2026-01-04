@@ -1,8 +1,117 @@
-[gd_scene load_steps=3 format=3 uid="uid://c51hjd1iarkfj"]
+[gd_scene load_steps=9 format=3 uid="uid://c51hjd1iarkfj"]
 
 [ext_resource type="Script" uid="uid://dkbwj0skicqp0" path="res://lobby_menu.gd" id="1_nv5w8"]
+[ext_resource type="Texture2D" uid="uid://0l5voe7sv8eh" path="res://Screenshot 2025-12-15 221253.png" id="2_iohss"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_10hg3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nv5w8"]
+
+[sub_resource type="Animation" id="Animation_iohss"]
+resource_name = "sceneOut"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(573, -0.25, 0, 0.25, 0, -741, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(331.00003, -0.25, 0, 0.25, 0, 331.00003, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_eicbr"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(573, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(331.00003, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../TextureRect:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(19, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../TextureRect:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(928, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_iu37i"]
+resource_name = "goToGame"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TextureRect:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-37, -0.25, 0, 0.25, 0, -37, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../TextureRect:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(788, -0.25, 0, 0.25, 0, -43, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iu37i"]
+_data = {
+&"RESET": SubResource("Animation_eicbr"),
+&"goToGame": SubResource("Animation_iu37i"),
+&"sceneOut": SubResource("Animation_iohss")
+}
 
 [node name="lobby_menu" type="Control"]
 layout_mode = 3
@@ -44,19 +153,23 @@ text = "'s lobby"
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color(0.14406255, 0.14406255, 0.14406255, 1)
-position = Vector2(825.00006, 275.81253)
+position = Vector2(823.00006, 274)
 scale = Vector2(633.25, 535.625)
 mesh = SubResource("BoxMesh_10hg3")
 
-[node name="track" type="Node" parent="."]
+[node name="track" type="Control" parent="."]
+anchors_preset = 0
 
-[node name="length" type="Node" parent="track"]
+[node name="length" type="Control" parent="track"]
+anchors_preset = 0
 
 [node name="lengthVal" type="HSlider" parent="track/length"]
+layout_mode = 0
 offset_left = 513.0
 offset_top = 51.0
 offset_right = 839.99994
 offset_bottom = 67.0
+tooltip_text = "increase or decrease the length of each tracks generation"
 min_value = 10.0
 max_value = 500.0
 step = 10.0
@@ -65,15 +178,17 @@ metadata/_edit_use_anchors_ = true
 
 [node name="lengthLabel" type="Label" parent="track/length"]
 texture_filter = 1
-offset_left = 512.0
+layout_mode = 0
+offset_left = 513.0
 offset_top = 12.0
-offset_right = 674.0
+offset_right = 675.0
 offset_bottom = 51.0
 theme_override_font_sizes/font_size = 28
-text = "track length"
+text = "Track length"
 metadata/_edit_use_anchors_ = true
 
 [node name="lengthBox" type="SpinBox" parent="track/length"]
+layout_mode = 0
 offset_left = 846.0
 offset_top = 42.0
 offset_right = 932.5625
@@ -83,13 +198,16 @@ max_value = 99999.0
 value = 100.0
 metadata/_edit_use_anchors_ = true
 
-[node name="turning" type="Node" parent="track"]
+[node name="turning" type="Control" parent="track"]
+anchors_preset = 0
 
 [node name="turningVal" type="HSlider" parent="track/turning"]
+layout_mode = 0
 offset_left = 513.0
 offset_top = 112.0
 offset_right = 839.99994
 offset_bottom = 128.0
+tooltip_text = "increase or decrease the intensity of turns"
 min_value = -5.0
 max_value = 5.0
 step = 0.1
@@ -98,15 +216,17 @@ metadata/_edit_use_anchors_ = true
 
 [node name="turningLabel" type="Label" parent="track/turning"]
 texture_filter = 1
-offset_left = 512.0
+layout_mode = 0
+offset_left = 513.0
 offset_top = 73.0
-offset_right = 737.0
+offset_right = 738.0
 offset_bottom = 112.0
 theme_override_font_sizes/font_size = 28
-text = "turning intensity"
+text = "Turning intensity"
 metadata/_edit_use_anchors_ = true
 
 [node name="turningBox" type="SpinBox" parent="track/turning"]
+layout_mode = 0
 offset_left = 846.0
 offset_top = 103.0
 offset_right = 932.5625
@@ -117,13 +237,16 @@ step = 0.1
 value = 0.5
 metadata/_edit_use_anchors_ = true
 
-[node name="size" type="Node" parent="track"]
+[node name="size" type="Control" parent="track"]
+anchors_preset = 0
 
 [node name="sizeVal" type="HSlider" parent="track/size"]
+layout_mode = 0
 offset_left = 513.0
 offset_top = 172.0
 offset_right = 839.99994
 offset_bottom = 188.0
+tooltip_text = "increase or decrease the width of the track"
 min_value = -1.0
 max_value = 10.0
 step = 0.1
@@ -132,15 +255,17 @@ metadata/_edit_use_anchors_ = true
 
 [node name="sizeLabel" type="Label" parent="track/size"]
 texture_filter = 1
-offset_left = 512.0
+layout_mode = 0
+offset_left = 513.0
 offset_top = 133.0
-offset_right = 737.0
+offset_right = 738.0
 offset_bottom = 172.0
 theme_override_font_sizes/font_size = 28
-text = "track size"
+text = "Track size"
 metadata/_edit_use_anchors_ = true
 
 [node name="sizeBox" type="SpinBox" parent="track/size"]
+layout_mode = 0
 offset_left = 846.0
 offset_top = 163.0
 offset_right = 932.5625
@@ -151,19 +276,98 @@ step = 0.1
 value = 1.0
 metadata/_edit_use_anchors_ = true
 
-[node name="player" type="Node" parent="."]
+[node name="player" type="Control" parent="."]
+anchors_preset = 0
 
-[node name="jumps" type="Node" parent="player"]
+[node name="jumps" type="Control" parent="player"]
+anchors_preset = 0
 
 [node name="jumpBox" type="CheckBox" parent="player/jumps"]
 texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+offset_left = 508.0
+offset_top = 232.00002
+offset_right = 532.0
+offset_bottom = 256.0
+scale = Vector2(1.565, 1.565)
+tooltip_text = "disable or enable jumping"
+theme_override_font_sizes/font_size = 16
+
+[node name="jumpLabel" type="Label" parent="player/jumps"]
+texture_filter = 1
+layout_mode = 0
 offset_left = 513.0
-offset_top = 454.0
-offset_right = 625.0
-offset_bottom = 501.0
+offset_top = 193.0
+offset_right = 597.0
+offset_bottom = 232.0
 theme_override_font_sizes/font_size = 28
 text = "Jumps"
-metadata/_edit_use_anchors_ = true
+
+[node name="jumpLabel2" type="Label" parent="player/jumps"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 547.0
+offset_top = 230.0
+offset_right = 664.0
+offset_bottom = 269.0
+theme_override_font_sizes/font_size = 28
+text = "Disabled"
+
+[node name="speed" type="Control" parent="player"]
+anchors_preset = 0
+
+[node name="speedVal" type="HSlider" parent="player/speed"]
+layout_mode = 0
+offset_left = 513.0
+offset_top = 310.0
+offset_right = 839.99994
+offset_bottom = 326.0
+tooltip_text = "increase or decrease the base speed of every player"
+min_value = 1.0
+max_value = 8.0
+value = 5.0
+
+[node name="speedLabel" type="Label" parent="player/speed"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 513.0
+offset_top = 271.0
+offset_right = 738.0
+offset_bottom = 310.0
+theme_override_font_sizes/font_size = 28
+text = "Player speed"
+
+[node name="speedBox" type="SpinBox" parent="player/speed"]
+layout_mode = 0
+offset_left = 846.0
+offset_top = 301.0
+offset_right = 932.5625
+offset_bottom = 332.0
+min_value = 1.0
+max_value = 8.0
+value = 5.0
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(573, 331.00003)
+scale = Vector2(1324.5, 768.74994)
+mesh = SubResource("BoxMesh_nv5w8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../MeshInstance2D2")
+libraries = {
+&"": SubResource("AnimationLibrary_iu37i")
+}
+autoplay = "sceneOut"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 928.0
+offset_right = 1242.0
+offset_bottom = 1662.0002
+texture = ExtResource("2_iohss")
 
 [connection signal="button_down" from="start" to="." method="_on_start_button_down"]
 [connection signal="value_changed" from="track/length/lengthVal" to="." method="_on_length_val_value_changed"]
@@ -173,3 +377,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="value_changed" from="track/size/sizeVal" to="." method="_on_size_val_value_changed"]
 [connection signal="value_changed" from="track/size/sizeBox" to="." method="_on_size_box_value_changed"]
 [connection signal="toggled" from="player/jumps/jumpBox" to="." method="_on_jump_box_toggled"]
+[connection signal="value_changed" from="player/speed/speedVal" to="." method="_on_speed_val_value_changed"]
+[connection signal="value_changed" from="player/speed/speedBox" to="." method="_on_speed_box_value_changed"]
