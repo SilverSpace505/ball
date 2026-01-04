@@ -133,6 +133,7 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 		on_dm.emit(msg[0], msg[1])
 	elif event == 'playerJoined':
 		on_player_joined.emit(msg[0], msg[1])
+		names[msg[0]] = msg[1]
 	elif event == 'playerLeft':
 		on_player_left.emit(msg[0])
 	elif event == 'sync':
