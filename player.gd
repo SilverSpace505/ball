@@ -104,9 +104,10 @@ func _physics_process(delta: float) -> void:
 			floort = 0.2
 	
 	# jump
-	if Input.is_action_pressed("jump") && floort > 0:
-		velocity.y = jumpHeight
-		floort = 0
+	if Network.options.jumps == true:
+		if Input.is_action_pressed("jump") && floort > 0:
+			velocity.y = jumpHeight
+			floort = 0
 	
 	#void
 	if position.y < Global.voidLevel:

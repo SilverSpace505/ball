@@ -5,35 +5,50 @@ var mapLength = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Network.on_player_joined.connect(_addPlayer)
-	Network.options_changed.connect(_optionsChanged)
-	#Network.on_player_left.connect(_removePlayer)
-	$hostName.text = Network.names[Network.names.keys()[0]] + "'s lobby"
-	players = Network.names.values()
-	for username in players:
-		$playerList.add_item(username)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-func _addPlayer(id, username):
-	$playerList.add_item(username)
-
-func _removePlayer(id):
-	$playerList.remove_item(Network.names.keys().find(id))
-
-func _on_start_button_down() -> void:
-	Network.client.emit('start')
-
-#sync settings
-func _optionsChanged():
 	$track/length/lengthBox.value = Network.options.length
 	$track/length/lengthVal.value = Network.options.length
 	$track/turning/turningBox.value = Network.options.turning
 	$track/turning/turningVal.value = Network.options.turning
 	$track/size/sizeBox.value = Network.options.trackSize
 	$track/size/sizeVal.value = Network.options.trackSize
+	Network.on_player_joined.connect(_addPlayer)
+	Network.on_player_left.connect(_removePlayer)
+	Network.options_changed.connect(_optionsChanged)
+	#Network.on_player_left.connect(_removePlayer)
+	$hostName.text = Network.names[Network.names.keys()[0]] + "'s lobby"
+	players = Network.names.values()
+	for username in players:
+		$playerList.add_item(username)
+		
+	Network.emit('getOptions')
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func _addPlayer(_id, username):
+	$playerList.add_item(username)
+
+func _removePlayer(id):
+	$playerList.remove_item(Network.names.keys().find(id))
+	if Network.names.keys().find(id) == 0:
+		$hostName.text = Network.names[Network.names.keys()[1]] + "'s lobby"
+
+func _on_start_button_down() -> void:
+	Network.client.emit('start')
+
+#sync settings
+func _optionsChanged():
+	#track settings
+	$track/length/lengthBox.value = Network.options.length
+	$track/length/lengthVal.value = Network.options.length
+	$track/turning/turningBox.value = Network.options.turning
+	$track/turning/turningVal.value = Network.options.turning
+	$track/size/sizeBox.value = Network.options.trackSize
+	$track/size/sizeVal.value = Network.options.trackSize
+	
+	#player settings
+	$player/jumps/jumpBox.button_pressed = Network.options.jumps
 
 #Map length change
 func _on_length_val_value_changed(value: float) -> void:
@@ -61,3 +76,7 @@ func _on_size_val_value_changed(value: float) -> void:
 func _on_size_box_value_changed(value: float) -> void:
 	$track/size/sizeVal.value = $track/size/sizeBox.value
 	Network.options.trackSize = $track/size/sizeBox.value
+
+#jumping
+func _on_jump_box_toggled(toggled_on: bool) -> void:
+	Network.options.jumps = toggled_on

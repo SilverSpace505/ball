@@ -22,7 +22,7 @@ offset_right = 1150.0
 offset_bottom = 643.0
 theme_override_font_sizes/font_size = 61
 toggle_mode = true
-text = "Ready up"
+text = "Start Game"
 
 [node name="playerList" type="ItemList" parent="."]
 layout_mode = 0
@@ -124,7 +124,7 @@ offset_left = 513.0
 offset_top = 172.0
 offset_right = 839.99994
 offset_bottom = 188.0
-min_value = 1.0
+min_value = -1.0
 max_value = 10.0
 step = 0.1
 value = 1.0
@@ -145,15 +145,17 @@ offset_left = 846.0
 offset_top = 163.0
 offset_right = 932.5625
 offset_bottom = 194.0
-min_value = 1.0
+min_value = -1.0
 max_value = 10.0
 step = 0.1
 value = 1.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Jumps" type="Node" parent="."]
+[node name="player" type="Node" parent="."]
 
-[node name="CheckBox" type="CheckBox" parent="Jumps"]
+[node name="jumps" type="Node" parent="player"]
+
+[node name="jumpBox" type="CheckBox" parent="player/jumps"]
 texture_filter = 1
 offset_left = 513.0
 offset_top = 454.0
@@ -161,6 +163,7 @@ offset_right = 625.0
 offset_bottom = 501.0
 theme_override_font_sizes/font_size = 28
 text = "Jumps"
+metadata/_edit_use_anchors_ = true
 
 [connection signal="button_down" from="start" to="." method="_on_start_button_down"]
 [connection signal="value_changed" from="track/length/lengthVal" to="." method="_on_length_val_value_changed"]
@@ -169,3 +172,4 @@ text = "Jumps"
 [connection signal="value_changed" from="track/turning/turningBox" to="." method="_on_turning_box_value_changed"]
 [connection signal="value_changed" from="track/size/sizeVal" to="." method="_on_size_val_value_changed"]
 [connection signal="value_changed" from="track/size/sizeBox" to="." method="_on_size_box_value_changed"]
+[connection signal="toggled" from="player/jumps/jumpBox" to="." method="_on_jump_box_toggled"]
