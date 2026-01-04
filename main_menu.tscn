@@ -196,7 +196,7 @@ tracks/16/keys = {
 tracks/17/type = "bezier"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("options/SpinBox:position:x")
+tracks/17/path = NodePath("options/volBox:position:x")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -207,7 +207,7 @@ tracks/17/keys = {
 tracks/18/type = "bezier"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("options/SpinBox:position:y")
+tracks/18/path = NodePath("options/volBox:position:y")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -416,7 +416,7 @@ tracks/15/keys = {
 tracks/16/type = "bezier"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("options/SpinBox:position:x")
+tracks/16/path = NodePath("options/volBox:position:x")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -427,7 +427,7 @@ tracks/16/keys = {
 tracks/17/type = "bezier"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("options/SpinBox:position:y")
+tracks/17/path = NodePath("options/volBox:position:y")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
@@ -589,7 +589,7 @@ offset_right = 748.0
 offset_bottom = -31.999916
 value = 100.0
 
-[node name="SpinBox" type="SpinBox" parent="options"]
+[node name="volBox" type="SpinBox" parent="options"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 600.0
@@ -604,3 +604,5 @@ value = 100.0
 [connection signal="pressed" from="settings" to="." method="_on_settings_pressed"]
 [connection signal="toggled" from="race" to="." method="_on_race_toggled"]
 [connection signal="pressed" from="options/back" to="." method="_on_back_pressed"]
+[connection signal="value_changed" from="options/volSlider" to="." method="_on_vol_slider_value_changed"]
+[connection signal="value_changed" from="options/volBox" to="." method="_on_vol_box_value_changed"]
