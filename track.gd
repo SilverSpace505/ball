@@ -4,9 +4,10 @@ extends Node3D
 
 @export var csgMesh: CSGPolygon3D
 
-@export var staticBody: StaticBody3D
-
 @export var finish: Node3D
+
+@export var island: PackedScene
+@export var islands: Node3D
 
 func _ready() -> void:
 	var points = csgMesh.polygon
@@ -30,6 +31,8 @@ func _ready() -> void:
 	
 	seed(Global.seed)
 	
+	var allPositions = []
+	
 	var positions = []
 	var quaternions = []
 	
@@ -37,6 +40,9 @@ func _ready() -> void:
 		
 		pos += Vector3(0, 0, -1 * scalar) * forward
 		path.curve.add_point(pos)
+		
+		if i % int(2 / scalar) == 0:
+			allPositions.append(pos)
 		
 		if i >= Network.options.length * 20 - 5:
 			positions.append(pos)
@@ -60,12 +66,32 @@ func _ready() -> void:
 		forward *= Quaternion(Vector3(0, 1, 0), vel.x * scalar / Network.options.trackSize) 
 		
 		Global.voidLevel = min(Global.voidLevel, pos.y - 5)
+			
 		#forward2 *= Quaternion(Vector3(0, 1, 0), vel.y)
 		
 		#var perp = Vector3(1, 0, 0) * forward2
 		#forward *= Quaternion(perp, vel.x)
 		
 	finish.position = positions[0] - $Path3D.global_position
+	
+	#spawn islands
+	for pos1 in allPositions:
+		if randf() > 0.9:
+			var offset = Vector3(0, 0, 0)
+			for try in range(10):
+				offset = Vector3(randf_range(-1, 1), randf_range(0, 0.25), randf_range(-1, 1)).normalized() * randf_range(10, 20)
+				var again = false
+				for pos2 in allPositions:
+					if (pos1 + offset).distance_to(pos2) < 10:
+						again = true
+				if not again:
+					break
+			
+			var newIsland = island.instantiate()
+			newIsland.position = pos1 + offset
+			newIsland.noiseSeed = randi()
+			newIsland.start_generate()
+			islands.add_child(newIsland)
 		
 	# Calculate the actual forward direction from the last quaternion
 	var track_forward = Vector3(0, 0, -1) * quaternions[0]

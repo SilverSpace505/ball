@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cplji6psrpo8t"]
+[gd_scene load_steps=33 format=3 uid="uid://cplji6psrpo8t"]
 
 [ext_resource type="Script" uid="uid://57v0fg1vf783" path="res://game.gd" id="1_vef74"]
 [ext_resource type="PackedScene" uid="uid://cn8pmff4bbixf" path="res://track.tscn" id="2_e2o6t"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ctosjx6bcrfi" path="res://player_element.tscn" id="7_eow3j"]
 [ext_resource type="Script" uid="uid://crsc18gj6w1de" path="res://finish.gd" id="8_j5wjh"]
 [ext_resource type="Texture2D" uid="uid://dwpwfs7hplmcp" path="res://kirkify.png" id="9_hve3p"]
+[ext_resource type="PackedScene" uid="uid://cec5hlvisc8q5" path="res://island.tscn" id="11_mfdv2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
 sky_top_color = Color(0.33153802, 0.8575765, 0.85415184, 1)
@@ -147,10 +148,12 @@ shadow_opacity = 0.8
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_e2o6t")
 
-[node name="track" parent="." node_paths=PackedStringArray("finish") instance=ExtResource("2_e2o6t")]
+[node name="track" parent="." node_paths=PackedStringArray("finish", "islands") instance=ExtResource("2_e2o6t")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, -0.42035323, 0.5572126)
 top_level = true
 finish = NodePath("../finish")
+island = ExtResource("11_mfdv2")
+islands = NodePath("../islands")
 
 [node name="player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_feb5d")]
 camera = NodePath("../camera")
@@ -358,6 +361,8 @@ mesh = SubResource("BoxMesh_vef74")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="finish"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2706543)
 shape = SubResource("BoxShape3D_vef74")
+
+[node name="islands" type="Node3D" parent="."]
 
 [connection signal="pressed" from="CanvasLayer/Control/pauseMenu/settings button" to="." method="_on_settings_button_pressed"]
 [connection signal="body_entered" from="finish" to="finish" method="_on_body_entered"]

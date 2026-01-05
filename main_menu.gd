@@ -7,6 +7,8 @@ extends Control
 func _ready() -> void:
 	lobby.text = str(Global.seed)
 	username.text = Global.username
+	$options/volSlider.value = Global.userSettings.volume
+	$options/volBox.value = Global.userSettings.volume
 
 func _on_play_button_down() -> void:
 	$AnimationPlayer.play("sceneTransition")
@@ -35,6 +37,8 @@ func _on_back_pressed() -> void:
 func _on_vol_slider_value_changed(value: float) -> void:
 	$options/volBox.value = $options/volSlider.value
 	Global.userSettings.volume = $options/volBox.value
+	Global.saveData()
 func _on_vol_box_value_changed(value: float) -> void:
 	$options/volSlider.value = $options/volBox.value
 	Global.userSettings.volume = $options/volBox.value
+	Global.saveData()

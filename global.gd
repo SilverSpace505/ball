@@ -44,6 +44,13 @@ func loadData():
 	var err = config.load('user://data.cfg')
 	if err == OK:
 		username = config.get_value('player', 'username', 'Unnamed')
+		
+		var json = JSON.new()
+		var jsonStr = config.get_value('user', 'settings', null)
+		if jsonStr != null:
+			var error = json.parse(jsonStr)
+			if error == OK:
+				userSettings = json.data
 	#var json = JSON.new()
 	#var error = json.parse(config.get_value())
 	#if error == OK:
