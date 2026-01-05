@@ -169,6 +169,12 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 		options = msg[0]
 		lastOptions = options.duplicate()
 		options_changed.emit()
+	elif event == 'left':
+		lobby = null
+		names = {}
+		if Global.scene != 'menu':
+			Global.scene = 'menu'
+			get_tree().change_scene_to_file("res://menu.tscn")
 
 func _on_timer_timeout() -> void:
 	if connected and lobby != null:
