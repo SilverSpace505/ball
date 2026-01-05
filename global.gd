@@ -16,6 +16,11 @@ var scene = 'menu'
 
 var lastState = -1
 
+var userSettings = {
+	'volume': 100,
+	'FOV': 90
+}
+
 func _ready() -> void:
 	loadData()
 
@@ -39,8 +44,14 @@ func loadData():
 	var err = config.load('user://data.cfg')
 	if err == OK:
 		username = config.get_value('player', 'username', 'Unnamed')
-	
+	#var json = JSON.new()
+	#var error = json.parse(config.get_value())
+	#if error == OK:
+		#userSettings = json.data
+
 func saveData():
 	var config = ConfigFile.new()
 	config.set_value('player', 'username', username)
+	config.set_value('user', 'settings', JSON.stringify(userSettings))
+	
 	config.save('user://data.cfg')

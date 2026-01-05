@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cn8pmff4bbixf"]
+[gd_scene load_steps=5 format=3 uid="uid://cn8pmff4bbixf"]
 
 [ext_resource type="Script" uid="uid://bxo74i4xu5chj" path="res://track.gd" id="1_mll3j"]
+[ext_resource type="Shader" uid="uid://cxn7y5lffdias" path="res://track.gdshader" id="2_phvr8"]
 
 [sub_resource type="Curve3D" id="Curve3D_mll3j"]
 _data = {
@@ -8,6 +9,11 @@ _data = {
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phvr8"]
+render_priority = 0
+shader = ExtResource("2_phvr8")
+shader_parameter/shade_bands = 5
 
 [node name="track" type="Node3D" node_paths=PackedStringArray("path", "csgMesh")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -35,3 +41,5 @@ path_local = false
 path_continuous_u = true
 path_u_distance = 0.0
 path_joined = false
+smooth_faces = true
+material = SubResource("ShaderMaterial_phvr8")

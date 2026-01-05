@@ -1,21 +1,24 @@
 [gd_scene load_steps=6 format=3 uid="uid://dovjqn5n6qnrn"]
 
-[ext_resource type="Texture2D" uid="uid://0l5voe7sv8eh" path="res://Screenshot 2025-12-15 221253.png" id="1_5nebm"]
 [ext_resource type="Script" uid="uid://bn5biorq6crxe" path="res://network_player.gd" id="1_j6rbc"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onrkg"]
-shading_mode = 0
-albedo_texture = ExtResource("1_5nebm")
-uv1_scale = Vector3(2.01, 2.01, 2.01)
-
-[sub_resource type="SphereMesh" id="SphereMesh_j6rbc"]
-material = SubResource("StandardMaterial3D_onrkg")
-uv2_padding = 4.84
-radius = 1.0
-height = 2.0
+[ext_resource type="Shader" uid="uid://cn1by0wq5yfu8" path="res://player.gdshader" id="2_j6rbc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3vexw"]
 radius = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_onrkg"]
+render_priority = 0
+shader = ExtResource("2_j6rbc")
+shader_parameter/shade_bands = 5
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_threshold = 0.6000000285
+shader_parameter/rim_smoothness = 0.0450000021375
+
+[sub_resource type="SphereMesh" id="SphereMesh_3vexw"]
+material = SubResource("ShaderMaterial_onrkg")
+uv2_padding = 4.84
+radius = 1.0
+height = 2.0
 
 [node name="networkPlayer" type="StaticBody3D" node_paths=PackedStringArray("mesh", "label")]
 transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
@@ -24,10 +27,6 @@ collision_mask = 3
 script = ExtResource("1_j6rbc")
 mesh = NodePath("MeshInstance3D")
 label = NodePath("Label3D")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = SubResource("SphereMesh_j6rbc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_3vexw")
@@ -42,5 +41,10 @@ font_size = 64
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_3vexw")
+skeleton = NodePath("../..")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -24,3 +24,17 @@ func _on_username_text_changed(new_text: String) -> void:
 
 func _on_race_toggled(toggled_on: bool) -> void:
 	Global.race = toggled_on
+
+#user settings tab
+func _on_settings_pressed() -> void:
+	$AnimationPlayer.play("settingsPressed")
+func _on_back_pressed() -> void:
+	$AnimationPlayer.play_backwards("settingsPressed")
+
+#volume
+func _on_vol_slider_value_changed(value: float) -> void:
+	$options/volBox.value = $options/volSlider.value
+	Global.userSettings.volume = $options/volBox.value
+func _on_vol_box_value_changed(value: float) -> void:
+	$options/volSlider.value = $options/volBox.value
+	Global.userSettings.volume = $options/volBox.value
