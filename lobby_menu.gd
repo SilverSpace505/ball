@@ -96,3 +96,7 @@ func _on_speed_val_value_changed(value: float) -> void:
 func _on_speed_box_value_changed(value: float) -> void:
 	$player/speed/speedVal.value = $player/speed/speedBox.value
 	Network.options.speed = $player/speed/speedBox.value
+
+
+func _on_exit_button_pressed() -> void:
+	Network.emit ('leave')

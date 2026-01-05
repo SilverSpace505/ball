@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c51hjd1iarkfj"]
 
 [ext_resource type="Script" uid="uid://dkbwj0skicqp0" path="res://lobby_menu.gd" id="1_nv5w8"]
-[ext_resource type="Texture2D" uid="uid://0l5voe7sv8eh" path="res://Screenshot 2025-12-15 221253.png" id="2_iohss"]
+[ext_resource type="Texture2D" uid="uid://dwpwfs7hplmcp" path="res://kirkify.png" id="2_eicbr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_10hg3"]
 
@@ -125,9 +125,9 @@ script = ExtResource("1_nv5w8")
 [node name="start" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = -1.0
+offset_left = 506.0
 offset_top = 551.0
-offset_right = 1150.0
+offset_right = 1140.0
 offset_bottom = 643.0
 theme_override_font_sizes/font_size = 61
 toggle_mode = true
@@ -138,7 +138,7 @@ layout_mode = 0
 offset_left = 10.0
 offset_top = 95.0
 offset_right = 452.0
-offset_bottom = 538.0
+offset_bottom = 541.0
 theme_override_font_sizes/font_size = 35
 
 [node name="hostName" type="Label" parent="."]
@@ -348,6 +348,16 @@ min_value = 1.0
 max_value = 8.0
 value = 5.0
 
+[node name="exitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 551.0
+offset_right = 442.0
+offset_bottom = 642.0
+theme_override_font_sizes/font_size = 28
+text = "return"
+expand_icon = true
+
 [node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(590, -567)
@@ -367,7 +377,7 @@ offset_left = 19.0
 offset_top = 928.0
 offset_right = 1242.0
 offset_bottom = 1662.0005
-texture = ExtResource("2_iohss")
+texture = ExtResource("2_eicbr")
 
 [connection signal="button_down" from="start" to="." method="_on_start_button_down"]
 [connection signal="value_changed" from="track/length/lengthVal" to="." method="_on_length_val_value_changed"]
@@ -379,3 +389,4 @@ texture = ExtResource("2_iohss")
 [connection signal="toggled" from="player/jumps/jumpBox" to="." method="_on_jump_box_toggled"]
 [connection signal="value_changed" from="player/speed/speedVal" to="." method="_on_speed_val_value_changed"]
 [connection signal="value_changed" from="player/speed/speedBox" to="." method="_on_speed_box_value_changed"]
+[connection signal="pressed" from="exitButton" to="." method="_on_exit_button_pressed"]
