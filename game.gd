@@ -31,7 +31,7 @@ func _physics_process(_delta: float) -> void:
 		Global.isReady = false
 	
 	if Input.is_action_just_pressed("esc"):
-		$CanvasLayer/Control/pauseMenu.visible = true
+		$CanvasLayer/Control/pauseMenu.visible = !$CanvasLayer/Control/pauseMenu.visible
 
 
 func _on_settings_button_pressed() -> void:
