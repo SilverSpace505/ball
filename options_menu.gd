@@ -6,11 +6,9 @@ func _ready() -> void:
 	$volBox.value = Global.userSettings.volume
 	$volSlider.value = Global.userSettings.volume
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
 
 func _on_back_pressed() -> void:
 	Sfx.get_node("clickSFX").play()
