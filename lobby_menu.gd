@@ -35,8 +35,6 @@ func _on_start_button_down() -> void:
 	await get_tree().create_timer(0.5).timeout
 	Network.client.emit('start')
 	
-func _on_start_mouse_entered() -> void:
-	Sfx.get_node("browseSFX").play()
 
 #sync settings
 func _optionsChanged():
@@ -104,7 +102,6 @@ func _on_exit_button_pressed() -> void:
 	Sfx.get_node("clickSFX").play()
 	Network.emit ('leave')
 
-
 func _on_seed_value_changed(value: float) -> void:
 	Network.options.seed = value
 
@@ -112,13 +109,5 @@ func _on_randomise_toggled(toggled_on: bool) -> void:
 	Sfx.get_node("clickSFX").play()
 	Network.options.randomise = toggled_on
 
-func _on_randomise_mouse_entered() -> void:
-	Sfx.get_node("browseSFX").play()
-
-
-func _on_jump_box_mouse_entered() -> void:
-	Sfx.get_node("browseSFX").play()
-
-
-func _on_exit_button_mouse_entered() -> void:
+func _on_mouse_hover() -> void:
 	Sfx.get_node("browseSFX").play()

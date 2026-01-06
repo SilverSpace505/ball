@@ -36,17 +36,22 @@ func _physics_process(_delta: float) -> void:
 		$CanvasLayer/Control/pauseMenu.visible = !$CanvasLayer/Control/pauseMenu.visible
 
 func _on_settings_button_pressed() -> void:
+	Sfx.get_node("clickSFX").play()
 	$CanvasLayer/Control/pauseMenu.visible = !$CanvasLayer/Control/pauseMenu.visible
 	$CanvasLayer/Control/optionsMenu.visible = true
 	$CanvasLayer/Control/optionsMenu/AnimationPlayer.play("inGameOptions")
 
 func _on_lobby_button_pressed() -> void:
+	Sfx.get_node("clickSFX").play()
 	Global.scene = 'lobby'
 	get_tree().change_scene_to_file("res://lobby_menu.tscn")
 
 func _on_close_button_pressed() -> void:
 	$CanvasLayer/Control/pauseMenu.visible = false
+	Sfx.get_node("clickSFX").play()
 
 func _settingsClosed():
-	print("aAAAA")
 	$CanvasLayer/Control/pauseMenu.visible = true
+
+func _on_mouse_hover() -> void:
+	Sfx.get_node("browseSFX").play()
