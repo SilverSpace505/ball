@@ -33,6 +33,8 @@ extends Node3D
 
 var thread: Thread
 
+signal on_generated
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -97,6 +99,7 @@ func generate(vertices: PackedVector3Array, colours: PackedVector4Array):
 	$MeshInstance3D.mesh = surfaceTool.commit()
 	$MeshInstance3D.position = Vector3(-resolution.x / 2.0, -resolution.y / 2.0, -resolution.z / 2.0)
 	
+	on_generated.emit()
 	thread.wait_to_finish()
 	
 func march_cube(x: int, y: int, z: int, grid: Grid, vertices: PackedVector3Array, colours: PackedVector4Array):

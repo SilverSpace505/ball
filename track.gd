@@ -10,16 +10,12 @@ extends Node3D
 @export var islands: Node3D
 
 var trackPoints: PackedVector2Array
+var allPositions = []
+var islandI = 0
 
-func _on_seed():
-	var points = trackPoints
-	for i in range(len(points)):
-		if points[i].x < 0:
-			points[i] = points[i] - Vector2(Network.options.trackSize - 1, 0)
-		if points[i].x > 0:
-			points[i] = points[i] + Vector2(Network.options.trackSize - 1, 0)
-	csgMesh.polygon = points
-	
+var thread: Thread
+
+func generate_track():
 	var pos = Vector3()
 	var forward = Quaternion()
 		
@@ -28,12 +24,15 @@ func _on_seed():
 	var tvel = Vector3(0, -0.2, 0)
 	var vel = tvel
 	
+	var path = Path3D.new()
+	path.curve = Curve3D.new()
+	
 	path.curve.clear_points()
 	path.curve.add_point(Vector3(0, 0, 0))
 	
 	seed(Network.options.seed)
 	
-	var allPositions = []
+	allPositions = []
 	
 	var positions = []
 	var quaternions = []
@@ -46,7 +45,7 @@ func _on_seed():
 		if i % int(2 / scalar) == 0:
 			allPositions.append(pos)
 		
-		if i >= Network.options.length * 100 - 5:
+		if i >= Network.options.length * 100 - 2:
 			positions.append(pos)
 			quaternions.append(forward)
 		
@@ -68,35 +67,37 @@ func _on_seed():
 		forward *= Quaternion(Vector3(0, 1, 0), vel.x * scalar / Network.options.trackSize) 
 		
 		Global.voidLevel = min(Global.voidLevel, pos.y - 5)
-			
+	
+	call_deferred('_points_generated', path, positions, quaternions)
+	
+	call_deferred('_points_generated', path, positions, quaternions)
 		#forward2 *= Quaternion(Vector3(0, 1, 0), vel.y)
 		
 		#var perp = Vector3(1, 0, 0) * forward2
 		#forward *= Quaternion(perp, vel.x)
-		
+
+func _on_seed():
+	var points = trackPoints
+	for i in range(len(points)):
+		if points[i].x < 0:
+			points[i] = points[i] - Vector2(Network.options.trackSize - 1, 0)
+		if points[i].x > 0:
+			points[i] = points[i] + Vector2(Network.options.trackSize - 1, 0)
+	csgMesh.polygon = points
+	
+	thread = Thread.new()
+	thread.start(generate_track)
+
+func _points_generated(npath, positions, quaternions):
+	add_child(npath)
+	csgMesh.path_node = npath.get_path()
 	finish.position = positions[0] - $Path3D.global_position
 	
 	for island2 in islands.get_children():
 		island2.queue_free()
 	
-	#spawn islands
-	for pos1 in allPositions:
-		if randf() > 0.9:
-			var offset = Vector3(0, 0, 0)
-			for try in range(10):
-				offset = Vector3(randf_range(-1, 1), randf_range(0, 0.25), randf_range(-1, 1)).normalized() * randf_range(10, 20)
-				var again = false
-				for pos2 in allPositions:
-					if (pos1 + offset).distance_to(pos2) < 10:
-						again = true
-				if not again:
-					break
-			
-			var newIsland = island.instantiate()
-			newIsland.position = pos1 + offset
-			newIsland.noiseSeed = randi()
-			newIsland.start_generate()
-			islands.add_child(newIsland)
+	islandI = -1
+	_next_island()
 		
 	# Calculate the actual forward direction from the last quaternion
 	var track_forward = Vector3(0, 0, -1) * quaternions[0]
@@ -116,6 +117,31 @@ func _on_seed():
 	var current_path = csgMesh.path_node
 	csgMesh.path_node = NodePath("")
 	csgMesh.path_node = current_path
+
+func _next_island():
+	islandI += 1
+	if islandI >= len(allPositions):
+		return
+	var pos1 = allPositions[islandI]
+	if randf() > 0.9:
+		var offset = Vector3(0, 0, 0)
+		for try in range(10):
+			offset = Vector3(randf_range(-1, 1), randf_range(0, 0.25), randf_range(-1, 1)).normalized() * randf_range(10, 20)
+			var again = false
+			for pos2 in allPositions:
+				if (pos1 + offset).distance_to(pos2) < 10:
+					again = true
+			if not again:
+				break
+		
+		var newIsland = island.instantiate()
+		newIsland.position = pos1 + offset
+		newIsland.noiseSeed = randi()
+		newIsland.on_generated.connect(_next_island)
+		newIsland.start_generate()
+		islands.add_child(newIsland)
+	else:
+		_next_island()
 
 func _ready() -> void:
 	Network.on_seed.connect(_on_seed)
