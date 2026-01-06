@@ -179,6 +179,10 @@ func _process(delta: float) -> void:
 		
 	$CollisionShape3D.disabled = not Global.running
 	
+	var camera = get_viewport().get_camera_3d()
+	if camera:
+		$Label3D.fixed_size = camera.global_position.distance_to($Label3D.global_position) > 1
+	
 func _broadcast_data(data):
 	send_msg('data', Network.data, false)
 

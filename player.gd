@@ -131,6 +131,8 @@ func _process(delta: float) -> void:
 	core.global_position = core.global_position.lerp(global_position, clamp(delta * 50, 0, 1))
 	if Network.fps < 100:
 		core.global_position = global_position
+	
+	$core/Label3D.fixed_size = camera.global_position.distance_to($core/Label3D.global_position) > 1
 
 func _input(event):
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

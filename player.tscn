@@ -45,4 +45,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3718, 0)
 billboard = 1
 no_depth_test = true
 fixed_size = true
+text = "testing"
 font_size = 64

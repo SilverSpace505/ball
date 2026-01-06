@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c51hjd1iarkfj"]
+[gd_scene load_steps=10 format=3 uid="uid://c51hjd1iarkfj"]
 
+[ext_resource type="Theme" uid="uid://6thw543k5i1t" path="res://gui.tres" id="1_eicbr"]
 [ext_resource type="Script" uid="uid://dkbwj0skicqp0" path="res://lobby_menu.gd" id="1_nv5w8"]
 [ext_resource type="Texture2D" uid="uid://dwpwfs7hplmcp" path="res://kirkify.png" id="2_eicbr"]
 
@@ -120,6 +121,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_eicbr")
 script = ExtResource("1_nv5w8")
 
 [node name="start" type="Button" parent="."]

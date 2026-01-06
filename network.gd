@@ -174,7 +174,7 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 		names = {}
 		if Global.scene != 'menu':
 			Global.scene = 'menu'
-			get_tree().change_scene_to_file("res://menu.tscn")
+			get_tree().change_scene_to_file("res://main_menu.tscn")
 
 func _on_timer_timeout() -> void:
 	if connected and lobby != null:

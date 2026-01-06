@@ -35,4 +35,12 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_settings_button_pressed() -> void:
+	Global.scene = 'menu'
 	get_tree().change_scene_to_file("res://main_menu.tscn")
+
+func _on_lobby_button_pressed() -> void:
+	Global.scene = 'lobby'
+	get_tree().change_scene_to_file("res://lobby_menu.tscn")
+
+func _on_close_button_pressed() -> void:
+	$CanvasLayer/Control/pauseMenu.visible = false

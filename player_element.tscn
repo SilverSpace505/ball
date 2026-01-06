@@ -44,11 +44,13 @@ layout_mode = 2
 
 [node name="place" type="Label" parent="panel/margin/container"]
 layout_mode = 2
+theme = ExtResource("1_rtdu2")
 theme_override_font_sizes/font_size = 10
 
 [node name="username" type="Label" parent="panel/margin/container"]
 layout_mode = 2
 size_flags_horizontal = 8
+theme = ExtResource("1_rtdu2")
 theme_override_font_sizes/font_size = 10
 
 [node name="space" type="Control" parent="panel/margin/container"]
@@ -60,6 +62,7 @@ layout_mode = 2
 
 [node name="time" type="Label" parent="panel/margin/container/right"]
 layout_mode = 2
+theme = ExtResource("1_rtdu2")
 theme_override_font_sizes/font_size = 10
 
 [node name="ready" type="Control" parent="panel/margin/container/right"]
@@ -76,7 +79,9 @@ offset_top = -8.0
 offset_right = 70.0
 offset_bottom = 8.0
 grow_vertical = 2
+theme = ExtResource("1_rtdu2")
 theme_override_colors/font_color = Color(0.12941177, 0.75686276, 0.25490198, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.21568628, 0, 1)
 theme_override_font_sizes/font_size = 10
 text = "ready"
 vertical_alignment = 1
@@ -110,7 +115,9 @@ offset_top = -8.0
 offset_right = 70.0
 offset_bottom = 8.0
 grow_vertical = 2
+theme = ExtResource("1_rtdu2")
 theme_override_colors/font_color = Color(0.75686276, 0.12941177, 0.16470589, 1)
+theme_override_colors/font_shadow_color = Color(0.21568628, 0, 0, 1)
 theme_override_font_sizes/font_size = 10
 text = "not ready"
 vertical_alignment = 1
@@ -133,7 +140,9 @@ expand_mode = 4
 [node name="latency" type="Label" parent="panel/margin/container/right"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5044349, 0.8063406, 1, 1)
+theme_override_colors/font_shadow_color = Color(5.5350364e-07, 0.2961455, 0.43400484, 1)
 theme_override_font_sizes/font_size = 8
+text = "23ms"
 
 [node name="connecting" type="TextureRect" parent="panel/margin/container/right"]
 visible = false

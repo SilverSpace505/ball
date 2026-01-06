@@ -13,8 +13,13 @@ bg_color = Color(0.33333334, 0.33333334, 0.33333334, 0.52156866)
 bg_color = Color(0.2, 0.2, 0.2, 0.7019608)
 
 [resource]
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 10
 ItemList/colors/font_color = Color(1, 1, 1, 1)
 ItemList/styles/panel = SubResource("StyleBoxFlat_xxxrk")
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_outline_color = Color(0, 0, 0, 1)
+LineEdit/constants/outline_size = 7
 Panel/styles/panel = SubResource("StyleBoxFlat_gv4p5")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_dhoft")
 panel2/base_type = &"Panel"
