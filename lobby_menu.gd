@@ -5,6 +5,10 @@ var mapLength = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if Global.leavingScene == 'menu':
+		$AnimationPlayer.play("sceneOut")
+	elif Global.leavingScene == 'game':
+		$AnimationPlayer.play("leftGame")
 	_optionsChanged()
 	Network.on_player_joined.connect(_addPlayer)
 	Network.on_player_left.connect(_removePlayer)
@@ -97,6 +101,7 @@ func _on_speed_box_value_changed(value: float) -> void:
 
 
 func _on_exit_button_pressed() -> void:
+	Global.leavingScene = 'lobby'
 	Network.emit ('leave')
 
 func _on_seed_value_changed(value: float) -> void:

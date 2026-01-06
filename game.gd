@@ -47,6 +47,7 @@ func _on_settings_button_pressed() -> void:
 	$CanvasLayer/Control/optionsMenu/AnimationPlayer.play("inGameOptions")
 
 func _on_lobby_button_pressed() -> void:
+	Global.leavingScene = 'game'
 	BackgroundMusic.bus = "menu"
 	Sfx.get_node("clickSFX").play()
 	Global.scene = 'lobby'

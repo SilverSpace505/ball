@@ -11,6 +11,7 @@ func _ready() -> void:
 	$AnimationPlayer.play_backwards("settingsPressed")
 
 func _on_play_button_down() -> void:
+	Global.leavingScene = 'menu'
 	$AnimationPlayer.play("sceneTransition")
 	await get_tree().create_timer(0.5).timeout
 	Network.client.emit('join', [str(Global.seed), race.button_pressed, Global.username])

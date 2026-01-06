@@ -9,8 +9,10 @@ script = ExtResource("1_ycbqo")
 
 [node name="clickSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_a0u1m")
-bus = &"menu"
+volume_db = 10.0
+bus = &"clicks"
 
 [node name="browseSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ycbqo")
-bus = &"menu"
+volume_db = 10.0
+bus = &"clicks"

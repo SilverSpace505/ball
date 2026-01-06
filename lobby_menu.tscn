@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c51hjd1iarkfj"]
+[gd_scene load_steps=12 format=3 uid="uid://c51hjd1iarkfj"]
 
 [ext_resource type="Theme" uid="uid://6thw543k5i1t" path="res://gui.tres" id="1_eicbr"]
 [ext_resource type="Script" uid="uid://dkbwj0skicqp0" path="res://lobby_menu.gd" id="1_nv5w8"]
 [ext_resource type="Texture2D" uid="uid://bkknqe4kfbj16" path="res://loadingToGame.png" id="3_eicbr"]
+[ext_resource type="Texture2D" uid="uid://dkpcbqblad3hv" path="res://leavingGame.png" id="4_iu37i"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_10hg3"]
 
@@ -76,6 +77,28 @@ tracks/5/keys = {
 "points": PackedFloat32Array(1347.1521, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../TextureRect2:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(-1504, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../TextureRect2:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(8, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_iu37i"]
 resource_name = "goToGame"
@@ -136,8 +159,8 @@ tracks/0/path = NodePath(".:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(573, -0.25, 0, 0.25, 0, -741, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(573, -0.25, 0, 0.25, 0, -903.11505, -0.083333336, 246.01917, 0, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/1/type = "bezier"
@@ -147,8 +170,56 @@ tracks/1/path = NodePath(".:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(331.00003, -0.25, 0, 0.25, 0, 331.00003, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(331.00003, -0.25, 0, 0.25, 0, 331, -0.083333336, 5.086263e-06, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_u8bsw"]
+resource_name = "leftGame"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(573, -0.25, 0, 0.25, 0, -903.11505, -0.083333336, 246.01917, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(331.00003, -0.25, 0, 0.25, 0, 331, -0.083333336, 5.086263e-06, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../TextureRect2:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -1496, -0.083333336, 249.33334, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../TextureRect2:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.083333336, 0, 0, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 
@@ -156,6 +227,7 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_eicbr"),
 &"goToGame": SubResource("Animation_iu37i"),
+&"leftGame": SubResource("Animation_u8bsw"),
 &"sceneOut": SubResource("Animation_iohss")
 }
 
@@ -176,7 +248,7 @@ offset_left = 506.0
 offset_top = 551.0
 offset_right = 1140.0
 offset_bottom = 643.0
-theme_override_font_sizes/font_size = 61
+theme_override_font_sizes/font_size = 60
 toggle_mode = true
 text = "Start Game"
 
@@ -441,18 +513,18 @@ value = 5.0
 
 [node name="exitButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 21.0
-offset_top = 551.0
-offset_right = 442.0
-offset_bottom = 642.0
-theme_override_font_sizes/font_size = 28
+offset_left = 24.0
+offset_top = 552.0
+offset_right = 445.0
+offset_bottom = 643.0
+theme_override_font_sizes/font_size = 58
 text = "return"
 expand_icon = true
 
 [node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(590, -567)
-scale = Vector2(1216.0001, 913.00006)
+scale = Vector2(1594.1149, 913.00006)
 mesh = SubResource("BoxMesh_nv5w8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -460,7 +532,6 @@ root_node = NodePath("../MeshInstance2D2")
 libraries = {
 &"": SubResource("AnimationLibrary_iu37i")
 }
-autoplay = "sceneOut"
 
 [node name="MeshInstance2D3" type="MeshInstance2D" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -475,10 +546,19 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -576.0
 offset_top = 883.35
-offset_right = 576.0
+offset_right = 575.9999
 offset_bottom = 1531.3503
 grow_horizontal = 2
 texture = ExtResource("3_eicbr")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -1504.0
+offset_top = 8.0
+offset_right = -351.99976
+offset_bottom = 656.0
+texture = ExtResource("4_iu37i")
 expand_mode = 1
 
 [connection signal="button_down" from="start" to="." method="_on_start_button_down"]
