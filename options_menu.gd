@@ -14,7 +14,6 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_back_pressed() -> void:
-	Sfx.get_node("clickSFX").play()
 	$AnimationPlayer.play_backwards("optionsPressed")
 	await get_tree().create_timer(0.425).timeout
 	get_tree().change_scene_to_file("res://main_menu.tscn")
@@ -41,10 +40,12 @@ func _on_vol_box_music_value_changed(value: float) -> void:
 	Global.saveData()
 
 func _on_in_game_back_pressed() -> void:
+	BackgroundMusic.bus = "inGame"
 	$AnimationPlayer.play_backwards("inGameOptions")
 	await get_tree().create_timer(0.425).timeout
 	emit_signal("settingsClosed")
 
-
 func _on_mouse_hover() -> void:
 	Sfx.get_node("browseSFX").play()
+func _clicksound():
+	Sfx.get_node("clickSFX").play()

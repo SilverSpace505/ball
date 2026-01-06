@@ -54,6 +54,28 @@ tracks/3/keys = {
 "points": PackedFloat32Array(883.35, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../MeshInstance2D3:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(594.4433, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../MeshInstance2D3:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1347.1521, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_iu37i"]
 resource_name = "goToGame"
@@ -79,6 +101,28 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(2, 0),
 "points": PackedFloat32Array(1141.995, 0, 0, 0.083333336, -190.3325, 0, -0.083333336, 147.225, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../MeshInstance2D3:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(594.4433, -0.25, 0, 0.25, 0, 608, -0.083333336, -2.2594504, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../MeshInstance2D3:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1347.1521, -0.25, 0, 0.25, 0, 496, -0.083333336, 141.85869, 0, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 
@@ -408,7 +452,7 @@ expand_icon = true
 [node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(590, -567)
-scale = Vector2(1324.5, 768.74994)
+scale = Vector2(1216.0001, 913.00006)
 mesh = SubResource("BoxMesh_nv5w8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -417,6 +461,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_iu37i")
 }
 autoplay = "sceneOut"
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(594.4433, 1347.1521)
+scale = Vector2(-1993.2571, 1082.1482)
+mesh = SubResource("BoxMesh_nv5w8")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -432,11 +482,12 @@ texture = ExtResource("3_eicbr")
 expand_mode = 1
 
 [connection signal="button_down" from="start" to="." method="_on_start_button_down"]
+[connection signal="button_down" from="start" to="." method="_clicksound"]
 [connection signal="mouse_entered" from="start" to="." method="_on_mouse_hover"]
 [connection signal="value_changed" from="track/seed/seed" to="." method="_on_seed_value_changed"]
 [connection signal="mouse_entered" from="track/seed/randomise" to="." method="_on_mouse_hover"]
-[connection signal="pressed" from="track/seed/randomise" to="." method="_on_randomise_pressed"]
 [connection signal="toggled" from="track/seed/randomise" to="." method="_on_randomise_toggled"]
+[connection signal="toggled" from="track/seed/randomise" to="." method="_clicksound"]
 [connection signal="mouse_entered" from="track/length/lengthVal" to="." method="_on_mouse_hover"]
 [connection signal="value_changed" from="track/length/lengthVal" to="." method="_on_length_val_value_changed"]
 [connection signal="value_changed" from="track/length/lengthBox" to="." method="_on_length_box_value_changed"]
@@ -448,8 +499,10 @@ expand_mode = 1
 [connection signal="value_changed" from="track/size/sizeBox" to="." method="_on_size_box_value_changed"]
 [connection signal="mouse_entered" from="player/jumps/jumpBox" to="." method="_on_mouse_hover"]
 [connection signal="toggled" from="player/jumps/jumpBox" to="." method="_on_jump_box_toggled"]
+[connection signal="toggled" from="player/jumps/jumpBox" to="." method="_clicksound"]
 [connection signal="mouse_entered" from="player/speed/speedVal" to="." method="_on_mouse_hover"]
 [connection signal="value_changed" from="player/speed/speedVal" to="." method="_on_speed_val_value_changed"]
 [connection signal="value_changed" from="player/speed/speedBox" to="." method="_on_speed_box_value_changed"]
 [connection signal="mouse_entered" from="exitButton" to="." method="_on_mouse_hover"]
 [connection signal="pressed" from="exitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="exitButton" to="." method="_clicksound"]

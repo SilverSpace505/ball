@@ -817,6 +817,7 @@ text = "return
 
 [connection signal="mouse_entered" from="back" to="." method="_on_mouse_hover"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="back" to="." method="_clicksound"]
 [connection signal="mouse_entered" from="volSlider" to="." method="_on_mouse_hover"]
 [connection signal="value_changed" from="volSlider" to="." method="_on_vol_slider_value_changed"]
 [connection signal="mouse_entered" from="volBox" to="." method="_on_mouse_hover"]
@@ -825,4 +826,5 @@ text = "return
 [connection signal="mouse_entered" from="volBoxMusic" to="." method="_on_mouse_hover"]
 [connection signal="value_changed" from="volBoxMusic" to="." method="_on_vol_box_music_value_changed"]
 [connection signal="mouse_entered" from="inGameBack" to="." method="_on_mouse_hover"]
+[connection signal="pressed" from="inGameBack" to="." method="_clicksound"]
 [connection signal="pressed" from="inGameBack" to="." method="_on_in_game_back_pressed"]

@@ -5,6 +5,7 @@ extends Node3D
 @export var start: Label
 
 func _ready() -> void:
+	BackgroundMusic.bus = "inGame"
 	connect("settingsClosed", _settingsClosed)
 	Global.running = not Global.race
 	Global.isReady = false
@@ -33,6 +34,10 @@ func _physics_process(_delta: float) -> void:
 		Global.isReady = false
 	
 	if Input.is_action_just_pressed("esc"):
+		if BackgroundMusic.bus == "inGame":
+			BackgroundMusic.bus = "pause"
+		elif BackgroundMusic.bus == "pause":
+			BackgroundMusic.bus = "inGame"
 		$CanvasLayer/Control/pauseMenu.visible = !$CanvasLayer/Control/pauseMenu.visible
 
 func _on_settings_button_pressed() -> void:
@@ -42,11 +47,15 @@ func _on_settings_button_pressed() -> void:
 	$CanvasLayer/Control/optionsMenu/AnimationPlayer.play("inGameOptions")
 
 func _on_lobby_button_pressed() -> void:
+	BackgroundMusic.bus = "menu"
 	Sfx.get_node("clickSFX").play()
 	Global.scene = 'lobby'
+	$CanvasLayer/Control/AnimationPlayer.play("leave game")
+	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://lobby_menu.tscn")
 
 func _on_close_button_pressed() -> void:
+	BackgroundMusic.bus = "inGame"
 	$CanvasLayer/Control/pauseMenu.visible = false
 	Sfx.get_node("clickSFX").play()
 
@@ -55,3 +64,5 @@ func _settingsClosed():
 
 func _on_mouse_hover() -> void:
 	Sfx.get_node("browseSFX").play()
+func _clicksound():
+	Sfx.get_node("clickSFX").play()
