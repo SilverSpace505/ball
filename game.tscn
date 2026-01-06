@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cplji6psrpo8t"]
+[gd_scene load_steps=35 format=3 uid="uid://cplji6psrpo8t"]
 
 [ext_resource type="Script" uid="uid://57v0fg1vf783" path="res://game.gd" id="1_vef74"]
 [ext_resource type="PackedScene" uid="uid://cn8pmff4bbixf" path="res://track.tscn" id="2_e2o6t"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bkknqe4kfbj16" path="res://loadingToGame.png" id="10_iotsf"]
 [ext_resource type="Texture2D" uid="uid://bkp2x56pojfwb" path="res://cross.png" id="11_iotsf"]
 [ext_resource type="PackedScene" uid="uid://cec5hlvisc8q5" path="res://island.tscn" id="11_mfdv2"]
+[ext_resource type="PackedScene" uid="uid://b4n0jm82clx84" path="res://options_menu.tscn" id="12_lc2xo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
 sky_top_color = Color(0.33153802, 0.8575765, 0.85415184, 1)
@@ -75,8 +76,8 @@ tracks/0/path = NodePath(".:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-37, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/1/type = "bezier"
@@ -86,8 +87,8 @@ tracks/1/path = NodePath(".:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-43, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 
@@ -101,8 +102,8 @@ tracks/0/path = NodePath(".:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-37, -0.25, 0, 0.25, 0, -37, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, 0, 0, 0.083333336, -6.166667, 0, -0.083333336, 0, 0, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/1/type = "bezier"
@@ -112,8 +113,8 @@ tracks/1/path = NodePath(".:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-43, -0.25, 0, 0.25, 0, -888, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, 0, 0, 0.083333336, -148, -888, -0.083333336, 148, 0, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 
@@ -324,15 +325,6 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 75
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = -37.0
-offset_top = -43.0
-offset_right = 1115.0
-offset_bottom = 605.0
-texture = ExtResource("10_iotsf")
-expand_mode = 1
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control"]
 root_node = NodePath("../TextureRect")
 libraries = {
@@ -425,6 +417,22 @@ grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("6_ryrav")
 text = "(ENTER) Toggle ready      (ESC) Toggle paused"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("10_iotsf")
+expand_mode = 1
+
+[node name="optionsMenu" parent="CanvasLayer/Control" instance=ExtResource("12_lc2xo")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="finish" type="Area3D" parent="."]
 physics_interpolation_mode = 1
