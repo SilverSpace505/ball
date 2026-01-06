@@ -418,11 +418,15 @@ libraries = {
 autoplay = "sceneOut"
 
 [node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = -37.0
-offset_top = 788.0
-offset_right = 1186.0
-offset_bottom = 1522.0005
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -557.0
+offset_top = 928.0
+offset_right = 595.0
+offset_bottom = 1576.0
+grow_horizontal = 2
 texture = ExtResource("3_eicbr")
 expand_mode = 1
 
