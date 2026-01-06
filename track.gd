@@ -38,7 +38,7 @@ func _on_seed():
 	var positions = []
 	var quaternions = []
 	
-	for i in range(Network.options.length * 20):
+	for i in range(Network.options.length * 100):
 		
 		pos += Vector3(0, 0, -1 * scalar) * forward
 		path.curve.add_point(pos)
@@ -46,7 +46,7 @@ func _on_seed():
 		if i % int(2 / scalar) == 0:
 			allPositions.append(pos)
 		
-		if i >= Network.options.length * 20 - 5:
+		if i >= Network.options.length * 100 - 5:
 			positions.append(pos)
 			quaternions.append(forward)
 		

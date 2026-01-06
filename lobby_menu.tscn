@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://6thw543k5i1t" path="res://gui.tres" id="1_eicbr"]
 [ext_resource type="Script" uid="uid://dkbwj0skicqp0" path="res://lobby_menu.gd" id="1_nv5w8"]
-[ext_resource type="Texture2D" uid="uid://dwpwfs7hplmcp" path="res://kirkify.png" id="2_eicbr"]
+[ext_resource type="Texture2D" uid="uid://bkknqe4kfbj16" path="res://loadingToGame.png" id="3_eicbr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_10hg3"]
 
@@ -419,11 +419,12 @@ autoplay = "sceneOut"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 19.0
-offset_top = 928.0
-offset_right = 1242.0
-offset_bottom = 1662.0005
-texture = ExtResource("2_eicbr")
+offset_left = -37.0
+offset_top = 788.0
+offset_right = 1186.0
+offset_bottom = 1522.0005
+texture = ExtResource("3_eicbr")
+expand_mode = 1
 
 [connection signal="button_down" from="start" to="." method="_on_start_button_down"]
 [connection signal="value_changed" from="track/seed/seed" to="." method="_on_seed_value_changed"]

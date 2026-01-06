@@ -9,7 +9,7 @@
 [ext_resource type="Theme" uid="uid://6thw543k5i1t" path="res://gui.tres" id="6_ryrav"]
 [ext_resource type="PackedScene" uid="uid://ctosjx6bcrfi" path="res://player_element.tscn" id="7_eow3j"]
 [ext_resource type="Script" uid="uid://crsc18gj6w1de" path="res://finish.gd" id="8_j5wjh"]
-[ext_resource type="Texture2D" uid="uid://dwpwfs7hplmcp" path="res://kirkify.png" id="9_hve3p"]
+[ext_resource type="Texture2D" uid="uid://bkknqe4kfbj16" path="res://loadingToGame.png" id="10_iotsf"]
 [ext_resource type="Texture2D" uid="uid://bkp2x56pojfwb" path="res://cross.png" id="11_iotsf"]
 [ext_resource type="PackedScene" uid="uid://cec5hlvisc8q5" path="res://island.tscn" id="11_mfdv2"]
 
@@ -324,13 +324,13 @@ theme_override_font_sizes/font_size = 75
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
-visible = false
 layout_mode = 0
 offset_left = -37.0
 offset_top = -43.0
 offset_right = 1186.0
 offset_bottom = 691.0
-texture = ExtResource("9_hve3p")
+texture = ExtResource("10_iotsf")
+expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control"]
 root_node = NodePath("../TextureRect")
