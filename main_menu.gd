@@ -36,11 +36,10 @@ func _on_settings_pressed() -> void:
 	Sfx.get_node("clickSFX").play()
 	$AnimationPlayer.play("settingsPressed")
 	await get_tree().create_timer(0.6).timeout
-	get_tree().change_scene_to_file("res://options_menu.tscn")
-	
+	$optionsMenu/AnimationPlayer.play("optionsPressed")
+
 func _on_settings_mouse_entered() -> void:
 	Sfx.get_node("browseSFX").play()
-
 
 func _on_race_mouse_entered() -> void:
 	Sfx.get_node("browseSFX").play()

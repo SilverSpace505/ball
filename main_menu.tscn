@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cskbojmb7f2h7"]
+[gd_scene load_steps=10 format=3 uid="uid://cskbojmb7f2h7"]
 
 [ext_resource type="Script" uid="uid://dx32ny7ktawxe" path="res://main_menu.gd" id="1_7vrkn"]
 [ext_resource type="Theme" uid="uid://6thw543k5i1t" path="res://gui.tres" id="3_fu7sn"]
+[ext_resource type="PackedScene" uid="uid://b4n0jm82clx84" path="res://options_menu.tscn" id="3_jix8l"]
 
 [sub_resource type="Animation" id="Animation_fu7sn"]
 length = 0.001
@@ -330,6 +331,9 @@ script = ExtResource("1_7vrkn")
 lobby = NodePath("lobby")
 username = NodePath("username")
 race = NodePath("race")
+
+[node name="optionsMenu" parent="." instance=ExtResource("3_jix8l")]
+layout_mode = 1
 
 [node name="title" type="Label" parent="."]
 texture_filter = 1

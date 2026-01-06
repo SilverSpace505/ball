@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
 	#elif Global.userSettings.volume <= 10:
 		#playing
 	if volume_db <= -47 && playing == true:
-		playing = false
+		stream_paused = true
 	elif volume_db >= -46 && playing == false:
-		playing = true
+		stream_paused = false
+	

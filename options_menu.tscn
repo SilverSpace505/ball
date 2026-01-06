@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4n0jm82clx84"]
+[gd_scene load_steps=8 format=3 uid="uid://b4n0jm82clx84"]
 
 [ext_resource type="Theme" uid="uid://6thw543k5i1t" path="res://gui.tres" id="1_lbr8e"]
 [ext_resource type="Script" uid="uid://dxp3ql7dk3oow" path="res://options_menu.gd" id="1_t1lix"]
@@ -228,236 +228,6 @@ tracks/19/keys = {
 "times": PackedFloat32Array(0)
 }
 
-[sub_resource type="Animation" id="Animation_t1lix"]
-resource_name = "optionsPressed"
-length = 0.6
-step = 0.1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("back:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(-288, -0.25, 0, 0.25, 0, 24, -0.050000004, -52.000004, 0, 0),
-"times": PackedFloat32Array(0, 0.3)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("back:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(568, -0.25, 0, 0.25, 0, 568, -0.050000004, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.3)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("volume:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(472, 0, 0, 0.050000004, 0, 472, -0.050000004, 0, 0, 0),
-"times": PackedFloat32Array(0.1, 0.4)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("volume:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(-160, 0, 0, 0.050000004, 32.000004, 32, -0.050000004, 0, 0, 0),
-"times": PackedFloat32Array(0.1, 0.4)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("volBox:position:x")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(584, -0.25, 0, 0.25, 0, 576, -0.050000004, 1.3333334, 0, 0),
-"times": PackedFloat32Array(0.2, 0.5)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("volBox:position:y")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(-160, -0.25, 0, 0.25, 0, 32, -0.050000004, -32.000004, 0, 0),
-"times": PackedFloat32Array(0.2, 0.5)
-}
-tracks/6/type = "bezier"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("volSlider:position:x")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(400, -0.25, 0, 0.25, 0, 400, -0.050000004, 0, 0, 0),
-"times": PackedFloat32Array(0.3, 0.6)
-}
-tracks/7/type = "bezier"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("volSlider:position:y")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(-120, -0.25, 0, 0.25, 0, 72, -0.050000004, -32.000004, 0, 0),
-"times": PackedFloat32Array(0.3, 0.6)
-}
-
-[sub_resource type="Animation" id="Animation_ogda5"]
-resource_name = "ingameOptions"
-length = 0.8
-step = 0.1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("volume:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(472, 0, 0, 0.050000004, 0, 472, -0.050000004, 0, 0, 0),
-"times": PackedFloat32Array(0.3, 0.6)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("volume:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-160, 0, 0, 0.050000004, 32.000004, 32, -0.050000004, 0, 0, 0),
-"times": PackedFloat32Array(0.3, 0.6)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("volBox:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(584, -0.25, 0, 0.25, 0, 584, -0.050000004, 1.3333334, 0, 0),
-"times": PackedFloat32Array(0.4, 0.7)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("volBox:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-160, -0.25, 0, 0.25, 0, 32, -0.050000004, -32.000004, 0, 0),
-"times": PackedFloat32Array(0.4, 0.7)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("volSlider:position:x")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(400, -0.25, 0, 0.25, 0, 400, -0.050000004, 0, 0, 0),
-"times": PackedFloat32Array(0.5, 0.8)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("volSlider:position:y")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-120, -0.25, 0, 0.25, 0, 72, -0.050000004, -32.000004, 0, 0),
-"times": PackedFloat32Array(0.5, 0.8)
-}
-tracks/6/type = "bezier"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MeshInstance2D:modulate:r")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"handle_modes": PackedInt32Array(2, 0),
-"points": PackedFloat32Array(0.25882354, 0, 0, 0.033333335, 0, 0.25882354, -0.10000001, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.4)
-}
-tracks/7/type = "bezier"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("MeshInstance2D:modulate:g")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"handle_modes": PackedInt32Array(2, 0),
-"points": PackedFloat32Array(0.25882354, 0, 0, 0.033333335, 0, 0.25882354, -0.10000001, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.4)
-}
-tracks/8/type = "bezier"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("MeshInstance2D:modulate:b")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"handle_modes": PackedInt32Array(2, 0),
-"points": PackedFloat32Array(0.25882354, 0, 0, 0.033333335, 0, 0.25882354, -0.10000001, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.4)
-}
-tracks/9/type = "bezier"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("MeshInstance2D:modulate:a")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"handle_modes": PackedInt32Array(2, 0),
-"points": PackedFloat32Array(0, 0, 0, 0.033333335, 0.069934644, 0.6784314, -0.10000001, -0.1130719, 0, 0),
-"times": PackedFloat32Array(0, 0.4)
-}
-tracks/10/type = "bezier"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("inGameBack:position:x")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(-288, -0.25, 0, 0.25, 0, 24, -0.050000004, -52.000004, 0, 0),
-"times": PackedFloat32Array(0.2, 0.5)
-}
-tracks/11/type = "bezier"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("inGameBack:position:y")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(568, -0.25, 0, 0.25, 0, 568, -0.050000004, 0, 0, 0),
-"times": PackedFloat32Array(0.2, 0.5)
-}
-
 [sub_resource type="Animation" id="Animation_6bffs"]
 resource_name = "inGameOptions"
 step = 0.1
@@ -682,11 +452,234 @@ tracks/19/keys = {
 "times": PackedFloat32Array(0)
 }
 
+[sub_resource type="Animation" id="Animation_t1lix"]
+resource_name = "optionsPressed"
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance2D:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0.25882354, -0.25, 0, 0.25, 0, 0.25882354, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance2D:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0.25882354, -0.25, 0, 0.25, 0, 0.25882354, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance2D:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0.25882354, -0.25, 0, 0.25, 0, 0.25882354, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshInstance2D:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.63529414, -0.050000004, -0.105882354, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("inGameBack:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-288, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.10000001)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("inGameBack:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(568, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.10000001)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("volume:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(479, -0.25, 0, 0.25, 0, 479, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0.20000002, 0.5)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("volume:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-792, -0.25, 0, 0.25, 0, 13, -0.050000004, -134.16667, 0, 0),
+"times": PackedFloat32Array(0.20000002, 0.5)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("volBox:position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(591, -0.25, 0, 0.25, 0, 591, -0.049999997, 0, 0, 0),
+"times": PackedFloat32Array(0.3, 0.6)
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("volBox:position:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-792, -0.25, 0, 0.25, 0, 13, -0.049999997, -134.16667, 0, 0),
+"times": PackedFloat32Array(0.3, 0.6)
+}
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("volSlider:position:x")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(404, -0.25, 0, 0.25, 0, 404, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0.4, 0.70000005)
+}
+tracks/11/type = "bezier"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("volSlider:position:y")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-761, -0.25, 0, 0.25, 0, 45, -0.050000004, -134.33334, 0, 0),
+"times": PackedFloat32Array(0.4, 0.70000005)
+}
+tracks/12/type = "bezier"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("volumeMusic:position:x")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(475, -0.25, 0, 0.25, 0, 475, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0.5, 0.8000001)
+}
+tracks/13/type = "bezier"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("volumeMusic:position:y")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-737, -0.25, 0, 0.25, 0, 64, -0.050000004, -133.50002, 0, 0),
+"times": PackedFloat32Array(0.5, 0.8000001)
+}
+tracks/14/type = "bezier"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("volBoxMusic:position:x")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(591, -0.25, 0, 0.25, 0, 591, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0.6, 0.9)
+}
+tracks/15/type = "bezier"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("volBoxMusic:position:y")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-737, -0.25, 0, 0.25, 0, 65, -0.050000004, -133.66667, 0, 0),
+"times": PackedFloat32Array(0.6, 0.9)
+}
+tracks/16/type = "bezier"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("volSliderMusic:position:x")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(404, -0.25, 0, 0.25, 0, 404, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0.70000005, 1)
+}
+tracks/17/type = "bezier"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("volSliderMusic:position:y")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-706, -0.25, 0, 0.25, 0, 97, -0.050000004, -133.83334, 0, 0),
+"times": PackedFloat32Array(0.70000005, 1)
+}
+tracks/18/type = "bezier"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("back:position:x")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-288, -0.25, 0, 0.25, 0, 24.875, -0.050000004, -52.145836, 0, 0),
+"times": PackedFloat32Array(0.099999994, 0.4)
+}
+tracks/19/type = "bezier"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("back:position:y")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(568, -0.25, 0, 0.25, 0, 568, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0.099999994, 0.4)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ogda5"]
 _data = {
 &"RESET": SubResource("Animation_4gmlt"),
 &"inGameOptions": SubResource("Animation_6bffs"),
-&"ingameOptions": SubResource("Animation_ogda5"),
 &"optionsPressed": SubResource("Animation_t1lix")
 }
 
@@ -709,7 +702,7 @@ mesh = SubResource("BoxMesh_t1lix")
 layout_mode = 0
 offset_left = -288.0
 offset_top = 568.0
-offset_right = -37.0
+offset_right = -37.00003
 offset_bottom = 626.0
 theme = ExtResource("1_lbr8e")
 theme_override_font_sizes/font_size = 36
@@ -724,7 +717,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -97.0
 offset_top = -792.0
-offset_right = 15.000244
+offset_right = 15.000366
 offset_bottom = -760.0
 grow_horizontal = 2
 theme = ExtResource("1_lbr8e")
@@ -808,7 +801,6 @@ value = 100.0
 libraries = {
 &"": SubResource("AnimationLibrary_ogda5")
 }
-autoplay = "optionsPressed"
 
 [node name="inGameBack" type="Button" parent="."]
 layout_mode = 0
