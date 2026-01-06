@@ -10,6 +10,7 @@ func _ready() -> void:
 	$AnimationPlayer.play_backwards("settingsPressed")
 
 func _on_play_button_down() -> void:
+	Sfx.get_node("clickSFX").play()
 	$AnimationPlayer.play("sceneTransition")
 	await get_tree().create_timer(0.5).timeout
 	Network.client.emit('join', [str(Global.seed), race.button_pressed, Global.username])
@@ -28,6 +29,7 @@ func _on_race_toggled(toggled_on: bool) -> void:
 
 #user settings tab
 func _on_settings_pressed() -> void:
+	Sfx.get_node("clickSFX").play()
 	$AnimationPlayer.play("settingsPressed")
 	await get_tree().create_timer(0.6).timeout
 	get_tree().change_scene_to_file("res://options_menu.tscn")
