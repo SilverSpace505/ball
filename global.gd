@@ -18,6 +18,7 @@ var lastState = -1
 
 var userSettings = {
 	'volume': 100,
+	'musicVol': 100,
 	'FOV': 90
 }
 
@@ -49,8 +50,8 @@ func loadData():
 		var jsonStr = config.get_value('user', 'settings', null)
 		if jsonStr != null:
 			var error = json.parse(jsonStr)
-			if error == OK:
-				userSettings = json.data
+			#if error == OK:
+				#userSettings = json.data
 	#var json = JSON.new()
 	#var error = json.parse(config.get_value())
 	#if error == OK:

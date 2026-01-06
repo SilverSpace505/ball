@@ -450,7 +450,9 @@ scale = Vector2(1324.5, 768.74994)
 mesh = SubResource("BoxMesh_glbon")
 
 [connection signal="button_down" from="play" to="." method="_on_play_button_down"]
+[connection signal="mouse_entered" from="play" to="." method="_on_play_mouse_entered"]
 [connection signal="text_changed" from="lobby" to="." method="_on_lobby_text_changed"]
 [connection signal="text_changed" from="username" to="." method="_on_username_text_changed"]
+[connection signal="mouse_entered" from="settings" to="." method="_on_settings_mouse_entered"]
 [connection signal="pressed" from="settings" to="." method="_on_settings_pressed"]
 [connection signal="toggled" from="race" to="." method="_on_race_toggled"]

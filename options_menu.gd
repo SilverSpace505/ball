@@ -16,6 +16,8 @@ func _on_back_pressed() -> void:
 	await get_tree().create_timer(0.6).timeout
 	get_tree().change_scene_to_file("res://main_menu.tscn")
 	
+func _on_back_mouse_entered() -> void:
+	Sfx.get_node("browseSFX").play()
 	
 
 
@@ -29,3 +31,13 @@ func _on_vol_box_value_changed(value: float) -> void:
 	Global.userSettings.volume = $volBox.value
 	Global.saveData()
 pass # Replace with function body.
+
+func _on_vol_slider_music_value_changed(value: float) -> void:
+	$volBoxMusic.value = $volSliderMusic.value
+	Global.userSettings.musicVol = $volBoxMusic.value
+	Global.saveData()
+	
+func _on_vol_box_music_value_changed(value: float) -> void:
+	$volSliderMusic.value = $volBoxMusic.value
+	Global.userSettings.musicVol = $volBoxMusic.value
+	Global.saveData()

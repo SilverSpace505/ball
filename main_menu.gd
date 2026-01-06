@@ -15,6 +15,9 @@ func _on_play_button_down() -> void:
 	await get_tree().create_timer(0.5).timeout
 	Network.client.emit('join', [str(Global.seed), race.button_pressed, Global.username])
 	#get_tree().change_scene_to_file("res://game.tscn")
+func _on_play_mouse_entered() -> void:
+	Sfx.get_node("browseSFX").play()
+
 
 func _on_lobby_text_changed(new_text: String) -> void:
 	if int(new_text):
@@ -33,5 +36,6 @@ func _on_settings_pressed() -> void:
 	$AnimationPlayer.play("settingsPressed")
 	await get_tree().create_timer(0.6).timeout
 	get_tree().change_scene_to_file("res://options_menu.tscn")
-
-#volume
+	
+func _on_settings_mouse_entered() -> void:
+	Sfx.get_node("browseSFX").play()
