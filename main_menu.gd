@@ -28,6 +28,8 @@ func _on_race_toggled(toggled_on: bool) -> void:
 
 #user settings tab
 func _on_settings_pressed() -> void:
+	$AnimationPlayer.play("settingsPressed")
+	await get_tree().create_timer(0.6).timeout
 	get_tree().change_scene_to_file("res://options_menu.tscn")
 
 #volume
