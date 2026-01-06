@@ -24,8 +24,8 @@ tracks/1/path = NodePath("settings:position:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(449, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(452, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/2/type = "bezier"
@@ -35,8 +35,8 @@ tracks/2/path = NodePath("settings:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(565, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(1102, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/3/type = "bezier"
@@ -46,8 +46,8 @@ tracks/3/path = NodePath("username:position:x")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(341, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(344, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/4/type = "bezier"
@@ -57,8 +57,8 @@ tracks/4/path = NodePath("username:position:y")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(488, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(1025, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/5/type = "bezier"
@@ -68,8 +68,8 @@ tracks/5/path = NodePath("lobby:position:x")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(341, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(344, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/6/type = "bezier"
@@ -79,8 +79,8 @@ tracks/6/path = NodePath("lobby:position:y")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(405, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(942, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/7/type = "bezier"
@@ -90,8 +90,8 @@ tracks/7/path = NodePath("play:position:x")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(489.99997, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(492.99997, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/8/type = "bezier"
@@ -101,8 +101,8 @@ tracks/8/path = NodePath("play:position:y")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(270.99997, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(808, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/9/type = "bezier"
@@ -112,8 +112,8 @@ tracks/9/path = NodePath("race:position:x")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(828, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(831, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/10/type = "bezier"
@@ -123,8 +123,30 @@ tracks/10/path = NodePath("race:position:y")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(413.5, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(950.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/11/type = "bezier"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("title:position:x")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(483, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/12/type = "bezier"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("title:position:y")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(-285, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 
@@ -151,7 +173,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_jix8l"]
 resource_name = "settingsPressed"
-length = 1.5
+length = 0.6
 step = 0.1
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -226,8 +248,8 @@ tracks/6/path = NodePath("play:position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(489.99997, -0.25, 0, 0.25, 0, 490.00003, -0.050000004, -1.0172526e-05, 0, 0),
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(535.5, 0, 0, 0.050000004, -7.5833287, 535.5, -0.050000004, 0, 0, 0),
 "times": PackedFloat32Array(0.3, 0.6)
 }
 tracks/7/type = "bezier"
@@ -237,8 +259,8 @@ tracks/7/path = NodePath("play:position:y")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(270.99997, -0.25, 0, 0.25, 0, 790, -0.050000004, -86.5, 0, 0),
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(270, 0, 0, 0.050000004, 86.66667, 790, -0.050000004, -86.66667, 0, 0),
 "times": PackedFloat32Array(0.3, 0.6)
 }
 tracks/8/type = "bezier"
@@ -262,6 +284,28 @@ tracks/9/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(413.5, -0.25, 0, 0.25, 0, 928, -0.038333334, -85.75, 0, 0),
 "times": PackedFloat32Array(0.2, 0.6)
+}
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("title:position:x")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(458, 0, 0, 0.050000004, 4.166667, 471, -0.050000004, -2.1666667, 0, 0),
+"times": PackedFloat32Array(0.2, 0.5)
+}
+tracks/11/type = "bezier"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("title:position:y")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(113, 0, 0, 0.050000004, -53.166668, -206, -0.050000004, 53.166668, 0, 0),
+"times": PackedFloat32Array(0.2, 0.5)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jix8l"]
@@ -287,27 +331,42 @@ lobby = NodePath("lobby")
 username = NodePath("username")
 race = NodePath("race")
 
+[node name="title" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_top = -285.0
+offset_right = 144.0
+offset_bottom = -177.0
+grow_horizontal = 2
+theme_override_constants/line_spacing = 14
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 105
+text = "BALL"
+
 [node name="play" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -86.00003
-offset_top = -53.00003
-offset_right = 753.0
-offset_bottom = 441.99878
+offset_left = -83.00003
+offset_top = 808.0
+offset_right = 61.0
+offset_bottom = 879.0
 grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.21, 0.21)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_color = Color(0.82819706, 0.828197, 0.828197, 1)
-theme_override_constants/outline_size = 50
-theme_override_font_sizes/font_size = 322
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 60
 text = "PLAY"
 flat = true
 icon_alignment = 1
@@ -320,10 +379,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -235.0
-offset_top = 81.0
-offset_right = 235.0
-offset_bottom = 142.0003
+offset_left = -232.0
+offset_top = 618.0
+offset_right = 238.0
+offset_bottom = 679.0003
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_fu7sn")
@@ -339,10 +398,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -235.0
-offset_top = 164.0
-offset_right = 235.0
-offset_bottom = 224.99951
+offset_left = -232.0
+offset_top = 701.0
+offset_right = 238.0
+offset_bottom = 761.99976
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_fu7sn")
@@ -353,10 +412,10 @@ max_length = 15
 
 [node name="settings" type="Button" parent="."]
 layout_mode = 0
-offset_left = 449.0
-offset_top = 565.0
-offset_right = 700.0
-offset_bottom = 623.0
+offset_left = 452.0
+offset_top = 1102.0
+offset_right = 703.0
+offset_bottom = 1160.0
 theme = ExtResource("3_fu7sn")
 theme_override_font_sizes/font_size = 32
 text = "Settings"
@@ -368,10 +427,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 252.0
-offset_top = 89.5
-offset_right = 336.0
-offset_bottom = 120.500244
+offset_left = 255.0
+offset_top = 626.5
+offset_right = 339.0
+offset_bottom = 657.5002
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
