@@ -9,8 +9,10 @@ extends Node3D
 @export var island: PackedScene
 @export var islands: Node3D
 
-func _ready() -> void:
-	var points = csgMesh.polygon
+var trackPoints: PackedVector2Array
+
+func _on_seed():
+	var points = trackPoints
 	for i in range(len(points)):
 		if points[i].x < 0:
 			points[i] = points[i] - Vector2(Network.options.trackSize - 1, 0)
@@ -29,7 +31,7 @@ func _ready() -> void:
 	path.curve.clear_points()
 	path.curve.add_point(Vector3(0, 0, 0))
 	
-	seed(Global.seed)
+	seed(Network.options.seed)
 	
 	var allPositions = []
 	
@@ -74,6 +76,9 @@ func _ready() -> void:
 		
 	finish.position = positions[0] - $Path3D.global_position
 	
+	for island2 in islands.get_children():
+		island2.queue_free()
+	
 	#spawn islands
 	for pos1 in allPositions:
 		if randf() > 0.9:
@@ -111,3 +116,10 @@ func _ready() -> void:
 	var current_path = csgMesh.path_node
 	csgMesh.path_node = NodePath("")
 	csgMesh.path_node = current_path
+
+func _ready() -> void:
+	Network.on_seed.connect(_on_seed)
+	
+	trackPoints = csgMesh.polygon
+	
+	_on_seed()

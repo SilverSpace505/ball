@@ -22,7 +22,9 @@ var options = {
 	'turning': 0.5,
 	'trackSize': 1,
 	'jumps': false,
-	'speed': 5
+	'speed': 5,
+	'seed': 1,
+	'randomise': true
 }
 
 var lastOptions = {}
@@ -43,6 +45,7 @@ signal spawn
 signal on_connected
 signal on_disconnected
 signal on_names
+signal on_seed
 
 signal on_create_offer
 signal on_session
@@ -140,7 +143,11 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 		Global.time = 0
 		Global.place = ''
 		spawn.emit(msg[1])
-		Global.seed = msg[2]
+		if options.randomise:
+			options.seed = msg[2]
+			lastOptions.seed = msg[2]
+			on_seed.emit()
+			
 	elif event == 'cancelStart':
 		Global.startTime = -1
 	elif event == 'place':
