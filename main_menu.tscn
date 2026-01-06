@@ -1,12 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cskbojmb7f2h7"]
+[gd_scene load_steps=9 format=3 uid="uid://cskbojmb7f2h7"]
 
 [ext_resource type="Script" uid="uid://dx32ny7ktawxe" path="res://main_menu.gd" id="1_7vrkn"]
-[ext_resource type="Texture2D" uid="uid://dxnpwxnhl2j6y" path="res://New Piskel (1).png" id="2_7vrkn"]
 [ext_resource type="Theme" uid="uid://6thw543k5i1t" path="res://gui.tres" id="3_fu7sn"]
-
-[sub_resource type="Theme" id="Theme_fu7sn"]
-CheckBox/colors/font_outline_color = Color(0, 0, 0, 1)
-CheckBox/constants/outline_size = 5
 
 [sub_resource type="Animation" id="Animation_fu7sn"]
 length = 0.001
@@ -130,94 +125,6 @@ tracks/10/loop_wrap = true
 tracks/10/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(413.5, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/11/type = "bezier"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("options/back:position:x")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-280, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/12/type = "bezier"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("options/back:position:y")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(568, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/13/type = "bezier"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("options/volume:position:x")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(480, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/14/type = "bezier"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("options/volume:position:y")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-96, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/15/type = "bezier"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("options/volSlider:position:x")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(408, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/16/type = "bezier"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("options/volSlider:position:y")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-48, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/17/type = "bezier"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("options/volBox:position:x")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(600, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/18/type = "bezier"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("options/volBox:position:y")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-88, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 
@@ -356,94 +263,6 @@ tracks/9/keys = {
 "points": PackedFloat32Array(413.5, -0.25, 0, 0.25, 0, 928, -0.038333334, -85.75, 0, 0),
 "times": PackedFloat32Array(0.2, 0.6)
 }
-tracks/10/type = "bezier"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("options/back:position:x")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(-280, -0.25, 0, 0.25, 0, 16, -0.041666668, -49.333336, 0, 0),
-"times": PackedFloat32Array(0.54, 0.79)
-}
-tracks/11/type = "bezier"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("options/back:position:y")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(568, -0.25, 0, 0.25, 0, 568, -0.041666668, 0, 0, 0),
-"times": PackedFloat32Array(0.54, 0.79)
-}
-tracks/12/type = "bezier"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("options/volume:position:x")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(480, -0.25, 0, 0.25, 0, 480, -0.03333333, 0, 0, 0),
-"times": PackedFloat32Array(0.5, 0.9)
-}
-tracks/13/type = "bezier"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("options/volume:position:y")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-96, -0.25, 0, 0.25, 0, 24, -0.03333333, -20, 0, 0),
-"times": PackedFloat32Array(0.5, 0.9)
-}
-tracks/14/type = "bezier"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("options/volSlider:position:x")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(408, -0.25, 0, 0.25, 0, 408, -0.03333333, 0, 0, 0),
-"times": PackedFloat32Array(0.5, 0.8)
-}
-tracks/15/type = "bezier"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("options/volSlider:position:y")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-48, -0.25, 0, 0.25, 0, 72, -0.03333333, -20, 0, 0),
-"times": PackedFloat32Array(0.5, 0.8)
-}
-tracks/16/type = "bezier"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("options/volBox:position:x")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(600, -0.25, 0, 0.25, 0, 600, -0.03333333, 0, 0, 0),
-"times": PackedFloat32Array(0.5, 1.0000001)
-}
-tracks/17/type = "bezier"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("options/volBox:position:y")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-88, -0.25, 0, 0.25, 0, 32, -0.03333333, -20, 0, 0),
-"times": PackedFloat32Array(0.5, 1.0000001)
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jix8l"]
 _data = {
@@ -462,6 +281,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_fu7sn")
 script = ExtResource("1_7vrkn")
 lobby = NodePath("lobby")
 username = NodePath("username")
@@ -486,7 +306,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_color = Color(0.82819706, 0.828197, 0.828197, 1)
-icon = ExtResource("2_7vrkn")
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 322
+text = "PLAY"
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -553,7 +375,7 @@ offset_bottom = 120.500244
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
-theme = SubResource("Theme_fu7sn")
+theme = ExtResource("3_fu7sn")
 button_pressed = true
 text = "Race"
 
@@ -568,57 +390,8 @@ position = Vector2(1868, 331)
 scale = Vector2(1324.5, 768.74994)
 mesh = SubResource("BoxMesh_glbon")
 
-[node name="options" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="back" type="Button" parent="options"]
-layout_mode = 0
-offset_left = -280.0
-offset_top = 568.0
-offset_right = -29.0
-offset_bottom = 626.0
-theme = ExtResource("3_fu7sn")
-theme_override_font_sizes/font_size = 36
-text = "return
-"
-
-[node name="volume" type="Label" parent="options"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 480.0
-offset_top = -96.0
-offset_right = 590.0
-offset_bottom = -54.0
-theme = ExtResource("3_fu7sn")
-theme_override_font_sizes/font_size = 30
-text = "Volume"
-
-[node name="volSlider" type="HSlider" parent="options"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 408.0
-offset_top = -48.0
-offset_right = 748.0
-offset_bottom = -31.999916
-value = 100.0
-
-[node name="volBox" type="SpinBox" parent="options"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 600.0
-offset_top = -88.0
-offset_right = 686.5625
-offset_bottom = -57.0
-theme = ExtResource("3_fu7sn")
-value = 100.0
-
 [connection signal="button_down" from="play" to="." method="_on_play_button_down"]
 [connection signal="text_changed" from="lobby" to="." method="_on_lobby_text_changed"]
 [connection signal="text_changed" from="username" to="." method="_on_username_text_changed"]
 [connection signal="pressed" from="settings" to="." method="_on_settings_pressed"]
 [connection signal="toggled" from="race" to="." method="_on_race_toggled"]
-[connection signal="pressed" from="options/back" to="." method="_on_back_pressed"]
-[connection signal="value_changed" from="options/volSlider" to="." method="_on_vol_slider_value_changed"]
-[connection signal="value_changed" from="options/volBox" to="." method="_on_vol_box_value_changed"]

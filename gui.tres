@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://6thw543k5i1t"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://6thw543k5i1t"]
+
+[ext_resource type="FontFile" uid="uid://b8uixwqpu4o2d" path="res://fortyfive/Fortyfive.ttf" id="1_gv4p5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxxrk"]
 bg_color = Color(0.15847227, 0.15847233, 0.15847221, 0.49019608)
@@ -15,11 +17,15 @@ bg_color = Color(0.2, 0.2, 0.2, 0.7019608)
 [resource]
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 10
+Button/fonts/font = ExtResource("1_gv4p5")
 ItemList/colors/font_color = Color(1, 1, 1, 1)
+ItemList/fonts/font = ExtResource("1_gv4p5")
 ItemList/styles/panel = SubResource("StyleBoxFlat_xxxrk")
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/fonts/font = ExtResource("1_gv4p5")
 LineEdit/colors/font_outline_color = Color(0, 0, 0, 1)
 LineEdit/constants/outline_size = 7
+LineEdit/fonts/font = ExtResource("1_gv4p5")
 Panel/styles/panel = SubResource("StyleBoxFlat_gv4p5")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_dhoft")
 panel2/base_type = &"Panel"
