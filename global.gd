@@ -46,10 +46,12 @@ func loadData():
 	if err == OK:
 		username = config.get_value('player', 'username', 'Unnamed')
 		
-		var json = JSON.new()
-		var jsonStr = config.get_value('user', 'settings', null)
-		if jsonStr != null:
-			var error = json.parse(jsonStr)
+		for setting in userSettings:
+			userSettings[setting] = config.get_value('userSettings', setting, userSettings[setting])
+		#var json = JSON.new()
+		#var jsonStr = config.get_value('user', 'settings', null)
+		#if jsonStr != null:
+			#var error = json.parse(jsonStr)
 			#if error == OK:
 				#userSettings = json.data
 	#var json = JSON.new()
@@ -60,6 +62,7 @@ func loadData():
 func saveData():
 	var config = ConfigFile.new()
 	config.set_value('player', 'username', username)
-	config.set_value('user', 'settings', JSON.stringify(userSettings))
+	for setting in userSettings:
+		config.set_value('userSettings', setting, userSettings[setting])
 	
 	config.save('user://data.cfg')

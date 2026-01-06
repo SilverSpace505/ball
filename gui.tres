@@ -18,6 +18,7 @@ bg_color = Color(0.2, 0.2, 0.2, 0.7019608)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 10
 Button/fonts/font = ExtResource("1_gv4p5")
+CheckBox/constants/outline_size = 5
 ItemList/colors/font_color = Color(1, 1, 1, 1)
 ItemList/fonts/font = ExtResource("1_gv4p5")
 ItemList/styles/panel = SubResource("StyleBoxFlat_xxxrk")
