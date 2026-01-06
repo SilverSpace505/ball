@@ -9,3 +9,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	volume_db = -5 / (Global.userSettings.volume / 100)
 	volume_db = volume_db / (Global.userSettings.musicVol / 100)
+	#if Global.userSettings.musicVol <= 10:
+		#playing = false
+	#elif Global.userSettings.volume <= 10:
+		#playing
+	if volume_db <= -47 && playing == true:
+		playing = false
+	elif volume_db >= -46 && playing == false:
+		playing = true

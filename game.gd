@@ -5,11 +5,13 @@ extends Node3D
 @export var start: Label
 
 func _ready() -> void:
+	connect("settingsClosed", _settingsClosed)
 	Global.running = not Global.race
 	Global.isReady = false
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed('ready'):
+		$CanvasLayer/Control/optionsMenu.visible = false
 		if Global.race:
 			if not Global.running:
 				Global.isReady = not Global.isReady
@@ -33,10 +35,10 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("esc"):
 		$CanvasLayer/Control/pauseMenu.visible = !$CanvasLayer/Control/pauseMenu.visible
 
-
 func _on_settings_button_pressed() -> void:
-	Global.scene = 'menu'
-	get_tree().change_scene_to_file("res://main_menu.tscn")
+	$CanvasLayer/Control/pauseMenu.visible = !$CanvasLayer/Control/pauseMenu.visible
+	$CanvasLayer/Control/optionsMenu.visible = true
+	$CanvasLayer/Control/optionsMenu/AnimationPlayer.play("inGameOptions")
 
 func _on_lobby_button_pressed() -> void:
 	Global.scene = 'lobby'
@@ -44,3 +46,7 @@ func _on_lobby_button_pressed() -> void:
 
 func _on_close_button_pressed() -> void:
 	$CanvasLayer/Control/pauseMenu.visible = false
+
+func _settingsClosed():
+	print("aAAAA")
+	$CanvasLayer/Control/pauseMenu.visible = true
