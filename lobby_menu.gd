@@ -30,7 +30,6 @@ func _removePlayer(id):
 		$hostName.text = Network.names[Network.names.keys()[1]] + "'s lobby"
 
 func _on_start_button_down() -> void:
-	Sfx.get_node("clickSFX").play()
 	$AnimationPlayer.play("goToGame")
 	await get_tree().create_timer(0.5).timeout
 	Network.client.emit('start')
@@ -97,7 +96,6 @@ func _on_speed_box_value_changed(value: float) -> void:
 
 
 func _on_exit_button_pressed() -> void:
-	Sfx.get_node("clickSFX").play()
 	Network.emit ('leave')
 
 
