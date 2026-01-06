@@ -7,6 +7,7 @@ extends Control
 func _ready() -> void:
 	lobby.text = str(Global.seed)
 	username.text = Global.username
+	$AnimationPlayer.play_backwards("settingsPressed")
 
 func _on_play_button_down() -> void:
 	$AnimationPlayer.play("sceneTransition")
@@ -28,7 +29,5 @@ func _on_race_toggled(toggled_on: bool) -> void:
 #user settings tab
 func _on_settings_pressed() -> void:
 	get_tree().change_scene_to_file("res://options_menu.tscn")
-func _on_back_pressed() -> void:
-	$AnimationPlayer.play_backwards("settingsPressed")
 
 #volume

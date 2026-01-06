@@ -1,7 +1,197 @@
-[gd_scene load_steps=3 format=3 uid="uid://bty4y48rg6uh4"]
+[gd_scene load_steps=6 format=3 uid="uid://b4n0jm82clx84"]
 
 [ext_resource type="Theme" uid="uid://6thw543k5i1t" path="res://gui.tres" id="1_lbr8e"]
 [ext_resource type="Script" uid="uid://dxp3ql7dk3oow" path="res://options_menu.gd" id="1_t1lix"]
+
+[sub_resource type="Animation" id="Animation_t1lix"]
+resource_name = "optionsPressed"
+length = 0.6
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("back:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(-288, -0.25, 0, 0.25, 0, 24, -0.050000004, -52.000004, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("back:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(568, -0.25, 0, 0.25, 0, 568, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("volume:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(472, 0, 0, 0.050000004, 0, 472, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0.1, 0.4)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("volume:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(-160, 0, 0, 0.050000004, 32.000004, 32, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0.1, 0.4)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("volBox:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(584, -0.25, 0, 0.25, 0, 576, -0.050000004, 1.3333334, 0, 0),
+"times": PackedFloat32Array(0.2, 0.5)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("volBox:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(-160, -0.25, 0, 0.25, 0, 32, -0.050000004, -32.000004, 0, 0),
+"times": PackedFloat32Array(0.2, 0.5)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("volSlider:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(400, -0.25, 0, 0.25, 0, 400, -0.050000004, 0, 0, 0),
+"times": PackedFloat32Array(0.3, 0.6)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("volSlider:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(-120, -0.25, 0, 0.25, 0, 72, -0.050000004, -32.000004, 0, 0),
+"times": PackedFloat32Array(0.3, 0.6)
+}
+
+[sub_resource type="Animation" id="Animation_4gmlt"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("back:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-288, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("back:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(568, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("volume:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(472, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("volume:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(-160, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("volBox:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(584, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("volBox:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-160, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("volSlider:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(400, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("volSlider:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-120, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ogda5"]
+_data = {
+&"RESET": SubResource("Animation_4gmlt"),
+&"optionsPressed": SubResource("Animation_t1lix")
+}
 
 [node name="optionsMenu" type="Control"]
 layout_mode = 3
@@ -12,10 +202,10 @@ script = ExtResource("1_t1lix")
 
 [node name="back" type="Button" parent="."]
 layout_mode = 0
-offset_left = 23.0
-offset_top = 566.0
-offset_right = 274.0
-offset_bottom = 624.0
+offset_left = -288.0
+offset_top = 568.0
+offset_right = -37.0
+offset_bottom = 626.0
 theme = ExtResource("1_lbr8e")
 theme_override_font_sizes/font_size = 36
 text = "return
@@ -24,10 +214,10 @@ text = "return
 [node name="volume" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 478.0
-offset_top = 55.0
-offset_right = 588.0
-offset_bottom = 97.0
+offset_left = 472.0
+offset_top = -160.0
+offset_right = 584.0
+offset_bottom = -128.0
 theme = ExtResource("1_lbr8e")
 theme_override_font_sizes/font_size = 30
 text = "Volume"
@@ -35,21 +225,27 @@ text = "Volume"
 [node name="volSlider" type="HSlider" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 406.0
-offset_top = 103.0
-offset_right = 746.0
-offset_bottom = 119.00009
+offset_left = 400.0
+offset_top = -120.0
+offset_right = 744.0
+offset_bottom = -103.9999
 value = 100.0
 
 [node name="volBox" type="SpinBox" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 598.0
-offset_top = 63.0
-offset_right = 684.5625
-offset_bottom = 94.0
+offset_left = 584.0
+offset_top = -160.0
+offset_right = 672.0
+offset_bottom = -128.0
 theme = ExtResource("1_lbr8e")
 value = 100.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ogda5")
+}
+autoplay = "optionsPressed"
 
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
 [connection signal="value_changed" from="volSlider" to="." method="_on_vol_slider_value_changed"]
