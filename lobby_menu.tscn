@@ -162,8 +162,46 @@ mesh = SubResource("BoxMesh_10hg3")
 [node name="track" type="Control" parent="."]
 anchors_preset = 0
 
+[node name="seed" type="Control" parent="track"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="seedLabel" type="Label" parent="track/seed"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.05
+anchor_bottom = -0.05
+offset_left = 513.0
+offset_top = 12.0
+offset_right = 680.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 28
+text = "Seed"
+metadata/_edit_use_anchors_ = true
+
+[node name="seed" type="SpinBox" parent="track/seed"]
+layout_mode = 0
+offset_left = 514.0
+offset_top = 48.0
+offset_right = 932.0
+offset_bottom = 79.0
+max_value = inf
+
+[node name="randomise" type="CheckBox" parent="track/seed"]
+layout_mode = 0
+offset_left = 517.0
+offset_top = 88.0
+offset_right = 632.0
+offset_bottom = 119.0
+button_pressed = true
+text = "Randomise"
+
 [node name="length" type="Control" parent="track"]
 anchors_preset = 0
+offset_top = 113.0
+offset_bottom = 113.0
 
 [node name="lengthVal" type="HSlider" parent="track/length"]
 layout_mode = 0
@@ -202,6 +240,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="turning" type="Control" parent="track"]
 anchors_preset = 0
+offset_top = 113.0
+offset_bottom = 113.0
 
 [node name="turningVal" type="HSlider" parent="track/turning"]
 layout_mode = 0
@@ -241,6 +281,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="size" type="Control" parent="track"]
 anchors_preset = 0
+offset_top = 113.0
+offset_bottom = 113.0
 
 [node name="sizeVal" type="HSlider" parent="track/size"]
 layout_mode = 0
@@ -280,6 +322,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="player" type="Control" parent="."]
 anchors_preset = 0
+offset_top = 114.0
+offset_bottom = 114.0
 
 [node name="jumps" type="Control" parent="player"]
 anchors_preset = 0
@@ -382,6 +426,8 @@ offset_bottom = 1662.0005
 texture = ExtResource("2_eicbr")
 
 [connection signal="button_down" from="start" to="." method="_on_start_button_down"]
+[connection signal="value_changed" from="track/seed/seed" to="." method="_on_seed_value_changed"]
+[connection signal="toggled" from="track/seed/randomise" to="." method="_on_randomise_toggled"]
 [connection signal="value_changed" from="track/length/lengthVal" to="." method="_on_length_val_value_changed"]
 [connection signal="value_changed" from="track/length/lengthBox" to="." method="_on_length_box_value_changed"]
 [connection signal="value_changed" from="track/turning/turningVal" to="." method="_on_turning_val_value_changed"]

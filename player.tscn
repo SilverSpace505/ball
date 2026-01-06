@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://xf7dekaj2vlt"]
+[gd_scene load_steps=7 format=3 uid="uid://xf7dekaj2vlt"]
 
 [ext_resource type="Script" uid="uid://dksggyfqmwiyv" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="FontFile" uid="uid://du6t0nvtj3kim" path="res://Fortyfive.ttf" id="2_i3pqv"]
 [ext_resource type="Shader" uid="uid://cn1by0wq5yfu8" path="res://player.gdshader" id="2_onrkg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4flbx"]
@@ -41,7 +42,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3718, 0)
 billboard = 1
 no_depth_test = true
 fixed_size = true
-text = "testing"
+font = ExtResource("2_i3pqv")
 font_size = 64
 
 [node name="scale" type="Node3D" parent="core"]

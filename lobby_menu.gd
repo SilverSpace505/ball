@@ -5,12 +5,7 @@ var mapLength = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$track/length/lengthBox.value = Network.options.length
-	$track/length/lengthVal.value = Network.options.length
-	$track/turning/turningBox.value = Network.options.turning
-	$track/turning/turningVal.value = Network.options.turning
-	$track/size/sizeBox.value = Network.options.trackSize
-	$track/size/sizeVal.value = Network.options.trackSize
+	_optionsChanged()
 	Network.on_player_joined.connect(_addPlayer)
 	Network.on_player_left.connect(_removePlayer)
 	Network.options_changed.connect(_optionsChanged)
@@ -42,6 +37,8 @@ func _on_start_button_down() -> void:
 #sync settings
 func _optionsChanged():
 	#track settings
+	$track/seed/seed.value = Network.options.seed
+	$track/seed/randomise.button_pressed = Network.options.randomise
 	$track/length/lengthBox.value = Network.options.length
 	$track/length/lengthVal.value = Network.options.length
 	$track/turning/turningBox.value = Network.options.turning
@@ -100,3 +97,10 @@ func _on_speed_box_value_changed(value: float) -> void:
 
 func _on_exit_button_pressed() -> void:
 	Network.emit ('leave')
+
+
+func _on_seed_value_changed(value: float) -> void:
+	Network.options.seed = value
+
+func _on_randomise_toggled(toggled_on: bool) -> void:
+	Network.options.randomise = toggled_on
