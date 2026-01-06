@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcatevliq7jdf"]
+[gd_scene load_steps=3 format=3 uid="uid://bcatevliq7jdf"]
 
 [ext_resource type="AudioStream" uid="uid://cq4pshs5s5uew" path="res://BREAKCORE.mp3" id="1_4m5bw"]
 [ext_resource type="Script" uid="uid://ctvyuehi1mcb8" path="res://background_music.gd" id="2_l3d1b"]
-[ext_resource type="AudioStream" uid="uid://82bdffb4sy2o" path="res://click.mp3" id="3_uwx38"]
-[ext_resource type="AudioStream" uid="uid://b5ktbqmadn1wd" path="res://browse.mp3" id="4_vraox"]
 
 [node name="backgroundMusic" type="AudioStreamPlayer"]
 stream = ExtResource("1_4m5bw")
@@ -11,9 +9,3 @@ volume_db = -80.0
 pitch_scale = 1.2
 autoplay = true
 script = ExtResource("2_l3d1b")
-
-[node name="clickSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_uwx38")
-
-[node name="browseSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_vraox")
