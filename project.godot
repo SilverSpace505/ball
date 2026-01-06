@@ -13,6 +13,8 @@ config_version=5
 config/name="ball"
 run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/bg_color=Color(0.14117648, 0.14117648, 0.14117648, 0)
+boot_splash/image="uid://0l5voe7sv8eh"
 config/icon="res://icon.svg"
 
 [autoload]
