@@ -96,7 +96,6 @@ func _on_speed_box_value_changed(value: float) -> void:
 
 
 func _on_exit_button_pressed() -> void:
-	Sfx.get_node("clickSFX").play()
 	Network.emit ('leave')
 
 
