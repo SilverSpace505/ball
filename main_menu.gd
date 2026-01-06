@@ -29,6 +29,7 @@ func _on_username_text_changed(new_text: String) -> void:
 
 func _on_race_toggled(toggled_on: bool) -> void:
 	Global.race = toggled_on
+	Sfx.get_node("clickSFX").play()
 
 #user settings tab
 func _on_settings_pressed() -> void:
@@ -38,4 +39,8 @@ func _on_settings_pressed() -> void:
 	get_tree().change_scene_to_file("res://options_menu.tscn")
 	
 func _on_settings_mouse_entered() -> void:
+	Sfx.get_node("browseSFX").play()
+
+
+func _on_race_mouse_entered() -> void:
 	Sfx.get_node("browseSFX").play()

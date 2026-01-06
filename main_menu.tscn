@@ -455,4 +455,5 @@ mesh = SubResource("BoxMesh_glbon")
 [connection signal="text_changed" from="username" to="." method="_on_username_text_changed"]
 [connection signal="mouse_entered" from="settings" to="." method="_on_settings_mouse_entered"]
 [connection signal="pressed" from="settings" to="." method="_on_settings_pressed"]
+[connection signal="mouse_entered" from="race" to="." method="_on_race_mouse_entered"]
 [connection signal="toggled" from="race" to="." method="_on_race_toggled"]
