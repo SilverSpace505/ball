@@ -6,6 +6,7 @@ extends CharacterBody3D
 @export var username: Label3D
 @export var mesh: Node3D
 @export var core: Node3D
+@export var scaleNode: Node3D
 
 @export var speed = Network.options.speed / 100
 @export var jumpHeight = 3
@@ -20,6 +21,10 @@ extends CharacterBody3D
 
 var floort = 0.0
 var bounceFactor = 1.0
+var moveSpeed = 0.0
+
+var scaleVel = Vector3()
+var lastPosition = Vector3()
 
 #Camera vars
 #@export var mouseSens = 1000
@@ -27,16 +32,19 @@ func _ready() -> void:
 	Network.launch.connect(_launch)
 	Network.spawn.connect(_spawn)
 	username.text = Global.username
+	lastPosition = position
 	
 func tp(pos):
 	var dif = pos - position
 	position += dif
+	lastPosition += dif
 	core.global_position = global_position
 	camera.position += dif
 	camera.followPos += dif
 
 func reset():
 	position = Vector3()
+	lastPosition = Vector3()
 	velocity = Vector3()
 	camera.position = camera.offset
 	camera.look_at(position + Vector3(0, 0.2, 0))
@@ -50,13 +58,16 @@ func _physics_process(delta: float) -> void:
 	#elif Input.is_action_pressed("esc"):
 		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
+	lastPosition = global_position
+	
+	moveSpeed = lerp(moveSpeed, Vector2(velocity.x, velocity.z).length() / 5, delta * 2)
+	
 	if Global.running:
 		velocity.y -= gravity * delta
 	
 	#get input axis relative to camera direction
 	var wasd = Vector3(Input.get_axis('left', 'right'), 0, Input.get_axis('slow', 'go')).normalized()
-	
-	camera.turn += (wasd.x / 100) * (Vector2(velocity.x, velocity.z).length() / 10) ** 2
+	camera.turn += (wasd.x / 100) * min(moveSpeed, 3)
 	
 	wasd *= camera.followQuat
 	wasd *= -1
@@ -66,7 +77,7 @@ func _physics_process(delta: float) -> void:
 	
 	floort -= delta
 	
-	var addSpeed = clamp(1 + (Vector2(velocity.x, velocity.z).length() / 5) ** 2 / 3, 1, 10)
+	var addSpeed = clamp(1 + moveSpeed ** 2 / 3, 1, 10)
 	
 	#add input axis onto velocity
 	velocity.x += wasd.x * speed * addSpeed
@@ -102,6 +113,8 @@ func _physics_process(delta: float) -> void:
 		bounceFactor = 1
 		if normal.dot(Vector3.UP) > 0.5:
 			floort = 0.2
+		
+		#scaleVel += change.cross(Vector3.UP)
 	
 	# jump
 	if Network.options.jumps == true:
@@ -128,7 +141,20 @@ func _process(delta: float) -> void:
 	mesh.rotate(Vector3(0, 0, 1), -velocity.x * delta * 2)
 	mesh.rotate(Vector3(1, 0, 0), velocity.z * delta * 2)
 	
-	core.global_position = core.global_position.lerp(global_position, clamp(delta * 50, 0, 1))
+	var alpha = Engine.get_physics_interpolation_fraction()
+	core.global_position = core.global_position.lerp(lastPosition.lerp(global_position, alpha), clamp(delta * 50, 0, 1))
+	
+	#scaleVel += (Vector3.ONE - scaleNode.scale) / 10
+	#scaleNode.scale += scaleVel
+	#var squash = clamp(velocity.length() * 0.3, 0, 0.5)
+	#var dir = velocity.normalized()
+	#var target_scale = Vector3.ONE
+	#if velocity.length() > 0.01:
+		#var right = dir.cross(Vector3.UP).normalized()
+		#target_scale = Vector3.ONE - dir * squash + right * squash * 0.5
+	#scaleNode.scale = scaleNode.scale.lerp(target_scale, delta * 10)
+	
+	#core.global_position = core.global_position.lerp(global_position, clamp(delta * 20, 0, 1))
 	if Network.fps < 100:
 		core.global_position = global_position
 	

@@ -4,11 +4,13 @@ extends Camera3D
 @export var player: Player
 @export var players: Players
 
-var offset = Vector3()
+var originalOffset = Vector3()
 var followPos = Vector3()
 var followQuat = Quaternion()
+var offset = Vector3()
 
 var turn = 0
+var updown = 0
 
 var distance = 1
 
@@ -25,8 +27,9 @@ func lerp5(start, end, step):
 	return lerpn(start, end, 0.5, step)
 
 func _ready() -> void:
-	offset = position
+	originalOffset = position
 	followPos = position
+	offset = position
 	
 func getTargetPos():
 	var pos = player.position
@@ -35,6 +38,14 @@ func getTargetPos():
 	return pos
 	
 func _physics_process(delta: float) -> void:
+	var move = Vector2(Input.get_axis('camera_left', 'camera_right'), Input.get_axis('camera_down', 'camera_up')).normalized()
+	
+	turn += move.x * delta
+	updown += move.y * delta * 2
+	updown = clamp(updown, -PI/2, PI/2)
+	
+	offset = originalOffset.rotated(Vector3(1, 0, 0), updown)
+	
 	turn *= 0.9
 	
 	var targetPos = getTargetPos()
@@ -73,6 +84,8 @@ func _physics_process(delta: float) -> void:
 	followQuat = followQuat.slerp(targetQuaternion, multiply)
 
 func _process(delta: float) -> void:
+	
+	offset = originalOffset.rotated(Vector3(1, 0, 0), updown)
 	
 	if not Global.running and Global.race and Global.startTime == -1 and players.length != INF:
 		distance = lerp5(distance, players.length / offset.length() + 1, delta * 15)

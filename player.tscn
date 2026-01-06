@@ -9,10 +9,10 @@ radius = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_onrkg"]
 render_priority = 0
 shader = ExtResource("2_onrkg")
-shader_parameter/shade_bands = 5
+shader_parameter/shade_bands = 3
 shader_parameter/rim_color = Color(1, 1, 1, 1)
 shader_parameter/rim_threshold = 0.6000000285
-shader_parameter/rim_smoothness = 0.0450000021375
+shader_parameter/rim_smoothness = 0.01
 
 [sub_resource type="SphereMesh" id="SphereMesh_onrkg"]
 material = SubResource("ShaderMaterial_onrkg")
@@ -20,13 +20,14 @@ uv2_padding = 4.84
 radius = 1.0
 height = 2.0
 
-[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("username", "mesh", "core")]
+[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("username", "mesh", "core", "scaleNode")]
 physics_interpolation_mode = 1
 transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
 script = ExtResource("1_4flbx")
 username = NodePath("core/Label3D")
-mesh = NodePath("core/MeshInstance3D")
+mesh = NodePath("core/scale/MeshInstance3D")
 core = NodePath("core")
+scaleNode = NodePath("core/scale")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_4flbx")
@@ -35,11 +36,6 @@ shape = SubResource("SphereShape3D_4flbx")
 transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
 top_level = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="core"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = SubResource("SphereMesh_onrkg")
-skeleton = NodePath("../..")
-
 [node name="Label3D" type="Label3D" parent="core"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3718, 0)
 billboard = 1
@@ -47,3 +43,10 @@ no_depth_test = true
 fixed_size = true
 text = "testing"
 font_size = 64
+
+[node name="scale" type="Node3D" parent="core"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="core/scale"]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 0.99999994, 0, -0.99999994, 0, -4.3711385e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_onrkg")
+skeleton = NodePath("../../..")
