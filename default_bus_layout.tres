@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://boettvhtprdvk"]
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://boettvhtprdvk"]
 
 [sub_resource type="AudioEffectNotchFilter" id="AudioEffectNotchFilter_j3pel"]
 resource_name = "NotchFilter"
@@ -8,6 +8,18 @@ resource_name = "Reverb"
 
 [sub_resource type="AudioEffectFilter" id="AudioEffectFilter_g28q7"]
 resource_name = "Filter"
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_j3pel"]
+resource_name = "Delay"
+tap1_delay_ms = 85.0
+tap1_level_db = 0.0
+tap1_pan = 1.0
+tap2_delay_ms = 40.0
+tap2_level_db = 0.0
+tap2_pan = -1.0
+feedback_delay_ms = 119.0
+feedback_level_db = 0.0
+feedback_lowpass = 321.0
 
 [resource]
 bus/0/volume_db = 0.06726074
@@ -35,3 +47,11 @@ bus/3/volume_db = -3.7683105
 bus/3/send = &"Master"
 bus/3/effect/0/effect = SubResource("AudioEffectFilter_g28q7")
 bus/3/effect/0/enabled = true
+bus/4/name = &"New Bus"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = -4.002995
+bus/4/send = &"Master"
+bus/4/effect/0/effect = SubResource("AudioEffectDelay_j3pel")
+bus/4/effect/0/enabled = true

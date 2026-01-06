@@ -8,4 +8,5 @@ stream = ExtResource("1_4m5bw")
 volume_db = -5.0
 pitch_scale = 1.1
 autoplay = true
+bus = &"menu"
 script = ExtResource("2_l3d1b")
