@@ -11,8 +11,10 @@ script = ExtResource("1_ycbqo")
 stream = ExtResource("1_a0u1m")
 volume_db = 10.0
 bus = &"clicks"
+playback_type = 1
 
 [node name="browseSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ycbqo")
 volume_db = 10.0
 bus = &"clicks"
+playback_type = 1
