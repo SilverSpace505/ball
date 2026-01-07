@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cu4hxnto5mnhq"]
+[gd_scene load_steps=3 format=3 uid="uid://cu4hxnto5mnhq"]
 
 [ext_resource type="Script" uid="uid://b4bpmrj4dbrbk" path="res://upgrade_select.gd" id="1_0cbif"]
+[ext_resource type="Texture2D" uid="uid://cgp2car2jn4ky" path="res://upgrade cards/speed_boost_card.png" id="2_3ru1o"]
 
 [node name="upgradeSelect" type="Control"]
 layout_mode = 3
@@ -12,6 +13,33 @@ grow_vertical = 2
 script = ExtResource("1_0cbif")
 
 [node name="upgrade1" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -504.0
+offset_top = -754.0
+offset_right = 504.0
+offset_bottom = 754.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("2_3ru1o")
+icon_alignment = 1
+
+[node name="upgrade2" type="Button" parent="."]
+layout_mode = 1
+offset_right = 1080.0
+offset_bottom = 1568.0
+scale = Vector2(0.225, 0.225)
+icon = ExtResource("2_3ru1o")
+icon_alignment = 1
+
+[node name="upgrade3" type="Button" parent="."]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_right = 1080.0
+offset_bottom = 1568.0
+scale = Vector2(0.225, 0.225)
+icon = ExtResource("2_3ru1o")
+icon_alignment = 1

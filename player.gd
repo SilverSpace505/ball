@@ -125,7 +125,7 @@ func _physics_process(delta: float) -> void:
 	#void
 	if position.y < Global.voidLevel:
 		tp(Vector3(0, 1, 0))
-		bounceFactor = 0.2
+		bounceFactor = 0
 	
 	#networking
 	Network.data.x = position.x
