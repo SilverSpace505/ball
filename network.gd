@@ -124,7 +124,7 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 	if event == 'id':
 		#update state with id from server
 		id = msg[0]
-		emit('sync')
+		sync_time()
 		if lobby != null:
 			emit('join', [str(Global.seed), Global.race, Global.username])
 	elif event == 'joined':
