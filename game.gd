@@ -39,6 +39,14 @@ func _physics_process(_delta: float) -> void:
 		elif BackgroundMusic.bus == "pause":
 			BackgroundMusic.bus = "inGame"
 		$CanvasLayer/Control/pauseMenu.visible = !$CanvasLayer/Control/pauseMenu.visible
+	
+	$CanvasLayer/Control/loading/name.text = Global.progressName
+	Global.progress = $track.progress
+	if $track.progress != -1:
+		$CanvasLayer/Control/loading.visible = true
+		$CanvasLayer/Control/loading/progress.value = $track.progress * 100
+	else:
+		$CanvasLayer/Control/loading.visible = false
 
 func _on_settings_button_pressed() -> void:
 	Sfx.get_node("clickSFX").play()

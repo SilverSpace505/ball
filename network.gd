@@ -14,7 +14,8 @@ var data = {
 	'username': 'Unnamed',
 	'time': 0,
 	'ready': 0,
-	'place': ''
+	'place': '',
+	'progress': -1
 }
 
 var options = {
@@ -46,6 +47,7 @@ signal on_connected
 signal on_disconnected
 signal on_names
 signal on_seed
+signal cancel_start
 
 signal on_create_offer
 signal on_session
@@ -122,6 +124,7 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 	if event == 'id':
 		#update state with id from server
 		id = msg[0]
+		emit('sync')
 		if lobby != null:
 			emit('join', [str(Global.seed), Global.race, Global.username])
 	elif event == 'joined':
@@ -139,17 +142,20 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 			Global.scene = 'game'
 			get_tree().change_scene_to_file("res://game.tscn")
 	elif event == 'start':
+		if options.randomise:
+			options.seed = msg[0]
+			lastOptions.seed = msg[0]
+			on_seed.emit()
+		else:
+			emit('loaded')
+	elif event == 'startRace':
+		spawn.emit(msg[1])
 		Global.startTime = msg[0]
 		Global.time = 0
 		Global.place = ''
-		spawn.emit(msg[1])
-		if options.randomise:
-			options.seed = msg[2]
-			lastOptions.seed = msg[2]
-			on_seed.emit()
-			
 	elif event == 'cancelStart':
 		Global.startTime = -1
+		cancel_start.emit()
 	elif event == 'place':
 		Global.place = msg[0]
 	elif event == 'createOffer':
@@ -195,6 +201,7 @@ func _on_timer_timeout() -> void:
 				isReady = 2
 		data.ready = isReady
 		data.place = Global.place
+		data.progress = Global.progress
 		broadcast_data.emit(data)
 		client.emit('data', data)
 

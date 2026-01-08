@@ -137,12 +137,17 @@ grow_vertical = 2
 texture = ExtResource("3_ogmru")
 expand_mode = 4
 
+[node name="progress" type="Label" parent="panel/margin/container/right"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5044349, 0.8063406, 1, 1)
+theme_override_colors/font_shadow_color = Color(5.5350364e-07, 0.2961455, 0.43400484, 1)
+theme_override_font_sizes/font_size = 8
+
 [node name="latency" type="Label" parent="panel/margin/container/right"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5044349, 0.8063406, 1, 1)
 theme_override_colors/font_shadow_color = Color(5.5350364e-07, 0.2961455, 0.43400484, 1)
 theme_override_font_sizes/font_size = 8
-text = "23ms"
 
 [node name="connecting" type="TextureRect" parent="panel/margin/container/right"]
 visible = false

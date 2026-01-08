@@ -13,6 +13,8 @@ extends Control
 
 @export var latency: String = ''
 
+@export var progress: String = ''
+
 func _process(_delta: float) -> void:
 	$panel/margin/container/username.text = username
 	$panel/margin/container/place.text = place
@@ -21,3 +23,4 @@ func _process(_delta: float) -> void:
 	$panel/margin/container/right/notready.visible = isReady == 2
 	$panel/margin/container/right/connecting.visible = connecting
 	$panel/margin/container/right/latency.text = latency
+	$panel/margin/container/right/progress.text = progress

@@ -1,7 +1,5 @@
 extends Node3D
 
-@export var path: Path3D
-
 @export var csgMesh: CSGPolygon3D
 
 @export var finish: Node3D
@@ -13,9 +11,31 @@ var trackPoints: PackedVector2Array
 var allPositions = []
 var islandI = 0
 
+var generationSeed = -1
+
 var thread: Thread
 
+var mutex: Mutex
+var mesh_data_ready = false
+var mesh_vertices = PackedVector3Array()
+var mesh_indices = PackedInt32Array()
+var mesh_uvs = PackedVector2Array()
+var mesh_normals = PackedVector3Array()
+var mesh_faces = PackedVector3Array()
+
+var first = 0.6
+var progression = [first/7*1, first/7*2, first/7*3, first/7*4, first/7*5, first/7*6, first/7*7, 1]
+var progressionStep = 0.001
+
+var progress = -1
+
 func generate_track():
+	
+	var currentSeed = generationSeed
+	
+	mutex = Mutex.new()
+	mesh_data_ready = false
+	
 	var pos = Vector3()
 	var forward = Quaternion()
 		
@@ -24,11 +44,7 @@ func generate_track():
 	var tvel = Vector3(0, -0.2, 0)
 	var vel = tvel
 	
-	var path = Path3D.new()
-	path.curve = Curve3D.new()
-	
-	path.curve.clear_points()
-	path.curve.add_point(Vector3(0, 0, 0))
+	var curve = Curve3D.new()
 	
 	seed(Network.options.seed)
 	
@@ -37,10 +53,20 @@ func generate_track():
 	var positions = []
 	var quaternions = []
 	
+	var currentProgress = 0
+	
 	for i in range(Network.options.length * 100):
 		
+		if generationSeed != currentSeed:
+			return
+		
+		var p = i / Network.options.length / 100
+		if (p - currentProgress) * progression[0] > progressionStep:
+			currentProgress = p
+			call_deferred('_on_progress', currentProgress * progression[0])
+		
 		pos += Vector3(0, 0, -1 * scalar) * forward
-		path.curve.add_point(pos)
+		curve.add_point(pos)
 		
 		if i % int(2 / scalar) == 0:
 			allPositions.append(pos)
@@ -68,15 +94,49 @@ func generate_track():
 		
 		Global.voidLevel = min(Global.voidLevel, pos.y - 5)
 	
-	call_deferred('_points_generated', path, positions, quaternions)
+	var mesh = gen_mesh(curve, csgMesh.polygon, Network.options.length * 100)
 	
-	call_deferred('_points_generated', path, positions, quaternions)
+	if generationSeed != currentSeed:
+		return
+	#
+	#var arrays = []
+	#arrays.resize(Mesh.ARRAY_MAX)
+	#arrays[Mesh.ARRAY_VERTEX] = mesh.vertices
+	#arrays[Mesh.ARRAY_INDEX] = mesh.indices
+	#arrays[Mesh.ARRAY_TEX_UV] = mesh.uvs
+	#arrays[Mesh.ARRAY_NORMAL] = mesh.normals
+	#
+	#var arrayMesh = ArrayMesh.new()
+	#arrayMesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	#
+	var faces = gen_collision(mesh.vertices, mesh.indices)
+	
+	if generationSeed != currentSeed:
+		return
+	
+	mutex.lock()
+	mesh_vertices = mesh.vertices
+	mesh_indices = mesh.indices
+	mesh_uvs = mesh.uvs
+	mesh_normals = mesh.normals
+	mesh_faces = faces
+	#mesh_shape = 
+	mesh_data_ready = true
+	mutex.unlock()
+	
+	if generationSeed != currentSeed:
+		return
+	
+	call_deferred('_points_generated', positions, quaternions)
 		#forward2 *= Quaternion(Vector3(0, 1, 0), vel.y)
 		
 		#var perp = Vector3(1, 0, 0) * forward2
 		#forward *= Quaternion(perp, vel.x)
 
 func _on_seed():
+	generationSeed = Network.options.seed
+	progress = 0
+	Global.progressName = 'generation'
 	var points = trackPoints
 	for i in range(len(points)):
 		if points[i].x < 0:
@@ -84,21 +144,124 @@ func _on_seed():
 		if points[i].x > 0:
 			points[i] = points[i] + Vector2(Network.options.trackSize - 1, 0)
 	csgMesh.polygon = points
+	finish.visible = false
 	
 	thread = Thread.new()
 	thread.start(generate_track)
 
-func _points_generated(npath, positions, quaternions):
-	add_child(npath)
-	csgMesh.path_node = npath.get_path()
-	finish.position = positions[0] - $Path3D.global_position
+func _on_progress(percentage):
+	progress = percentage
+
+func _points_generated(positions, quaternions):
+	_load_when_ready(positions, quaternions)
+	#add_child(npath)
+	#csgMesh.path_node = npath.get_path()
+	#finish.position = positions[0] - $Path3D.global_position
+	#
+	#for island2 in islands.get_children():
+		#island2.queue_free()
+	#
+	#islandI = -1
+	#_next_island()
+		
+	## Calculate the actual forward direction from the last quaternion
+	#var track_forward = Vector3(0, 0, -1) * quaternions[0]
+	#var track_up = Vector3(0, 1, 0) * quaternions[0]
+	#
+	## Create a basis from the track direction and set it
+	#var finish_basis = Basis()
+	#finish_basis.z = -track_forward.normalized()  # Forward is -Z in Godot
+	#finish_basis.y = track_up.normalized()
+	#finish_basis.x = finish_basis.y.cross(finish_basis.z).normalized()
+	#finish_basis = finish_basis.orthonormalized()
+	#
+	#finish.basis = finish_basis
+	##finish.quaternion = quaternions[len(quaternions) - 1]
+	##finish.rotation = $Path3D.global_rotation * finishQ
+	#
+	#var current_path = csgMesh.path_node
+	#csgMesh.path_node = NodePath("")
+	#csgMesh.path_node = current_path
+
+func _load_when_ready(positions, quaternions):
+	mutex.lock()
+	var isReady = mesh_data_ready
+	mutex.unlock()
+	
+	if not isReady:
+		await get_tree().process_frame
+		_load_when_ready(positions, quaternions)
+		return
+	
+	var currentSeed = generationSeed
+	
+	mutex.lock()
+	var vertices = mesh_vertices
+	var indices = mesh_indices
+	var uvs = mesh_uvs
+	var normals = mesh_normals
+	var faces = mesh_faces
+	#var arrayMesh = mesh_mesh
+	#var shape = mesh_shape
+	mesh_data_ready = false
+	mutex.unlock()
+	
+	var arrays = []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_INDEX] = indices
+	arrays[Mesh.ARRAY_TEX_UV] = uvs
+	arrays[Mesh.ARRAY_NORMAL] = normals
+	
+	var arrayMesh = ArrayMesh.new()
+	arrayMesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	
+	$mesh.mesh = arrayMesh
 	
 	for island2 in islands.get_children():
 		island2.queue_free()
 	
 	islandI = -1
 	_next_island()
+	
+	for shape in $collisions.get_children():
+		shape.queue_free()
+	
+	var currentProgress = 0
+	Global.progressName = 'collisions'
+	
+	var chunks = split_into_chunks(faces, 30000)
+	var i = 0
+	for chunk in chunks:
+		if generationSeed != currentSeed:
+			return
+		var p = float(i) / len(chunks)
+		if (p - currentProgress) * (progression[7] - progression[6]) > progressionStep:
+			currentProgress = p
+			_on_progress(currentProgress * (progression[7] - progression[6]) + progression[6])
+		var shape = ConcavePolygonShape3D.new()
+		shape.set_faces(chunk)
 		
+		var cshape = CollisionShape3D.new()
+		cshape.shape = shape
+		$collisions.add_child(cshape)
+		
+		await get_tree().process_frame
+		
+		i += 1
+	
+	progress = -1
+	
+	#var shape = ConcavePolygonShape3D.new()
+	#shape.set_faces(vertices)
+	#shape.set_faces(arrayMesh.get_faces())
+	#$collisions/shape.shape = shape
+	
+	Network.emit('loaded')
+	
+	finish.visible = true
+	finish.position = positions[0]
+	
 	# Calculate the actual forward direction from the last quaternion
 	var track_forward = Vector3(0, 0, -1) * quaternions[0]
 	var track_up = Vector3(0, 1, 0) * quaternions[0]
@@ -114,10 +277,6 @@ func _points_generated(npath, positions, quaternions):
 	#finish.quaternion = quaternions[len(quaternions) - 1]
 	#finish.rotation = $Path3D.global_rotation * finishQ
 	
-	var current_path = csgMesh.path_node
-	csgMesh.path_node = NodePath("")
-	csgMesh.path_node = current_path
-
 func _next_island():
 	islandI += 1
 	if islandI >= len(allPositions):
@@ -145,7 +304,149 @@ func _next_island():
 
 func _ready() -> void:
 	Network.on_seed.connect(_on_seed)
+	Network.cancel_start.connect(_cancel_start)
 	
 	trackPoints = csgMesh.polygon
 	
-	_on_seed()
+func _cancel_start():
+	generationSeed = -1
+	progress = -1
+
+func gen_mesh(curve: Curve3D, cross: PackedVector2Array, segments: int):
+	var vertices = PackedVector3Array()
+	var indices = PackedInt32Array()
+	var uvs = PackedVector2Array()
+	
+	var currentProgress = 0
+	var currentSeed = generationSeed
+	
+	Global.progressName = 'mesh'
+	
+	for i in range(segments + 1):
+		if generationSeed != currentSeed:
+			return
+		var p = float(i) / segments
+		if (p - currentProgress) * (progression[1] - progression[0]) > progressionStep:
+			currentProgress = p
+			call_deferred('_on_progress', currentProgress * (progression[1] - progression[0]) + progression[0])
+		
+		var t = float(i) / segments
+		var point = curve.sample_baked(t * curve.get_baked_length())
+		var forward = (curve.sample_baked(t * curve.get_baked_length() + 0.1) - point).normalized()
+		
+		var up = Vector3.UP
+		if abs(forward.dot(up)) > 0.99:
+			up = Vector3.RIGHT
+		var right = forward.cross(up).normalized()
+		up = right.cross(forward).normalized()
+		
+		for vpoint in cross:
+			var vertex = point + right * vpoint.x + up * vpoint.y
+			vertices.append(vertex)
+			uvs.append(Vector2(vpoint.x, t))
+	
+	currentProgress = 0
+	
+	var csc = cross.size()
+	for i in range(segments):
+		if generationSeed != currentSeed:
+			return
+		var p = float(i) / segments
+		if (p - currentProgress) * (progression[2] - progression[1]) > progressionStep:
+			currentProgress = p
+			call_deferred('_on_progress', currentProgress * (progression[2] - progression[1]) + progression[1])
+		for j in range(csc):
+			var current = i * csc + j
+			var next = current + csc
+			
+			indices.append(current)
+			indices.append(next)
+			indices.append(current + 1 if j < csc - 1 else i * csc)
+			
+			indices.append(current + 1 if j < csc - 1 else i * csc)
+			indices.append(next)
+			indices.append(next + 1 if j < csc - 1 else (i + 1) * csc)
+	
+	return {
+		'vertices': vertices,
+		'indices': indices,
+		'uvs': uvs,
+		'normals': calculate_normals(vertices, indices)
+	}
+
+func calculate_normals(vertices: PackedVector3Array, indices: PackedInt32Array):
+	var normals = PackedVector3Array()
+	normals.resize(vertices.size())
+	var currentSeed = generationSeed
+	var currentProgress = 0
+	
+	for i in range(vertices.size()):
+		if generationSeed != currentSeed:
+			return
+		var p = float(i) / vertices.size()
+		if (p - currentProgress) * (progression[3] - progression[2]) > progressionStep:
+			currentProgress = p
+			call_deferred('_on_progress', currentProgress * (progression[3] - progression[2]) + progression[2])
+		normals[i] = Vector3.ZERO
+	
+	currentProgress = 0
+	
+	for i in range(0, indices.size(), 3):
+		if generationSeed != currentSeed:
+			return
+		var p = float(i) / indices.size()
+		if (p - currentProgress) * (progression[4] - progression[3]) > progressionStep:
+			currentProgress = p
+			call_deferred('_on_progress', currentProgress * (progression[4] - progression[3]) + progression[3])
+		
+		var i0 = indices[i]
+		var i1 = indices[i + 1]
+		var i2 = indices[i + 2]
+		
+		var v0 = vertices[i0]
+		var v1 = vertices[i1]
+		var v2 = vertices[i2]
+		
+		var edge1 = v1 - v0
+		var edge2 = v2 - v0
+		var normal = edge1.cross(edge2).normalized()
+		
+		normals[i0] -= normal
+		normals[i1] -= normal
+		normals[i2] -= normal
+	
+	currentProgress = 0
+	
+	for i in range(normals.size()):
+		if generationSeed != currentSeed:
+			return
+		var p = float(i) / normals.size()
+		if (p - currentProgress) * (progression[5] - progression[4]) > progressionStep:
+			currentProgress = p
+			call_deferred('_on_progress', currentProgress * (progression[5] - progression[4]) + progression[4])
+		
+		normals[i] = normals[i].normalized()
+	
+	return normals
+
+func gen_collision(vertices: PackedVector3Array, indices: PackedInt32Array):
+	var currentSeed = generationSeed
+	var currentProgress = 0
+	var faces = PackedVector3Array()
+	for i in range(0, indices.size(), 3):
+		if generationSeed != currentSeed:
+			return
+		var p = float(i) / indices.size()
+		if (p - currentProgress) * (progression[6] - progression[5]) > progressionStep:
+			currentProgress = p
+			call_deferred('_on_progress', currentProgress * (progression[6] - progression[5]) + progression[5])
+		faces.append(vertices[indices[i]])
+		faces.append(vertices[indices[i + 1]])
+		faces.append(vertices[indices[i + 2]])
+	return faces
+	
+func split_into_chunks(all_faces: PackedVector3Array, chunk_size: int) -> Array:
+	var chunks = []
+	for i in range(0, all_faces.size(), chunk_size):
+		chunks.append(all_faces.slice(i, i + chunk_size))
+	return chunks

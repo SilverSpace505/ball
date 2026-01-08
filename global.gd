@@ -23,6 +23,9 @@ var userSettings = {
 	'FOV': 90
 }
 
+var progress = -1
+var progressName = ''
+
 func _ready() -> void:
 	loadData()
 

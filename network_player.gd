@@ -228,6 +228,11 @@ func on_msg(event, data):
 		element.username = data.username
 		element.isReady = data.ready
 		element.place = data.place
+		
+		if data.progress != -1:
+			element.progress = str(round(data.progress * 100)) + '%'
+		else:
+			element.progress = ''
 	elif event == 'ping':
 		send_msg('ping2', {}, false)
 	elif event == 'ping2':

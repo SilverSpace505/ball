@@ -3,43 +3,28 @@
 [ext_resource type="Script" uid="uid://bxo74i4xu5chj" path="res://track.gd" id="1_mll3j"]
 [ext_resource type="Shader" uid="uid://cxn7y5lffdias" path="res://track.gdshader" id="2_phvr8"]
 
-[sub_resource type="Curve3D" id="Curve3D_mll3j"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_phvr8"]
 render_priority = 0
 shader = ExtResource("2_phvr8")
 shader_parameter/shade_bands = 5
 
-[node name="track" type="Node3D" node_paths=PackedStringArray("path", "csgMesh")]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_phvr8"]
+
+[node name="track" type="Node3D" node_paths=PackedStringArray("csgMesh")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("1_mll3j")
-path = NodePath("Path3D")
 csgMesh = NodePath("main")
-
-[node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
-top_level = true
-curve = SubResource("Curve3D_mll3j")
 
 [node name="main" type="CSGPolygon3D" parent="."]
 transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, -0.22558957, 0.16303922, -0.023931736)
-use_collision = true
+visible = false
 polygon = PackedVector2Array(1.9625306, 0.55098474, 2.0276723, 0.63389224, 2.114528, 0.6615281, 2.1875656, 0.60033447, 2.2448113, 0.44833726, 2.2270453, 0.20751052, 2.1211393, 0.055083364, 1.9175808, -0.006798342, 0.006013006, -0.13274322, -1.9126014, -0.0071073323, -2.1100006, 0.046190336, -2.2284398, 0.1962135, -2.2521276, 0.44098824, -2.186986, 0.5929854, -2.1198702, 0.66207504, -2.0251188, 0.6245693, -1.9698471, 0.54363567, -2.0172226, 0.47059804, -2.0527549, 0.39361244, -2.0606508, 0.28504306, 0.0041428506, 0.09159212, 2.0580919, 0.28355807, 2.0521698, 0.38620555, 2.0197763, 0.46018118)
-mode = 2
-path_node = NodePath("../Path3D")
-path_interval_type = 0
-path_interval = 0.5
-path_simplify_angle = 0.0
-path_rotation = 1
-path_rotation_accurate = false
-path_local = false
-path_continuous_u = true
-path_u_distance = 0.0
-path_joined = false
 smooth_faces = true
 material = SubResource("ShaderMaterial_phvr8")
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+
+[node name="collisions" type="StaticBody3D" parent="."]
+
+[node name="shape" type="CollisionShape3D" parent="collisions"]
+shape = SubResource("ConcavePolygonShape3D_phvr8")

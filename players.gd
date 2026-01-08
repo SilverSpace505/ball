@@ -55,6 +55,10 @@ func _process(delta: float) -> void:
 		playerElements[Network.id].time = str(round(Global.time * 100) / 100)
 		playerElements[Network.id].username = Global.username
 		playerElements[Network.id].isReady = 0
+		if $'../track'.progress != -1:
+			playerElements[Network.id].progress = str(round($'../track'.progress * 100)) + '%'
+		else:
+			playerElements[Network.id].progress = ''
 		if not Global.running:
 			if Global.isReady:
 				playerElements[Network.id].isReady = 1
