@@ -23,11 +23,13 @@ func _physics_process(_delta: float) -> void:
 	
 	var unix_timestamp_ms = Network.get_time()
 	if unix_timestamp_ms < Global.startTime:
+		$CanvasLayer/Control/AnimationPlayer.play("startTimer")
 		start.text = str(int(min(3, ceil((Global.startTime - unix_timestamp_ms) / 1000))))
-	else:
-		start.text = ''
+	#else:
+		#start.text = ''
 	
 	if Global.startTime != -1 and unix_timestamp_ms >= Global.startTime:
+		await get_tree().create_timer(1).timeout
 		Global.startTime = -1
 		Global.time = 0
 		Global.running = true
