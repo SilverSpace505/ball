@@ -2,15 +2,21 @@ shader_type spatial;
 
 uniform int shade_bands : hint_range(2, 10) = 3;
 
+uniform sampler2D trackTypes : source_color, filter_nearest;
+
 varying vec3 world_position;
+
+varying flat vec2 uv2;
 
 void vertex() {
 	world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	uv2 = UV2;
 	// Called for every vertex the material is visible on.
 }
 
 void fragment() {
-	ALBEDO = vec3(1.0);
+	vec4 tex_color = texture(trackTypes, vec2(mod(UV.x, 0.5), mod(UV.y, 0.5)) + uv2);
+	ALBEDO = tex_color.rgb;
 	// Called for every pixel the material is visible on.
 }
 

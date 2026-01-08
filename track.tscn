@@ -1,7 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cn8pmff4bbixf"]
+[gd_scene load_steps=7 format=3 uid="uid://cn8pmff4bbixf"]
 
 [ext_resource type="Script" uid="uid://bxo74i4xu5chj" path="res://track.gd" id="1_mll3j"]
 [ext_resource type="Shader" uid="uid://cxn7y5lffdias" path="res://track.gdshader" id="2_phvr8"]
+[ext_resource type="Texture2D" uid="uid://bpmwsne1tj7" path="res://track.png" id="3_bcvet"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bcvet"]
+render_priority = 0
+shader = ExtResource("2_phvr8")
+shader_parameter/shade_bands = 5
+shader_parameter/trackTypes = ExtResource("3_bcvet")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_phvr8"]
 render_priority = 0
@@ -13,12 +20,13 @@ shader_parameter/shade_bands = 5
 [node name="track" type="Node3D" node_paths=PackedStringArray("csgMesh")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("1_mll3j")
+material = SubResource("ShaderMaterial_bcvet")
 csgMesh = NodePath("main")
 
 [node name="main" type="CSGPolygon3D" parent="."]
 transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, -0.22558957, 0.16303922, -0.023931736)
 visible = false
-polygon = PackedVector2Array(1.9625306, 0.55098474, 2.0276723, 0.63389224, 2.114528, 0.6615281, 2.1875656, 0.60033447, 2.2448113, 0.44833726, 2.2270453, 0.20751052, 2.1211393, 0.055083364, 1.9175808, -0.006798342, 0.006013006, -0.13274322, -1.9126014, -0.0071073323, -2.1100006, 0.046190336, -2.2284398, 0.1962135, -2.2521276, 0.44098824, -2.186986, 0.5929854, -2.1198702, 0.66207504, -2.0251188, 0.6245693, -1.9698471, 0.54363567, -2.0172226, 0.47059804, -2.0527549, 0.39361244, -2.0606508, 0.28504306, 0.0041428506, 0.09159212, 2.0580919, 0.28355807, 2.0521698, 0.38620555, 2.0197763, 0.46018118)
+polygon = PackedVector2Array(1.9625306, 0.55098474, 2.0276723, 0.63389224, 2.114528, 0.6615281, 2.1875656, 0.60033447, 2.2448113, 0.44833726, 2.2270453, 0.20751052, 2.1211393, 0.055083364, 1.9175808, -0.006798342, 0.0052606165, -0.029309437, -1.9126014, -0.0071073323, -2.1100006, 0.046190336, -2.2284398, 0.1962135, -2.2521276, 0.44098824, -2.186986, 0.5929854, -2.1198702, 0.66207504, -2.0251188, 0.6245693, -1.9698471, 0.54363567, -2.0172226, 0.47059804, -2.0527549, 0.39361244, -2.0606508, 0.28504306, 9.88543e-05, 0.25293326, 2.0580919, 0.28355807, 2.0521698, 0.38620555, 2.0197763, 0.46018118)
 smooth_faces = true
 material = SubResource("ShaderMaterial_phvr8")
 
@@ -28,3 +36,18 @@ material = SubResource("ShaderMaterial_phvr8")
 
 [node name="shape" type="CollisionShape3D" parent="collisions"]
 shape = SubResource("ConcavePolygonShape3D_phvr8")
+
+[node name="start" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 75
+horizontal_alignment = 1

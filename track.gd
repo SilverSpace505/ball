@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var material: Material
+
 @export var csgMesh: CSGPolygon3D
 
 @export var finish: Node3D
@@ -20,6 +22,7 @@ var mesh_data_ready = false
 var mesh_vertices = PackedVector3Array()
 var mesh_indices = PackedInt32Array()
 var mesh_uvs = PackedVector2Array()
+var mesh_uvs2 = PackedVector2Array()
 var mesh_normals = PackedVector3Array()
 var mesh_faces = PackedVector3Array()
 
@@ -28,6 +31,10 @@ var progression = [first/7*1, first/7*2, first/7*3, first/7*4, first/7*5, first/
 var progressionStep = 0.001
 
 var progress = -1
+var minX = 0
+
+var types = []
+var typeCurve = Curve3D.new()
 
 func generate_track():
 	
@@ -53,6 +60,11 @@ func generate_track():
 	var positions = []
 	var quaternions = []
 	
+	var typeCurve = Curve3D.new()
+	var types = []
+	
+	var currentType = 0
+	
 	var currentProgress = 0
 	
 	for i in range(Network.options.length * 100):
@@ -67,6 +79,15 @@ func generate_track():
 		
 		pos += Vector3(0, 0, -1 * scalar) * forward
 		curve.add_point(pos)
+		
+		if i % int(scalar * 10) == 0:
+			typeCurve.add_point(pos)
+			
+			var pleaseSkip = currentType == 1 or currentType == 3
+			if randf() > 0.7 or pleaseSkip:
+				currentType = randi_range(0, 3)
+			
+			types.append(currentType)
 		
 		if i % int(2 / scalar) == 0:
 			allPositions.append(pos)
@@ -94,7 +115,7 @@ func generate_track():
 		
 		Global.voidLevel = min(Global.voidLevel, pos.y - 5)
 	
-	var mesh = gen_mesh(curve, csgMesh.polygon, Network.options.length * 100)
+	var mesh = gen_mesh(curve, csgMesh.polygon, Network.options.length * 100, types)
 	
 	if generationSeed != currentSeed:
 		return
@@ -118,6 +139,7 @@ func generate_track():
 	mesh_vertices = mesh.vertices
 	mesh_indices = mesh.indices
 	mesh_uvs = mesh.uvs
+	mesh_uvs2 = mesh.uvs2
 	mesh_normals = mesh.normals
 	mesh_faces = faces
 	#mesh_shape = 
@@ -127,7 +149,7 @@ func generate_track():
 	if generationSeed != currentSeed:
 		return
 	
-	call_deferred('_points_generated', positions, quaternions)
+	call_deferred('_points_generated', positions, quaternions, types, typeCurve)
 		#forward2 *= Quaternion(Vector3(0, 1, 0), vel.y)
 		
 		#var perp = Vector3(1, 0, 0) * forward2
@@ -137,12 +159,14 @@ func _on_seed():
 	generationSeed = Network.options.seed
 	progress = 0
 	Global.progressName = 'generation'
+	minX = INF
 	var points = trackPoints
 	for i in range(len(points)):
 		if points[i].x < 0:
 			points[i] = points[i] - Vector2(Network.options.trackSize - 1, 0)
 		if points[i].x > 0:
 			points[i] = points[i] + Vector2(Network.options.trackSize - 1, 0)
+		minX = min(minX, points[i].x)
 	csgMesh.polygon = points
 	finish.visible = false
 	
@@ -152,7 +176,9 @@ func _on_seed():
 func _on_progress(percentage):
 	progress = percentage
 
-func _points_generated(positions, quaternions):
+func _points_generated(positions, quaternions, ntypes, ntypeCurve):
+	types = ntypes
+	typeCurve = ntypeCurve
 	_load_when_ready(positions, quaternions)
 	#add_child(npath)
 	#csgMesh.path_node = npath.get_path()
@@ -199,6 +225,7 @@ func _load_when_ready(positions, quaternions):
 	var vertices = mesh_vertices
 	var indices = mesh_indices
 	var uvs = mesh_uvs
+	var uvs2 = mesh_uvs2
 	var normals = mesh_normals
 	var faces = mesh_faces
 	#var arrayMesh = mesh_mesh
@@ -211,11 +238,13 @@ func _load_when_ready(positions, quaternions):
 	arrays[Mesh.ARRAY_VERTEX] = vertices
 	arrays[Mesh.ARRAY_INDEX] = indices
 	arrays[Mesh.ARRAY_TEX_UV] = uvs
+	arrays[Mesh.ARRAY_TEX_UV2] = uvs2
 	arrays[Mesh.ARRAY_NORMAL] = normals
 	
 	var arrayMesh = ArrayMesh.new()
 	arrayMesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	
+	arrayMesh.surface_set_material(0, material)
 	$mesh.mesh = arrayMesh
 	
 	for island2 in islands.get_children():
@@ -312,13 +341,21 @@ func _cancel_start():
 	generationSeed = -1
 	progress = -1
 
-func gen_mesh(curve: Curve3D, cross: PackedVector2Array, segments: int):
+func gen_mesh(curve: Curve3D, cross: PackedVector2Array, segments: int, types):
 	var vertices = PackedVector3Array()
 	var indices = PackedInt32Array()
 	var uvs = PackedVector2Array()
+	var uvs2 = PackedVector2Array()
 	
 	var currentProgress = 0
 	var currentSeed = generationSeed
+	
+	var typeUvs = [
+		Vector2(0, 0),
+		Vector2(0.5, 0),
+		Vector2(0, 0.5),
+		Vector2(0.5, 0.5)
+	]
 	
 	Global.progressName = 'mesh'
 	
@@ -343,7 +380,12 @@ func gen_mesh(curve: Curve3D, cross: PackedVector2Array, segments: int):
 		for vpoint in cross:
 			var vertex = point + right * vpoint.x + up * vpoint.y
 			vertices.append(vertex)
-			uvs.append(Vector2(vpoint.x, t))
+			
+			var type = types[floor(float(i) / 10 / 10)]
+			
+			var x = (vpoint.x - minX) / -minX
+			uvs.append(Vector2(x, t * segments / 20))
+			uvs2.append(typeUvs[type])
 	
 	currentProgress = 0
 	
@@ -371,6 +413,7 @@ func gen_mesh(curve: Curve3D, cross: PackedVector2Array, segments: int):
 		'vertices': vertices,
 		'indices': indices,
 		'uvs': uvs,
+		'uvs2': uvs2,
 		'normals': calculate_normals(vertices, indices)
 	}
 
@@ -450,3 +493,23 @@ func split_into_chunks(all_faces: PackedVector3Array, chunk_size: int) -> Array:
 	for i in range(0, all_faces.size(), chunk_size):
 		chunks.append(all_faces.slice(i, i + chunk_size))
 	return chunks
+
+func get_track_type(pos: Vector3):
+	if typeCurve.point_count == 0: 
+		return 0
+	
+	var closest = typeCurve.get_closest_offset(pos)
+	var length = typeCurve.get_baked_length()
+	var interval = length / len(types) * 10 * 10
+
+	var index = int(floor(closest / interval))
+	if index < 0 or index >= len(types):
+		return 0
+	
+	return types[index]
+
+func get_distance(pos: Vector3):
+	if typeCurve.point_count == 0: 
+		return 0
+	
+	return typeCurve.get_closest_offset(pos)

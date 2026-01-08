@@ -26,6 +26,8 @@ var userSettings = {
 var progress = -1
 var progressName = ''
 
+var distance = 0
+
 func _ready() -> void:
 	loadData()
 

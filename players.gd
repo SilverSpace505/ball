@@ -55,6 +55,13 @@ func _process(delta: float) -> void:
 		playerElements[Network.id].time = str(round(Global.time * 100) / 100)
 		playerElements[Network.id].username = Global.username
 		playerElements[Network.id].isReady = 0
+		var distance = -1
+		if Global.running:
+			distance = Global.distance
+		if distance != -1:
+			playerElements[Network.id].distance = str(int(distance)) + 'm'
+		else:
+			playerElements[Network.id].distance = ''
 		if $'../track'.progress != -1:
 			playerElements[Network.id].progress = str(round($'../track'.progress * 100)) + '%'
 		else:
@@ -95,7 +102,10 @@ func _process(delta: float) -> void:
 		if aplace != bplace:
 			return aplace
 		
-		return float(a.time) < float(b.time)
+		if aplace and bplace:
+			return float(a.time) < float(b.time)
+		else:
+			return float(a.distance.left(a.distance.length() - 1)) > float(b.distance.left(b.distance.length() - 1))
 	)
 	
 	for i in range(children.size()):

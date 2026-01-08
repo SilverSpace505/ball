@@ -15,7 +15,8 @@ var data = {
 	'time': 0,
 	'ready': 0,
 	'place': '',
-	'progress': -1
+	'progress': -1,
+	'distance': -1
 }
 
 var options = {
@@ -206,9 +207,13 @@ func _on_timer_timeout() -> void:
 				isReady = 1
 			else:
 				isReady = 2
+		var distance = -1
+		if Global.running:
+			distance = Global.distance
 		data.ready = isReady
 		data.place = Global.place
 		data.progress = Global.progress
+		data.distance = distance
 		broadcast_data.emit(data)
 		client.emit('data', data)
 

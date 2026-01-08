@@ -58,6 +58,28 @@ func _physics_process(delta: float) -> void:
 	#elif Input.is_action_pressed("esc"):
 		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
+	Global.distance = $'../track'.get_distance(global_position)
+	
+	var trackType = $'../track'.get_track_type(global_position)
+	
+	var bounceModifier = 1
+	var frictionModifier = 1
+	
+	if trackType == 1: #sticky
+		bounceModifier = 0
+		frictionModifier = 1.5
+	
+	if trackType == 2: #ice
+		bounceModifier = 0.5
+		frictionModifier = 0.01
+	
+	if trackType == 3: #bouncy
+		bounceModifier = 3
+		frictionModifier = 1
+	
+	if floort <= 0:
+		frictionModifier = 1
+	
 	lastPosition = global_position
 	
 	moveSpeed = lerp(moveSpeed, Vector2(velocity.x, velocity.z).length() / 5, delta * 2)
@@ -84,8 +106,8 @@ func _physics_process(delta: float) -> void:
 	velocity.z -= wasd.z * speed * addSpeed
 	
 	#friction
-	velocity.x *= 0.99
-	velocity.z *= 0.99
+	velocity.x *= 0.99 ** frictionModifier
+	velocity.z *= 0.99 ** frictionModifier
 	
 	if not Global.running:
 		velocity *= 0.99
@@ -94,7 +116,7 @@ func _physics_process(delta: float) -> void:
 	
 	var collision = move_and_collide(velocity * delta)
 	
-	const bounciness = 0.3
+	var bounciness = 0.3 * bounceModifier
 	
 	#check for collisions and launch other players
 	#for i in get_slide_collision_count():
@@ -108,6 +130,8 @@ func _physics_process(delta: float) -> void:
 				collider.send_msg('launch', [launch.x, launch.y, launch.z], true)
 			#Network.client.emit('launch', [[collider.id, launch.x, launch.y, launch.z]])
 		var change = (1 + bounciness * bounceFactor) * velocity.dot(normal) * normal
+		if trackType == 3:
+			change -= normal
 		if change.length() > 0.1:
 			velocity -= change
 		bounceFactor = 1
