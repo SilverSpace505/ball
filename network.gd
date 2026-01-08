@@ -22,10 +22,17 @@ var options = {
 	'length': 100,
 	'turning': 0.5,
 	'trackSize': 1,
+	'globalModChance': 3,
 	'jumps': false,
 	'speed': 5,
 	'seed': 1,
 	'randomise': true
+}
+
+var globalMods = {
+	'lowGrav': false,
+	'globalSticky': false,
+	'globalIce': false
 }
 
 var lastOptions = {}

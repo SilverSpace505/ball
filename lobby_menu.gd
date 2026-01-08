@@ -50,6 +50,8 @@ func _optionsChanged():
 	$track/turning/turningVal.value = Network.options.turning
 	$track/size/sizeBox.value = Network.options.trackSize
 	$track/size/sizeVal.value = Network.options.trackSize
+	$track/globalChance/globlValLabel.text = "1 in " + str(Network.options.globalModChance)
+	$track/globalChance/globalVal.value = Network.options.globalModChance
 	
 	#player settings
 	$player/jumps/jumpBox.button_pressed = Network.options.jumps
@@ -112,3 +114,12 @@ func _on_mouse_hover() -> void:
 	Sfx.get_node("browseSFX").play()
 func _clicksound():
 	Sfx.get_node("clickSFX").play()
+
+
+func _on_global_val_value_changed(value: float) -> void:
+	$track/globalChance/globlValLabel.text = "1 in " + str(int($track/globalChance/globalVal.value))
+	if $track/globalChance/globalVal.value == 1:
+		$track/globalChance/globlValLabel.text = "always"
+	elif $track/globalChance/globalVal.value == 0:
+		$track/globalChance/globlValLabel.text = "never"
+	Network.options.globalModChance = int($track/globalChance/globalVal.value)

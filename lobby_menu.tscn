@@ -149,32 +149,6 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.5)
 }
 
-[sub_resource type="Animation" id="Animation_iohss"]
-resource_name = "sceneOut"
-length = 0.5
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(573, -0.25, 0, 0.25, 0, -903.11505, -0.083333336, 246.01917, 0, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(331.00003, -0.25, 0, 0.25, 0, 331, -0.083333336, 5.086263e-06, 0, 0),
-"times": PackedFloat32Array(0, 0.5)
-}
-
 [sub_resource type="Animation" id="Animation_u8bsw"]
 resource_name = "leftGame"
 length = 0.5
@@ -223,6 +197,32 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.5)
 }
 
+[sub_resource type="Animation" id="Animation_iohss"]
+resource_name = "sceneOut"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(573, -0.25, 0, 0.25, 0, -903.11505, -0.083333336, 246.01917, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(331.00003, -0.25, 0, 0.25, 0, 331, -0.083333336, 5.086263e-06, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iu37i"]
 _data = {
 &"RESET": SubResource("Animation_eicbr"),
@@ -267,6 +267,9 @@ offset_left = 10.0
 offset_top = 8.0
 offset_right = 488.0
 offset_bottom = 95.0
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 56
 text = "'s lobby"
 
@@ -437,6 +440,41 @@ step = 0.1
 value = 1.0
 metadata/_edit_use_anchors_ = true
 
+[node name="globalChance" type="Control" parent="track"]
+anchors_preset = 0
+offset_top = 167.0
+offset_bottom = 167.0
+
+[node name="globalVal" type="HSlider" parent="track/globalChance"]
+layout_mode = 0
+offset_left = 513.0
+offset_top = 176.0
+offset_right = 839.99994
+offset_bottom = 192.0
+tooltip_text = "increase or decrease the chance for a global modifier"
+max_value = 5.0
+value = 3.0
+
+[node name="globalLabel" type="Label" parent="track/globalChance"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 513.0
+offset_top = 137.0
+offset_right = 738.0
+offset_bottom = 176.0
+theme_override_font_sizes/font_size = 28
+text = "chance for global modifier"
+
+[node name="globlValLabel" type="Label" parent="track/globalChance"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 848.0
+offset_top = 173.0
+offset_right = 896.0
+offset_bottom = 193.0
+theme_override_font_sizes/font_size = 19
+text = "1 in 3"
+
 [node name="player" type="Control" parent="."]
 anchors_preset = 0
 offset_top = 114.0
@@ -450,9 +488,9 @@ texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
 offset_left = 508.0
-offset_top = 232.00002
+offset_top = 274.0
 offset_right = 532.0
-offset_bottom = 256.0
+offset_bottom = 298.0
 scale = Vector2(1.565, 1.565)
 tooltip_text = "disable or enable jumping"
 theme_override_font_sizes/font_size = 16
@@ -461,20 +499,20 @@ theme_override_font_sizes/font_size = 16
 texture_filter = 1
 layout_mode = 0
 offset_left = 513.0
-offset_top = 193.0
+offset_top = 246.0
 offset_right = 597.0
-offset_bottom = 232.0
+offset_bottom = 285.0
 theme_override_font_sizes/font_size = 28
 text = "Jumps"
 
 [node name="jumpLabel2" type="Label" parent="player/jumps"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 547.0
-offset_top = 230.0
-offset_right = 664.0
-offset_bottom = 269.0
-theme_override_font_sizes/font_size = 28
+offset_left = 544.0
+offset_top = 282.0
+offset_right = 616.0
+offset_bottom = 302.0
+theme_override_font_sizes/font_size = 19
 text = "Disabled"
 
 [node name="speed" type="Control" parent="player"]
@@ -483,9 +521,9 @@ anchors_preset = 0
 [node name="speedVal" type="HSlider" parent="player/speed"]
 layout_mode = 0
 offset_left = 513.0
-offset_top = 310.0
+offset_top = 350.0
 offset_right = 839.99994
-offset_bottom = 326.0
+offset_bottom = 366.0
 tooltip_text = "increase or decrease the base speed of every player"
 min_value = 1.0
 max_value = 8.0
@@ -495,27 +533,27 @@ value = 5.0
 texture_filter = 1
 layout_mode = 0
 offset_left = 513.0
-offset_top = 271.0
+offset_top = 311.0
 offset_right = 738.0
-offset_bottom = 310.0
+offset_bottom = 350.0
 theme_override_font_sizes/font_size = 28
 text = "Player speed"
 
 [node name="speedBox" type="SpinBox" parent="player/speed"]
 layout_mode = 0
 offset_left = 846.0
-offset_top = 301.0
+offset_top = 341.0
 offset_right = 932.5625
-offset_bottom = 332.0
+offset_bottom = 372.0
 min_value = 1.0
 max_value = 8.0
 value = 5.0
 
 [node name="exitButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 24.0
+offset_left = 10.0
 offset_top = 552.0
-offset_right = 445.0
+offset_right = 452.0
 offset_bottom = 643.0
 theme_override_font_sizes/font_size = 58
 text = "return"
@@ -578,6 +616,7 @@ expand_mode = 1
 [connection signal="mouse_entered" from="track/size/sizeVal" to="." method="_on_mouse_hover"]
 [connection signal="value_changed" from="track/size/sizeVal" to="." method="_on_size_val_value_changed"]
 [connection signal="value_changed" from="track/size/sizeBox" to="." method="_on_size_box_value_changed"]
+[connection signal="value_changed" from="track/globalChance/globalVal" to="." method="_on_global_val_value_changed"]
 [connection signal="mouse_entered" from="player/jumps/jumpBox" to="." method="_on_mouse_hover"]
 [connection signal="pressed" from="player/jumps/jumpBox" to="." method="_clicksound"]
 [connection signal="toggled" from="player/jumps/jumpBox" to="." method="_on_jump_box_toggled"]
