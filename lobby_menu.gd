@@ -50,7 +50,7 @@ func _optionsChanged():
 	$track/turning/turningVal.value = Network.options.turning
 	$track/size/sizeBox.value = Network.options.trackSize
 	$track/size/sizeVal.value = Network.options.trackSize
-	$track/globalChance/globlValLabel.text = "1 in " + str(Network.options.globalModChance)
+	$track/globalChance/globlValLabel.text = "1 in " + str(int(Network.options.globalModChance))
 	$track/globalChance/globalVal.value = Network.options.globalModChance
 	
 	#player settings
