@@ -30,11 +30,13 @@ var options = {
 	'randomise': true
 }
 
-var globalMods = {
-	'lowGrav': false,
-	'globalSticky': false,
-	'globalIce': false
-}
+#var globalMods = {
+	#'lowGrav': false,
+	#'globalSticky': false,
+	#'globalIce': false
+#}
+
+var globalMod = null
 
 var lastOptions = {}
 

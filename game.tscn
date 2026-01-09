@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cplji6psrpo8t"]
+[gd_scene load_steps=42 format=3 uid="uid://cplji6psrpo8t"]
 
 [ext_resource type="Script" uid="uid://57v0fg1vf783" path="res://game.gd" id="1_vef74"]
 [ext_resource type="PackedScene" uid="uid://cn8pmff4bbixf" path="res://track.tscn" id="2_e2o6t"]
@@ -272,6 +272,61 @@ tracks/16/keys = {
 "update": 0,
 "values": [Vector2(556.00006, 284.00006)]
 }
+tracks/17/type = "bezier"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("../globalAlert:scale:x")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/18/type = "bezier"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("../globalAlert:scale:y")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/19/type = "bezier"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("../globalAlert:rotation")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-1.3177236, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/20/type = "bezier"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("../globalAlert:position:x")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(107.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/21/type = "bezier"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("../globalAlert:position:y")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(251.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_lc2xo"]
 resource_name = "leave game"
@@ -499,9 +554,70 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.5)
 }
 
+[sub_resource type="Animation" id="Animation_80cx4"]
+resource_name = "globalModDetected"
+length = 3.0
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../globalAlert:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1.2, -0.03333333, -0.033333343, 0, 0, 1, -0.03333333, 0.033333343, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 0.8)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../globalAlert:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1.2, -0.03333333, -0.033333343, 0, 0, 1, -0.03333333, 0.033333343, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 0.8)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../globalAlert:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2, 2, 0, 0),
+"points": PackedFloat32Array(-2.3823745, 0, 0, 0.050000004, 0.39706242, 6.2831855, -0.050000004, -1.44426, 0, 0, 6.2831855, -0.3166667, 0, 0, 0, 7.3391094, -0.066666685, -0.17598732, 0, 0),
+"times": PackedFloat32Array(0, 0.3, 2.3, 2.6)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../globalAlert:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2, 0, 2, 0, 2),
+"points": PackedFloat32Array(107.5, 0, 0, 0.20000002, 0, 107.5, -0.25, 0, 0.25, 0, 107.5, -0.083333336, 0, 0.033333324, 0, 107.5, -0.13333336, 0, 0, 0, 107.5, -0.066666685, 0, 0, 0),
+"times": PackedFloat32Array(0, 1.1, 1.6, 2.2, 2.6000001)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../globalAlert:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(2, 0, 2, 0, 2),
+"points": PackedFloat32Array(251.5, 0, 0, 0.20000002, 0, 251.5, -0.25, 0, 0.25, 0, 189.23387, -0.083333336, 11.622025, 0.033333324, -4.6488085, 189.23387, -0.13333336, 0, 0, 0, 1705, -0.066666685, -252.62769, 0, 0),
+"times": PackedFloat32Array(0, 1.1, 1.6, 2.2, 2.6000001)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iotsf"]
 _data = {
 &"RESET": SubResource("Animation_mfdv2"),
+&"globalModDetected": SubResource("Animation_80cx4"),
 &"leave game": SubResource("Animation_lc2xo"),
 &"startTimer": SubResource("Animation_215e1"),
 &"transOut": SubResource("Animation_hve3p")
@@ -724,7 +840,6 @@ root_node = NodePath("../TextureRect")
 libraries = {
 &"": SubResource("AnimationLibrary_iotsf")
 }
-autoplay = "transOut"
 
 [node name="pauseMenu" type="Control" parent="CanvasLayer/Control"]
 visible = false
@@ -889,6 +1004,29 @@ offset_right = 2312.0002
 offset_bottom = 648.0
 texture = ExtResource("13_215e1")
 expand_mode = 1
+
+[node name="globalAlert" type="Label" parent="CanvasLayer/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -468.5
+offset_top = -72.5
+offset_right = 468.5
+offset_bottom = 72.5011
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.3177236
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(468.5, 72.5)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 141
+text = "Global Modifier"
 
 [node name="Smoke" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-432, 456)
