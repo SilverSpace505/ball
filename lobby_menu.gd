@@ -51,6 +51,10 @@ func _optionsChanged():
 	$track/size/sizeBox.value = Network.options.trackSize
 	$track/size/sizeVal.value = Network.options.trackSize
 	$track/globalChance/globlValLabel.text = "1 in " + str(int(Network.options.globalModChance))
+	if $track/globalChance/globalVal.value == 1:
+		$track/globalChance/globlValLabel.text = "always"
+	elif $track/globalChance/globalVal.value == 0:
+		$track/globalChance/globlValLabel.text = "never"
 	$track/globalChance/globalVal.value = Network.options.globalModChance
 	
 	#player settings
