@@ -328,6 +328,66 @@ tracks/21/keys = {
 "times": PackedFloat32Array(0)
 }
 
+[sub_resource type="Animation" id="Animation_80cx4"]
+resource_name = "globalModDetected"
+length = 3.0
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../globalAlert:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1.2, -0.03333333, -0.033333343, 0, 0, 1, -0.03333333, 0.033333343, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 0.8)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../globalAlert:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1.2, -0.03333333, -0.033333343, 0, 0, 1, -0.03333333, 0.033333343, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 0.8)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../globalAlert:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2, 2, 0, 0),
+"points": PackedFloat32Array(-2.3823745, 0, 0, 0.050000004, 0.39706242, 6.2831855, -0.050000004, -1.44426, 0, 0, 6.2831855, -0.3166667, 0, 0, 0, 7.3391094, -0.066666685, -0.17598732, 0, 0),
+"times": PackedFloat32Array(0, 0.3, 2.3, 2.6)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../globalAlert:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2, 0, 2, 0, 2),
+"points": PackedFloat32Array(107.5, 0, 0, 0.20000002, 0, 107.5, -0.25, 0, 0.25, 0, 107.5, -0.083333336, 0, 0.033333324, 0, 107.5, -0.13333336, 0, 0, 0, 107.5, -0.066666685, 0, 0, 0),
+"times": PackedFloat32Array(0, 1.1, 1.6, 2.2, 2.6000001)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../globalAlert:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(2, 0, 2, 0, 2),
+"points": PackedFloat32Array(251.5, 0, 0, 0.20000002, 0, 251.5, -0.25, 0, 0.25, 0, 189.23387, -0.083333336, 11.622025, 0.033333324, -4.6488085, 189.23387, -0.13333336, 0, 0, 0, 1705, -0.066666685, -252.62769, 0, 0),
+"times": PackedFloat32Array(0, 1.1, 1.6, 2.2, 2.6000001)
+}
+
 [sub_resource type="Animation" id="Animation_lc2xo"]
 resource_name = "leave game"
 length = 0.5
@@ -552,66 +612,6 @@ tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 2),
 "points": PackedFloat32Array(496, -0.25, 0, 0.25, 0, -600, -0.083333336, 182.66667, 0, 0),
 "times": PackedFloat32Array(0, 0.5)
-}
-
-[sub_resource type="Animation" id="Animation_80cx4"]
-resource_name = "globalModDetected"
-length = 3.0
-step = 0.1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../globalAlert:scale:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1.2, -0.03333333, -0.033333343, 0, 0, 1, -0.03333333, 0.033333343, 0, 0),
-"times": PackedFloat32Array(0, 0.5, 0.8)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../globalAlert:scale:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1.2, -0.03333333, -0.033333343, 0, 0, 1, -0.03333333, 0.033333343, 0, 0),
-"times": PackedFloat32Array(0, 0.5, 0.8)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../globalAlert:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(2, 2, 0, 0),
-"points": PackedFloat32Array(-2.3823745, 0, 0, 0.050000004, 0.39706242, 6.2831855, -0.050000004, -1.44426, 0, 0, 6.2831855, -0.3166667, 0, 0, 0, 7.3391094, -0.066666685, -0.17598732, 0, 0),
-"times": PackedFloat32Array(0, 0.3, 2.3, 2.6)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../globalAlert:position:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(2, 0, 2, 0, 2),
-"points": PackedFloat32Array(107.5, 0, 0, 0.20000002, 0, 107.5, -0.25, 0, 0.25, 0, 107.5, -0.083333336, 0, 0.033333324, 0, 107.5, -0.13333336, 0, 0, 0, 107.5, -0.066666685, 0, 0, 0),
-"times": PackedFloat32Array(0, 1.1, 1.6, 2.2, 2.6000001)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../globalAlert:position:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(2, 0, 2, 0, 2),
-"points": PackedFloat32Array(251.5, 0, 0, 0.20000002, 0, 251.5, -0.25, 0, 0.25, 0, 189.23387, -0.083333336, 11.622025, 0.033333324, -4.6488085, 189.23387, -0.13333336, 0, 0, 0, 1705, -0.066666685, -252.62769, 0, 0),
-"times": PackedFloat32Array(0, 1.1, 1.6, 2.2, 2.6000001)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iotsf"]
@@ -1017,7 +1017,7 @@ anchor_bottom = 0.5
 offset_left = -468.5
 offset_top = -72.5
 offset_right = 468.5
-offset_bottom = 72.5011
+offset_bottom = 72.500854
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -1.3177236
@@ -1047,8 +1047,8 @@ playback_type = 1
 
 [connection signal="body_entered" from="finish" to="finish" method="_on_body_entered"]
 [connection signal="mouse_entered" from="CanvasLayer/Control/pauseMenu/Panel/lobby button" to="." method="_on_mouse_hover"]
-[connection signal="pressed" from="CanvasLayer/Control/pauseMenu/Panel/lobby button" to="." method="_on_lobby_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/pauseMenu/Panel/lobby button" to="." method="_clicksound"]
+[connection signal="pressed" from="CanvasLayer/Control/pauseMenu/Panel/lobby button" to="." method="_on_lobby_button_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/Control/pauseMenu/Panel/settings button" to="." method="_on_mouse_hover"]
 [connection signal="pressed" from="CanvasLayer/Control/pauseMenu/Panel/settings button" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/pauseMenu/Panel/settings button" to="." method="_clicksound"]

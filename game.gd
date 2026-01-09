@@ -6,10 +6,15 @@ extends Node3D
 
 func _ready() -> void:
 	Network.newRace.connect(_global_modifier)
+	Network.spawn.connect(_on_spawn)
 	BackgroundMusic.bus = "inGame"
 	#connect("settingsClosed", _settingsClosed)
 	Global.running = not Global.race
 	Global.isReady = false
+
+func _on_spawn(_index):
+	$CanvasLayer/Control/AnimationPlayer.seek(0, true)
+	$CanvasLayer/Control/AnimationPlayer.play("startTimer")
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed('ready'):
@@ -24,7 +29,6 @@ func _physics_process(_delta: float) -> void:
 	
 	var unix_timestamp_ms = Network.get_time()
 	if unix_timestamp_ms < Global.startTime:
-		$CanvasLayer/Control/AnimationPlayer.play("startTimer")
 		start.text = str(int(min(3, ceil((Global.startTime - unix_timestamp_ms) / 1000))))
 	#else:
 		#start.text = ''
@@ -53,7 +57,6 @@ func _physics_process(_delta: float) -> void:
 
 func _global_modifier():
 	$CanvasLayer/Control/AnimationPlayer.play("globalModDetected")
-	print("a")
 
 func _on_settings_button_pressed() -> void:
 	Sfx.get_node("clickSFX").play()

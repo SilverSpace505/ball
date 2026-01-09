@@ -116,32 +116,44 @@ func _physics_process(delta: float) -> void:
 		velocity *= 0.99
 	
 	var oldVel = velocity
-	
-	var collision = move_and_collide(velocity * delta)
-	
-	var bounciness = 0.3 * bounceModifier
-	
-	#check for collisions and launch other players
-	#for i in get_slide_collision_count():
-		#var collision = get_slide_collision(i)
-	if collision:
+	var remaining_delta = delta
+	var max_bounces = 4 
+	var bounce_count = 0
+
+	while remaining_delta > 0 and bounce_count < max_bounces:
+		var collision = move_and_collide(velocity * remaining_delta, false, 0.001, true)
+		
+		if not collision:
+			break
+		
+		bounce_count += 1
 		var collider = collision.get_collider()
 		var normal = collision.get_normal()
+		
 		if 'isNetworkPlayer' in collider:
 			var launch = oldVel + Vector3(0, 0.2, 0) * Vector2(velocity.x, velocity.z).length()
 			if collider.connected:
 				collider.send_msg('launch', [launch.x, launch.y, launch.z], true)
-			#Network.client.emit('launch', [[collider.id, launch.x, launch.y, launch.z]])
-		var change = (1 + bounciness * bounceFactor) * velocity.dot(normal) * normal
-		if trackType == 3:
-			change -= normal
-		if change.length() > 0.1:
-			velocity -= change
-		bounceFactor = 1
+		
 		if normal.dot(Vector3.UP) > 0.5:
 			floort = 0.2
 		
-		#scaleVel += change.cross(Vector3.UP)
+		var bounciness = 0.3 * bounceModifier
+		var velocity_along_normal = velocity.dot(normal)
+		
+		if velocity_along_normal < 0:
+			var bounce_vel = velocity_along_normal * normal * (1 + bounciness * bounceFactor)
+			if trackType == 3:
+				bounce_vel -= normal;
+			velocity -= bounce_vel
+			bounceFactor = 1
+		
+		#velocity = velocity.slide(normal)
+		
+		remaining_delta *= (1.0 - collision.get_travel().length() / (oldVel * delta).length())
+		
+		if remaining_delta < 0.001:
+			break
 	
 	# jump
 	if Network.options.jumps == true:

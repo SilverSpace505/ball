@@ -167,7 +167,7 @@ func _on_seed():
 	progress = 0
 	Global.progressName = 'generation'
 	minX = INF
-	var points = trackPoints
+	var points = trackPoints.duplicate()
 	for i in range(len(points)):
 		if points[i].x < 0:
 			points[i] = points[i] - Vector2(Network.options.trackSize - 1, 0)
