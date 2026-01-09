@@ -840,6 +840,7 @@ root_node = NodePath("../TextureRect")
 libraries = {
 &"": SubResource("AnimationLibrary_iotsf")
 }
+autoplay = "transOut"
 
 [node name="pauseMenu" type="Control" parent="CanvasLayer/Control"]
 visible = false
