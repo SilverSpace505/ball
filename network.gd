@@ -58,6 +58,7 @@ signal on_disconnected
 signal on_names
 signal on_seed
 signal cancel_start
+signal newRace
 
 signal on_create_offer
 signal on_session
@@ -160,6 +161,8 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 			Global.scene = 'game'
 			get_tree().change_scene_to_file("res://game.tscn")
 	elif event == 'start':
+		globalMod = msg[1]
+		newRace.emit()
 		if options.randomise:
 			options.seed = msg[0]
 			lastOptions.seed = msg[0]

@@ -5,9 +5,9 @@ extends Node3D
 @export var start: Label
 
 func _ready() -> void:
-	#$track.globalModTime.connect()
+	Network.newRace.connect(_global_modifier)
 	BackgroundMusic.bus = "inGame"
-	connect("settingsClosed", _settingsClosed)
+	#connect("settingsClosed", _settingsClosed)
 	Global.running = not Global.race
 	Global.isReady = false
 
@@ -53,7 +53,7 @@ func _physics_process(_delta: float) -> void:
 
 func _global_modifier():
 	$CanvasLayer/Control/AnimationPlayer.play("globalModDetected")
-
+	print("a")
 
 func _on_settings_button_pressed() -> void:
 	Sfx.get_node("clickSFX").play()

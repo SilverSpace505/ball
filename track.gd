@@ -158,11 +158,6 @@ func generate_track():
 		#forward *= Quaternion(perp, vel.x)
 
 func _on_seed():
-	var globalChance = randi() % 4
-	print(globalChance)
-	if globalChance == Network.options.globalModChance:
-		emit_signal("globalModTime")
-		print("GLOBAL MOD TIME")
 	generationSeed = Network.options.seed
 	progress = 0
 	Global.progressName = 'generation'
@@ -340,7 +335,6 @@ func _next_island():
 		_next_island()
 
 func _ready() -> void:
-	animationPlayer = get_tree().get_root().get_node("/root/world/ConvasLayer/Control/AnimationPlayer")
 	Network.on_seed.connect(_on_seed)
 	Network.cancel_start.connect(_cancel_start)
 	

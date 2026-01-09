@@ -59,6 +59,8 @@ func _optionsChanged():
 	
 	#player settings
 	$player/jumps/jumpBox.button_pressed = Network.options.jumps
+	$player/speed/speedVal.value = Network.options.speed
+	$player/speed/speedBox.value = Network.options.speed
 
 #Map length change
 func _on_length_val_value_changed(value: float) -> void:
