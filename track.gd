@@ -89,6 +89,11 @@ func generate_track():
 			if randf() > 0.7 or pleaseSkip:
 				currentType = randi_range(0, 3)
 			
+			if Network.globalMod == 'ice':
+				currentType = 2
+			if Network.globalMod == 'bouncy':
+				currentType = 3
+			
 			types.append(currentType)
 		
 		if i % int(2 / scalar) == 0:
