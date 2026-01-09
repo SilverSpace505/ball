@@ -894,11 +894,13 @@ expand_mode = 1
 position = Vector2(-432, 456)
 stream = ExtResource("15_80cx4")
 pitch_scale = 0.6
+bus = &"clicks"
 
 [node name="Veryloudairhorn" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-184, 248)
 stream = ExtResource("16_e8heu")
-volume_db = -7.67
+volume_db = -3.775
+bus = &"pause"
 
 [connection signal="body_entered" from="finish" to="finish" method="_on_body_entered"]
 [connection signal="mouse_entered" from="CanvasLayer/Control/pauseMenu/Panel/lobby button" to="." method="_on_mouse_hover"]
