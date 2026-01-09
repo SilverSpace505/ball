@@ -179,7 +179,7 @@ func _on_seed():
 	
 	thread = Thread.new()
 	thread.start(generate_track)
-	animationPlayer.play("transOut")
+	#animationPlayer.play("transOut")
 
 func _on_progress(percentage):
 	progress = percentage
