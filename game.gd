@@ -5,7 +5,7 @@ extends Node3D
 @export var start: Label
 
 func _ready() -> void:
-	$track.globalModTime.connect()
+	#$track.globalModTime.connect()
 	BackgroundMusic.bus = "inGame"
 	connect("settingsClosed", _settingsClosed)
 	Global.running = not Global.race
