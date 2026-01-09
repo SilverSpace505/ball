@@ -894,6 +894,7 @@ expand_mode = 1
 position = Vector2(-432, 456)
 stream = ExtResource("15_80cx4")
 pitch_scale = 0.6
+panning_strength = 0.0
 bus = &"clicks"
 playback_type = 1
 
@@ -901,6 +902,7 @@ playback_type = 1
 position = Vector2(-184, 248)
 stream = ExtResource("16_e8heu")
 volume_db = -3.775
+panning_strength = 0.0
 bus = &"pause"
 playback_type = 1
 
