@@ -26,6 +26,8 @@ var moveSpeed = 0.0
 var scaleVel = Vector3()
 var lastPosition = Vector3()
 
+var respawnTime = -1
+
 #Camera vars
 #@export var mouseSens = 1000
 func _ready() -> void:
@@ -58,7 +60,8 @@ func _physics_process(delta: float) -> void:
 	#elif Input.is_action_pressed("esc"):
 		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
-	Global.distance = $'../track'.get_distance(global_position)
+	if floort > 0:
+		Global.distance = $'../track'.get_distance(global_position)
 	
 	var trackType = $'../track'.get_track_type(global_position)
 	
@@ -146,9 +149,22 @@ func _physics_process(delta: float) -> void:
 			velocity.y = jumpHeight
 			floort = 0
 	
+	if respawnTime != -1:
+		respawnTime -= delta
+		$core/scale.scale = Vector3.ONE * respawnTime * 5
+	else:
+		$core/scale.scale = Vector3.ONE
+	
+	# respawn
+	if Input.is_action_pressed("respawn") and Global.running:
+		respawnTime = 0.2
+	
 	#void
-	if position.y < Global.voidLevel:
-		tp(Vector3(0, 1, 0))
+	if position.y < Global.voidLevel or (respawnTime <= 0 and respawnTime != -1):
+		moveSpeed = 0.0
+		velocity = Vector3(0, velocity.y, 0)
+		tp($'../track'.get_point(max(Global.distance - 200, 0)) + Vector3(0, 1, 0))
+		respawnTime = -1
 		bounceFactor = 0
 	
 	#networking
@@ -198,6 +214,7 @@ func _spawn(index):
 	position = Vector3(index * 0.25, 0, 0)
 	velocity = Vector3()
 	core.global_position = global_position
+	respawnTime = -1
 	
 	camera.followPos = camera.offset + position
 	camera.followQuat = Quaternion()

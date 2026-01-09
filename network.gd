@@ -101,10 +101,18 @@ func _ready() -> void:
 	client.connect_socket()
 	lastOptions = options.duplicate()
 
+var reconnectTime = 0
+
 func _process(delta: float) -> void:
 	#increment interpolation and send player data up to server
 	fpsc += 1
 	naccumulator += delta
+	
+	if client.state != client.State.CONNECTED:
+		reconnectTime += delta
+		if reconnectTime >= 3:
+			reconnectTime = 0
+			_on_socket_io_socket_disconnected()
 	
 	if not options.recursive_equal(lastOptions, 1):
 		emit('options', options)
@@ -138,7 +146,7 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 	elif event == 'joined':
 		lobby = msg[0]
 		names = msg[1]
-		if Global.scene != 'lobby':
+		if Global.scene != 'lobby' and Global.scene != 'game':
 			Global.scene = 'lobby'
 			get_tree().change_scene_to_file("res://lobby_menu.tscn")
 		else:
@@ -235,9 +243,19 @@ func _on_sync_timeout() -> void:
 func get_time():
 	return Time.get_unix_time_from_system() * 1000 + time_offset
 
+var reconnecting = false
 func _on_reconnect_timeout() -> void:
+	if client.state == client.State.CONNECTED or reconnecting:
+		return
+	reconnecting = true
+	on_disconnected.emit()
+	client.disconnect_socket()
+	await get_tree().create_timer(3).timeout
+	reconnecting = false
+	if client.state == client.State.CONNECTED:
+		return
 	client.connect_socket()
 
 func _on_socket_io_socket_disconnected() -> void:
-	on_disconnected.emit()
-	$reconnect.start()
+	_on_reconnect_timeout()
+	#$reconnect.start()

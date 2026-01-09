@@ -513,3 +513,8 @@ func get_distance(pos: Vector3):
 		return 0
 	
 	return typeCurve.get_closest_offset(pos)
+
+func get_point(distance: float):
+	if typeCurve.point_count == 0: 
+		return Vector3()
+	return typeCurve.sample_baked(distance)

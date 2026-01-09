@@ -137,8 +137,14 @@ func _on_player_left(id):
 
 func _on_disconnected():
 	for id in players:
-		players[id].queue_free()
 		players.erase(id)
 	for id in playerElements:
-		playerElements[id].queue_free()
 		playerElements.erase(id)
+	
+	players = {}
+	playerElements = {}
+	
+	for child in get_children():
+		child.queue_free()
+	for child in playersList.get_children():
+		child.queue_free()
