@@ -335,7 +335,7 @@ race = NodePath("race")
 [node name="optionsMenu" parent="." instance=ExtResource("3_jix8l")]
 layout_mode = 1
 
-[node name="title" type="Label" parent="."]
+[node name="title" type="RichTextLabel" parent="."]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 5
@@ -343,16 +343,22 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -118.0
 offset_top = -247.85
-offset_right = 119.0
-offset_bottom = -139.8499
+offset_right = 136.0
+offset_bottom = -103.850006
 grow_horizontal = 2
-theme_override_constants/line_spacing = 14
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 3
-theme_override_constants/outline_size = 8
-theme_override_constants/shadow_outline_size = 2
-theme_override_font_sizes/font_size = 105
-text = "BALL"
+theme_override_constants/shadow_outline_size = 6
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 105
+theme_override_font_sizes/bold_font_size = 105
+theme_override_font_sizes/bold_italics_font_size = 105
+theme_override_font_sizes/italics_font_size = 105
+theme_override_font_sizes/mono_font_size = 105
+bbcode_enabled = true
+text = "[wave amp=50][rainbow]BALL"
+fit_content = true
+scroll_active = false
 
 [node name="play" type="Button" parent="."]
 texture_filter = 1
@@ -459,8 +465,8 @@ mesh = SubResource("BoxMesh_glbon")
 [connection signal="text_changed" from="lobby" to="." method="_on_lobby_text_changed"]
 [connection signal="text_changed" from="username" to="." method="_on_username_text_changed"]
 [connection signal="mouse_entered" from="settings" to="." method="_on_mouse_hover"]
-[connection signal="pressed" from="settings" to="." method="_clicksound"]
 [connection signal="pressed" from="settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="settings" to="." method="_clicksound"]
 [connection signal="mouse_entered" from="race" to="." method="_on_mouse_hover"]
 [connection signal="toggled" from="race" to="." method="_clicksound"]
 [connection signal="toggled" from="race" to="." method="_on_race_toggled"]
