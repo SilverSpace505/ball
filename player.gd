@@ -199,7 +199,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector3(0, velocity.y, 0)
 		if velocity.y > 0:
 			velocity.y = 0
-		tp($'../track'.get_point(max(Global.distance - 200, 0)) + Vector3(0, 1, 0))
+		tp($'../track'.get_point(max(Global.distance - 10, 0)) + Vector3(0, 1, 0))
 		respawnTime = -1
 		bounceFactor = 0
 	
