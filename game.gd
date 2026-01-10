@@ -13,7 +13,8 @@ func _ready() -> void:
 	Global.isReady = false
 
 func _on_spawn(_index):
-	$CanvasLayer/Control/AnimationPlayer.seek(0, true)
+	if $CanvasLayer/Control/AnimationPlayer.current_animation == "globalModDetected":
+		$CanvasLayer/Control/AnimationPlayer.seek(0, true)
 	$CanvasLayer/Control/AnimationPlayer.play("startTimer")
 
 func _physics_process(_delta: float) -> void:
@@ -56,7 +57,8 @@ func _physics_process(_delta: float) -> void:
 		$CanvasLayer/Control/loading.visible = false
 
 func _global_modifier():
-	$CanvasLayer/Control/AnimationPlayer.play("globalModDetected")
+	if Network.globalMod != null:
+		$CanvasLayer/Control/AnimationPlayer.play("globalModDetected")
 
 func _on_settings_button_pressed() -> void:
 	Sfx.get_node("clickSFX").play()

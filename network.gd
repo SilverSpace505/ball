@@ -165,7 +165,8 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 		newRace.emit()
 		if options.randomise:
 			options.seed = msg[0]
-			lastOptions.seed = msg[0]
+			if id != names.keys()[0]:
+				lastOptions.seed = msg[0]
 			on_seed.emit()
 		else:
 			emit('loaded')

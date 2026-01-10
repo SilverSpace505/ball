@@ -70,18 +70,18 @@ func _physics_process(delta: float) -> void:
 	
 	if trackType == 1: #sticky
 		bounceModifier = 0
-		frictionModifier = 1.5
+		frictionModifier = 2
 	
 	if trackType == 2: #ice
 		bounceModifier = 0.5
-		frictionModifier = 0.01
+		frictionModifier = 0.5
 	
 	if trackType == 3: #bouncy
 		bounceModifier = 3
 		frictionModifier = 1
 	
 	if floort <= 0:
-		frictionModifier = 1
+		frictionModifier = 0.25
 	
 	lastPosition = global_position
 	
@@ -92,11 +92,11 @@ func _physics_process(delta: float) -> void:
 	
 	#get input axis relative to camera direction
 	var wasd = Vector3(Input.get_axis('left', 'right'), 0, Input.get_axis('slow', 'go')).normalized()
-	camera.turn += (wasd.x / 100) * min(moveSpeed, 3)
-	
+	camera.turn += wasd.x / 150
+	wasd.x *= 0.5
 	wasd *= camera.followQuat
 	wasd *= -1
-	
+		
 	if not Global.running:
 		wasd *= 0
 	
@@ -104,9 +104,14 @@ func _physics_process(delta: float) -> void:
 	
 	var addSpeed = clamp(1 + moveSpeed ** 2 / 3, 1, 10)
 	
+	#print(Vector2(velocity.x, velocity.z).normalized())
+	var diffModifier = 1 + (1 - (Vector2(velocity.x, velocity.z).normalized().dot(Vector2(wasd.x, -wasd.z)) + 1) / 2) 
+	
+	frictionModifier *= diffModifier
+	
 	#add input axis onto velocity
-	velocity.x += wasd.x * speed * addSpeed
-	velocity.z -= wasd.z * speed * addSpeed
+	velocity.x += wasd.x * speed * addSpeed * frictionModifier * diffModifier
+	velocity.z -= wasd.z * speed * addSpeed * frictionModifier * diffModifier
 	
 	#friction
 	velocity.x *= 0.99 ** frictionModifier
@@ -135,7 +140,10 @@ func _physics_process(delta: float) -> void:
 			if collider.connected:
 				collider.send_msg('launch', [launch.x, launch.y, launch.z], true)
 		
-		if normal.dot(Vector3.UP) > 0.5:
+		var is_floor = normal.dot(Vector3.UP) > 0.5
+		var is_wall = normal.dot(Vector3.UP) < 0.5 and normal.dot(Vector3.UP) > -0.5
+		
+		if is_floor:
 			floort = 0.2
 		
 		var bounciness = 0.3 * bounceModifier
@@ -145,6 +153,20 @@ func _physics_process(delta: float) -> void:
 			var bounce_vel = velocity_along_normal * normal * (1 + bounciness * bounceFactor)
 			if trackType == 3:
 				bounce_vel -= normal;
+			
+			if is_wall:
+				var tangent_vel = velocity - (velocity.dot(normal) * normal)
+				var normal_vel = velocity.dot(normal) * normal
+				
+				var wall_friction = 0.85 ** frictionModifier
+				
+				tangent_vel *= wall_friction
+				velocity = tangent_vel + normal_vel
+				
+			#print(1 - abs(normal.dot(Vector3.UP)))
+			#bounce_vel *= abs(normal.dot(Vector3.UP))
+			#var factor = abs(normal.dot(Vector3.UP)) ** 0.1
+			#velocity = Vector3(velocity.x * factor, velocity.y, velocity.z * factor)
 			velocity -= bounce_vel
 			bounceFactor = 1
 		
@@ -175,6 +197,8 @@ func _physics_process(delta: float) -> void:
 	if position.y < Global.voidLevel or (respawnTime <= 0 and respawnTime != -1):
 		moveSpeed = 0.0
 		velocity = Vector3(0, velocity.y, 0)
+		if velocity.y > 0:
+			velocity.y = 0
 		tp($'../track'.get_point(max(Global.distance - 200, 0)) + Vector3(0, 1, 0))
 		respawnTime = -1
 		bounceFactor = 0

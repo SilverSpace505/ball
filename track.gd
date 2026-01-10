@@ -54,6 +54,7 @@ func generate_track():
 	var vel = tvel
 	
 	var curve = Curve3D.new()
+	curve.add_point(Vector3())
 	
 	seed(Network.options.seed)
 	
@@ -85,7 +86,7 @@ func generate_track():
 		if i % int(scalar * 10) == 0:
 			typeCurve.add_point(pos)
 			
-			var pleaseSkip = currentType == 1 or currentType == 3
+			var pleaseSkip = currentType == 3
 			if randf() > 0.7 or pleaseSkip:
 				currentType = randi_range(0, 3)
 			
@@ -93,6 +94,8 @@ func generate_track():
 				currentType = 2
 			if Network.globalMod == 'bouncy':
 				currentType = 3
+			if Network.globalMod == 'sticky':
+				currentType = 1
 			
 			types.append(currentType)
 		
@@ -393,8 +396,7 @@ func gen_mesh(curve: Curve3D, cross: PackedVector2Array, segments: int, types):
 			
 			var type = types[floor(float(i) / 10 / 10)]
 			
-			var x = (vpoint.x - minX) / -minX
-			uvs.append(Vector2(x, t * segments / 20))
+			uvs.append(Vector2(vpoint.x / 1.5, t * segments / 20))
 			uvs2.append(typeUvs[type])
 	
 	currentProgress = 0
