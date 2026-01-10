@@ -27,7 +27,8 @@ var options = {
 	'jumps': false,
 	'speed': 5,
 	'seed': 1,
-	'randomise': true
+	'randomiseSeed': true,
+	'randomiseSettings': false
 }
 
 #var globalMods = {
@@ -159,14 +160,20 @@ func _on_socket_io_event_received(event: String, msg: Variant, _ns: String) -> v
 	elif event == 'startGame':
 		if Global.scene != 'game':
 			Global.scene = 'game'
+			Global.running = false
+			Global.startTime = -1
+			Global.time = 0
+			Global.place = ''
 			get_tree().change_scene_to_file("res://game.tscn")
 	elif event == 'start':
 		globalMod = msg[1]
 		newRace.emit()
-		if options.randomise:
+		if options.randomiseSettings:
+			options = msg[2]
+			lastOptions = options.duplicate()
+		if options.randomiseSeed:
 			options.seed = msg[0]
-			if id != names.keys()[0]:
-				lastOptions.seed = msg[0]
+			lastOptions.seed = msg[0]
 			on_seed.emit()
 		else:
 			emit('loaded')
