@@ -316,7 +316,15 @@ offset_top = 88.0
 offset_right = 632.0
 offset_bottom = 119.0
 button_pressed = true
-text = "Randomise"
+text = "Randomise Seed"
+
+[node name="randomise" type="CheckBox" parent="track"]
+layout_mode = 0
+offset_left = 679.0
+offset_top = 88.0
+offset_right = 850.0
+offset_bottom = 119.0
+text = "Randomise settings"
 
 [node name="length" type="Control" parent="track"]
 anchors_preset = 0
@@ -599,14 +607,17 @@ offset_bottom = 656.0
 texture = ExtResource("4_iu37i")
 expand_mode = 1
 
-[connection signal="button_down" from="start" to="." method="_on_start_button_down"]
 [connection signal="button_down" from="start" to="." method="_clicksound"]
+[connection signal="button_down" from="start" to="." method="_on_start_button_down"]
 [connection signal="mouse_entered" from="start" to="." method="_on_mouse_hover"]
 [connection signal="item_selected" from="playerList" to="." method="_clicksound"]
 [connection signal="value_changed" from="track/seed/seed" to="." method="_on_seed_value_changed"]
 [connection signal="mouse_entered" from="track/seed/randomise" to="." method="_on_mouse_hover"]
 [connection signal="pressed" from="track/seed/randomise" to="." method="_clicksound"]
 [connection signal="toggled" from="track/seed/randomise" to="." method="_on_randomise_toggled"]
+[connection signal="mouse_entered" from="track/randomise" to="." method="_on_mouse_hover"]
+[connection signal="pressed" from="track/randomise" to="." method="_clicksound"]
+[connection signal="toggled" from="track/randomise" to="." method="_on_randomise_settings_toggled"]
 [connection signal="mouse_entered" from="track/length/lengthVal" to="." method="_on_mouse_hover"]
 [connection signal="value_changed" from="track/length/lengthVal" to="." method="_on_length_val_value_changed"]
 [connection signal="value_changed" from="track/length/lengthBox" to="." method="_on_length_box_value_changed"]
@@ -624,5 +635,5 @@ expand_mode = 1
 [connection signal="value_changed" from="player/speed/speedVal" to="." method="_on_speed_val_value_changed"]
 [connection signal="value_changed" from="player/speed/speedBox" to="." method="_on_speed_box_value_changed"]
 [connection signal="mouse_entered" from="exitButton" to="." method="_on_mouse_hover"]
-[connection signal="pressed" from="exitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="exitButton" to="." method="_clicksound"]
+[connection signal="pressed" from="exitButton" to="." method="_on_exit_button_pressed"]

@@ -43,7 +43,8 @@ func _on_start_button_down() -> void:
 func _optionsChanged():
 	#track settings
 	$track/seed/seed.value = Network.options.seed
-	$track/seed/randomise.button_pressed = Network.options.randomise
+	$track/seed/randomise.button_pressed = Network.options.randomiseSeed
+	$track/randomise.button_pressed = Network.options.randomiseSettings
 	$track/length/lengthBox.value = Network.options.length
 	$track/length/lengthVal.value = Network.options.length
 	$track/turning/turningBox.value = Network.options.turning
@@ -114,13 +115,12 @@ func _on_seed_value_changed(value: float) -> void:
 	Network.options.seed = value
 
 func _on_randomise_toggled(toggled_on: bool) -> void:
-	Network.options.randomise = toggled_on
+	Network.options.randomiseSeed = toggled_on
 
 func _on_mouse_hover() -> void:
 	Sfx.get_node("browseSFX").play()
 func _clicksound():
 	Sfx.get_node("clickSFX").play()
-
 
 func _on_global_val_value_changed(value: float) -> void:
 	$track/globalChance/globlValLabel.text = "1 in " + str(int($track/globalChance/globalVal.value))
@@ -129,3 +129,6 @@ func _on_global_val_value_changed(value: float) -> void:
 	elif $track/globalChance/globalVal.value == 0:
 		$track/globalChance/globlValLabel.text = "never"
 	Network.options.globalModChance = int($track/globalChance/globalVal.value)
+
+func _on_randomise_settings_toggled(toggled_on: bool) -> void:
+	Network.options.randomiseSettings = toggled_on
