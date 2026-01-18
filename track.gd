@@ -67,6 +67,7 @@ func generate_track():
 	var types = []
 	
 	var currentType = 0
+	var currentRow = 0
 	
 	var currentProgress = 0
 	
@@ -85,9 +86,12 @@ func generate_track():
 		
 		if i % int(scalar * 10) == 0:
 			typeCurve.add_point(pos)
+			currentRow += 1
 			
 			var pleaseSkip = currentType == 3
-			if randf() > 0.7 or pleaseSkip:
+			var willSkip = randf() > (0.9 ** currentRow) or (pleaseSkip and randf() > (0.5 ** currentRow))
+			if willSkip:
+				currentRow = 0
 				currentType = randi_range(0, 3)
 			
 			if Network.globalMod == 'ice':

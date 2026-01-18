@@ -158,7 +158,9 @@ func _physics_process(delta: float) -> void:
 				var tangent_vel = velocity - (velocity.dot(normal) * normal)
 				var normal_vel = velocity.dot(normal) * normal
 				
-				var wall_friction = 0.85 ** frictionModifier
+				#var wall_friction = 0.95 ** frictionModifier
+				
+				var wall_friction = 0.99 ** frictionModifier
 				
 				tangent_vel *= wall_friction
 				velocity = tangent_vel + normal_vel
