@@ -23,6 +23,10 @@ var userSettings = {
 	'FOV': 90
 }
 
+var modifierModifications = {
+	'speed': 0.10,
+}
+
 var progress = -1
 var progressName = ''
 

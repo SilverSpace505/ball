@@ -635,5 +635,5 @@ expand_mode = 1
 [connection signal="value_changed" from="player/speed/speedVal" to="." method="_on_speed_val_value_changed"]
 [connection signal="value_changed" from="player/speed/speedBox" to="." method="_on_speed_box_value_changed"]
 [connection signal="mouse_entered" from="exitButton" to="." method="_on_mouse_hover"]
-[connection signal="pressed" from="exitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="exitButton" to="." method="_clicksound"]
+[connection signal="pressed" from="exitButton" to="." method="_on_exit_button_pressed"]

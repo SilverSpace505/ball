@@ -37,6 +37,12 @@ var options = {
 	#'globalIce': false
 #}
 
+var activeModifiers = {
+	'speed': 5,
+	'rhino': false,
+	'grab': false
+}
+
 var globalMod = null
 
 var lastOptions = {}

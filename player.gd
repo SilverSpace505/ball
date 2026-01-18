@@ -1,6 +1,12 @@
 class_name Player
 extends CharacterBody3D
 
+var upgradesGot = {
+	'speedUp': 0,
+	'rhinoMode': false,
+	'grab': false
+}
+
 @export var camera: Camera
 
 @export var username: Label3D
@@ -31,6 +37,7 @@ var respawnTime = -1
 #Camera vars
 #@export var mouseSens = 1000
 func _ready() -> void:
+	_upgrades()
 	Network.launch.connect(_launch)
 	Network.spawn.connect(_spawn)
 	username.text = Global.username
@@ -84,8 +91,8 @@ func _physics_process(delta: float) -> void:
 		frictionModifier = 0.25
 	
 	lastPosition = global_position
-	
-	moveSpeed = lerp(moveSpeed, Vector2(velocity.x, velocity.z).length() / 5, delta * 2)
+	var upgradeSpeedInc = 1 + upgradesGot.speedUp * Global.modifierModifications.speed
+	moveSpeed = lerp(moveSpeed, Vector2(velocity.x, velocity.z).length() / 5 / upgradeSpeedInc, delta * 2)
 	
 	if Global.running:
 		velocity.y -= gravity * delta
@@ -107,11 +114,12 @@ func _physics_process(delta: float) -> void:
 	#print(Vector2(velocity.x, velocity.z).normalized())
 	var diffModifier = 1 + (1 - (Vector2(velocity.x, velocity.z).normalized().dot(Vector2(wasd.x, -wasd.z)) + 1) / 2) 
 	
+	
 	frictionModifier *= diffModifier
 	
 	#add input axis onto velocity
-	velocity.x += wasd.x * speed * addSpeed * frictionModifier * diffModifier
-	velocity.z -= wasd.z * speed * addSpeed * frictionModifier * diffModifier
+	velocity.x += wasd.x * (speed * upgradeSpeedInc) * addSpeed * frictionModifier * diffModifier 
+	velocity.z -= wasd.z * (speed * upgradeSpeedInc) * addSpeed * frictionModifier * diffModifier 
 	
 	#friction
 	velocity.x *= 0.99 ** frictionModifier
@@ -261,3 +269,8 @@ func _spawn(index):
 	#camera.look_at(position + Vector3(0, 0.2, 0))
 	#camera.followPos = camera.offset + position
 	#camera.followQuat = camera.quaternion
+
+func _upgrades():
+	upgradesGot.speedUp = Network.activeModifiers.speed
+	upgradesGot.rhinoMode = Network.activeModifiers.rhino
+	upgradesGot.grab = Network.activeModifiers.grab
