@@ -14,7 +14,7 @@ var upgradesGot = {
 @export var core: Node3D
 @export var scaleNode: Node3D
 
-@export var speed = Network.options.speed / 100
+@export var speed = 5 / 100
 @export var jumpHeight = 3
 @export var gravity = 10
 #@export var backSpeed = 5
@@ -61,6 +61,7 @@ func reset():
 	camera.followQuat = camera.quaternion
 
 func _physics_process(delta: float) -> void:
+	speed = Network.options.speed / 100
 	# get mouse to be used :O
 	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
