@@ -5,10 +5,7 @@ var mapLength = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if Global.leavingScene == 'menu':
-		$AnimationPlayer.play("sceneOut")
-	elif Global.leavingScene == 'game':
-		$AnimationPlayer.play("leftGame")
+	call_deferred("animation_fix")
 	_optionsChanged()
 	Network.on_player_joined.connect(_addPlayer)
 	Network.on_player_left.connect(_removePlayer)
@@ -20,6 +17,12 @@ func _ready() -> void:
 		$playerList.add_item(username)
 		
 	Network.emit('getOptions')
+
+func animation_fix():
+	if Global.leavingScene == 'menu':
+		$AnimationPlayer.play("sceneOut")
+	elif Global.leavingScene == 'game':
+		$AnimationPlayer.play("leftGame")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
