@@ -265,6 +265,7 @@ toggle_mode = true
 text = "Start Game"
 
 [node name="readyUp" type="Button" parent="." unique_id=347642746]
+visible = false
 texture_filter = 1
 layout_mode = 0
 offset_left = 506.0
