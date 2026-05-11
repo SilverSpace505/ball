@@ -19,8 +19,10 @@ resource_name = "Reverb"
 resource_name = "Filter"
 cutoff_hz = 4630.0
 
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_g28q7"]
+resource_name = "Reverb"
+
 [resource]
-bus/0/volume_db = 0.06726074
 bus/1/name = &"inGame"
 bus/1/solo = false
 bus/1/mute = false
@@ -57,3 +59,11 @@ bus/4/effect/0/effect = SubResource("AudioEffectReverb_j3pel")
 bus/4/effect/0/enabled = true
 bus/4/effect/1/effect = SubResource("AudioEffectFilter_n8wo2")
 bus/4/effect/1/enabled = true
+bus/5/name = &"BALL"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 3.3424873
+bus/5/send = &"Master"
+bus/5/effect/0/effect = SubResource("AudioEffectReverb_g28q7")
+bus/5/effect/0/enabled = true

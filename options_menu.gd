@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_back_pressed() -> void:
-	print(Global.leavingScene)
+	#print(Global.leavingScene)
 	$AnimationPlayer.play_backwards("optionsPressed")
 	await get_tree().create_timer(0.425).timeout
 	emit_signal("settingsClosed")

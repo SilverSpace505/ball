@@ -5,11 +5,14 @@ extends Control
 @export var race: CheckBox
 
 func _ready() -> void:
+	
 	connect("settingsClosed", _settingsClosed)
 	BackgroundMusic.bus = "menu"
 	lobby.text = str(Global.seed)
 	username.text = Global.username
 	$AnimationPlayer.play_backwards("settingsPressed")
+	await get_tree().create_timer(0.35).timeout
+	$BALL.playing = true
 
 func _on_play_button_down() -> void:
 	Global.leavingScene = 'menu'
