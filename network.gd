@@ -287,4 +287,6 @@ func _player_finished():
 	print('first')
 	if Network.client.finished.length == Network.client.players.length:
 		print('second')
+		print(Network.client.finished.length)
+		print(Network.client.players.length)
 		Network.client.emit('upgrades')
