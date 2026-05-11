@@ -284,5 +284,7 @@ func _on_socket_io_socket_disconnected() -> void:
 	#$reconnect.start()
 
 func _player_finished():
+	print('first')
 	if Network.client.finished.length == Network.client.players.length:
+		print('second')
 		Network.client.emit('upgrades')
