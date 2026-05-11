@@ -113,6 +113,7 @@ func _on_speed_box_value_changed(value: float) -> void:
 
 func _on_exit_button_pressed() -> void:
 	$AnimationPlayer.play_backwards("sceneOut")
+	await get_tree().create_timer(0.5).timeout
 	Global.leavingScene = 'lobby'
 	Network.emit ('leave')
 

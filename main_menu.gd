@@ -7,6 +7,7 @@ extends Control
 func _ready() -> void:
 	if Global.leavingScene == 'lobby':
 		$AnimationPlayer.play_backwards("sceneTransition")
+		await get_tree().create_timer(0.5).timeout
 	connect("settingsClosed", _settingsClosed)
 	BackgroundMusic.bus = "menu"
 	lobby.text = str(Global.seed)
